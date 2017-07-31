@@ -31,9 +31,9 @@ npm install
 
 5 - Some important tasks:
 
-* gulp build - It will generate a "dist" folder with all files on a deliverable structure.
-* gulp server - It will start a local server with watching files (a real-time changes/creation watch)
-* gulp clear - Delete a "dist" and ".tmp" folders
+* (In progress) gulp build - It will generate a "dist" folder with all files on a deliverable structure.
+* gulp start - It will start a local server with watching files (a real-time changes/creation watch)
+* (In progress) gulp clear - Delete a "dist" and ".tmp" folders
 
 
 
