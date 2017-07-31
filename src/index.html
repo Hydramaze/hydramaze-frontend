@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+
+<html class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HydraMaze - Aprenda I.A. em apenas alguns cliques!</title>
+    <link rel="stylesheet" href="../tmp/assets/css/main.css">
+    <base href="/">
+</head>
+<body ng-app="hydramaze">
+    
+    <!-- Template router component -->
+    <div ui-view></div>
+
+    <span id="mq-detector">
+        <span class="visible-xs"></span>
+        <span class="visible-sm"></span>
+        <span class="visible-md"></span>
+        <span class="visible-lg"></span>
+    </span>
+    
+    <!-- Libraries -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/chart.js/dist/Chart.min.js"></script>
+    <script src="../bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="../bower_components/angular-multi-step-form/dist/browser/angular-multi-step-form.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Angular Application -->
+    <script src="app/app.js"></script>
+    
+    <!-- Directives -->
+    <script src="app/directives/on-finish-render-directives.js"></script>    
+    <script src="app/shared/footer/footer-directive.js"></script>
+    <script src="app/shared/navigation/navigation-directive.js"></script>
+    <script src="app/shared/sidebar/sidebar-directive.js"></script>
+    <script src="app/components/radar-chart/radar-chart-directive.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/templates/default/default.tpl.controller.js"></script>
+    <script src="app/templates/laboratory/laboratory.tpl.controller.js"></script>
+    <script src="app/views/404/404-controller.js"></script>
+    <script src="app/views/faq/faq-controller.js"></script>
+    <script src="app/views/home/home-controller.js"></script>
+    <script src="app/views/laboratory-content/tutorial/tutorial-controller.js"></script>
+    <script src="app/views/laboratory-content/tutorial/step-one/step-one-controller.js"></script>
+    <script src="app/views/laboratory-content/tutorial/step-two/step-two-controller.js"></script>
+    <script src="app/views/laboratory-content/tutorial/step-three/step-three-controller.js"></script>
+    <script src="app/components/radar-chart/radar-chart-controller.js"></script>
+
+    <!-- Services -->
+    <script src="app/views/404/404-service.js"></script>
+    <script src="app/views/faq/faq-service.js"></script>
+    <script src="app/views/home/home-service.js"></script>
+    <script src="app/views/laboratory-content/tutorial/tutorial-service.js"></script>
+    <script src="app/views/laboratory-content/tutorial/step-one/step-one-service.js"></script>
+    <script src="app/views/laboratory-content/tutorial/step-two/step-two-service.js"></script>
+    <script src="app/views/laboratory-content/tutorial/step-three/step-three-service.js"></script>
+
+</body>
+</html>

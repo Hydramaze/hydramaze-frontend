@@ -1,0 +1,154 @@
+// Base structure style
+
+html, body {
+
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+h1 {
+
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+
+}
+
+h6 {
+
+}
+
+p {
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.container-fluid {
+  max-width: 1430px;
+}
+
+.without-margin {
+  margin-top: 0px !important;
+  margin-right: 0px !important;
+  margin-bottom: 0px !important;
+  margin-left: 0px !important;
+}
+
+.without-border {
+  border: none !important;
+  border-radius: 0px !important;
+}
+
+.without-padding {
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
+}
+
+.green-title {
+  color: @color-green-title !important;
+}
+
+.content {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+#mq-detector {
+  visibility: hidden;
+}
+
+nav.custom-navbar {
+  background-color: @color-white;
+  height: 70px;
+  .navbar-header {
+    button {
+      margin: 18px;
+    }
+    a {
+      margin: 10px 0;
+    }
+    .logo {
+      max-width: 50px;
+      margin: 10px;
+      float: left;
+    }
+  }
+  .navbar-collapse {
+    ul {
+      li {
+        margin: 10px 0;
+        &.button-green-style {
+          @media (min-width: @screen-tablet) {
+          background-color: @color-green-primary;
+          border-radius: 10px;
+            a {
+              color: @color-white;
+            }
+          }
+          &:hover {
+            background-color: @color-green-primary-highlighted;
+          }
+        }
+      }
+    }
+    background-color: #dedede;
+    margin-right: -15px;
+    margin-left: -15px;
+    @media (min-width: @screen-tablet) {
+      background-color: @color-white;
+      margin-left: 0px;
+      margin-right: 0px;  
+    }
+  }
+}
+
+#menu-container {
+  -webkit-box-shadow: 0 0px 30px -6px black;
+  -moz-box-shadow: 0 0px 30px -6px black;
+  box-shadow: 0 0px 30px -6px black;
+
+  background-color: @color-white;
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 999;
+}
+
+#content-container {
+  margin-top: 70px;
+}
