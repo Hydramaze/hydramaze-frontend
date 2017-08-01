@@ -1,10 +1,30 @@
-<div id="menu-container" class="structure-block">
+<div id="header-container" class="structure-block">
     <div class="container-fluid">
         <navigation-block-directive></navigation-block-directive>
+
+        <ol class = "breadcrumb">
+          <li><a href="#">Início</a></li>
+          <li><a href="#">Laboratório</a></li>
+          <li class="active">Tutorial</li>
+        </ol>
+
     </div>
 </div>
 <div id="content-container" class="structure-block">
-    <div class="container-fluid">
-        <div ui-view="laboratorycontent"></div> 
+    <div class="container-fluid without-padding">
+        <div class="hidden-xs col-sm-3 col-md-3 sidebar">
+          <ul class="nav nav-stacked menu">
+            <li><a href='#'>Início<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+            <li><a href='#'>Downloads<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-download-alt"></span></a></li>
+            <li class="active"><a href='#'>Laboratório<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-education"></span></a></li>
+            <li><a href='#'>Sobre Nós<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tag"></span></a></li>
+          </ul>
+        </div>
+        <div ui-view="laboratorycontent" id="laboratory-content" class="col-xs-12 col-sm-9 col-md-9"></div> 
     </div>
 </div>
+<footer id="footer-container" class="structure-block">
+    <div class="container-fluid">
+        <footer-block-directive></footer-block-directive>
+    </div>
+</footer>

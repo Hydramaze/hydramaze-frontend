@@ -14,17 +14,17 @@ angular.module('hydramaze')
     $scope.steps = [
       {
         templateUrl: '/app/views/laboratory-content/tutorial/step-one/step-one.html',
-        title: 'Passo 1: Escolha um dataset',
+        title: 'Escolha um dataset',
         controller: 'StepOneCtrl'
       },
       {
         templateUrl: '/app/views/laboratory-content/tutorial/step-two/step-two.html',
-        title: 'Passo 2: Selecione um algoritmo e configure-o',
+        title: 'Selecione um algoritmo e configure-o',
         controller: 'StepTwoCtrl'
       },
       {
         templateUrl: '/app/views/laboratory-content/tutorial/step-three/step-three.html',
-        title: 'Passo 3: Apresentação dos resultados',
+        title: 'Apresentação dos resultados',
         controller: 'StepThreeCtrl'
       }
     ];

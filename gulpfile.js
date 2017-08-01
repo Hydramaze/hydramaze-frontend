@@ -43,6 +43,16 @@ gulp.task('scripts', function () {
     .pipe(connect.reload());
 });
 
+// Fonts
+gulp.task('fonts', function() {
+    gulp.src([
+      './bower_components/bootstrap/fonts/glyphicons-halflings-regular.*',
+      './bower_components/font-awesome/fonts/fontawesome-webfont.*'
+      ])
+      .pipe(gulp.dest('./tmp/assets/fonts'))
+      .pipe(connect.reload());
+});
+
 // Watch all files and reload when any change occurs
 gulp.task('watch', function () {
   gulp.watch(['./src/**/*.html'], ['html']);
@@ -54,6 +64,7 @@ gulp.task('initialization', function() {
   gulp.start('html');
   gulp.start('style');
   gulp.start('scripts');
+  gulp.start('fonts');
 });
 
-gulp.task('start', ['connect', 'initialization', 'watch']);
+gulp.task('start', ['connect', 'initialization', 'watch', 'fonts']);

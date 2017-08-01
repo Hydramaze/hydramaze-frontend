@@ -17,7 +17,7 @@ app.config(['$stateProvider',
 
   $locationProvider.hashPrefix('');
 
-  $urlRouterProvider.when('', '/home');
+  $urlRouterProvider.when('', '/inicio');
   $urlRouterProvider.otherwise('/404');
 
   $stateProvider
@@ -28,7 +28,7 @@ app.config(['$stateProvider',
       controller: 'DefaultTplCtrl'
   })
   .state('default.home', {
-      url: '/home',
+      url: '/inicio',
       views: {
         'defaultcontent': {
           templateUrl: 'app/views/home/home.html',
@@ -47,7 +47,7 @@ app.config(['$stateProvider',
   })
   .state('laboratory', {
       abstract: true,
-      url: '/laboratory',
+      url: '/laboratorio',
       templateUrl: 'app/templates/laboratory/laboratory.tpl.html',
       controller: 'LaboratoryTplCtrl'
   })

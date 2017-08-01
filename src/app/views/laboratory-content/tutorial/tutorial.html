@@ -1,14 +1,14 @@
-<multi-step-container steps="steps" class="simple-prev-next">
-    <h1>{{steps[$getActiveIndex()-1].title}}</h1>
-    <h2 ng-bind-template="Step {{$getActiveIndex()}}"></h2>
-    <header>
-      <button ng-disabled="$isFirst()" class="btn btn-default" ng-click="$previousStep()">
+<multi-step-container id="tutorial" steps="steps" class="simple-prev-next">
+    <h2><span class='text-color-hydra-lighter'>Passo {{$getActiveIndex()}}:</span> {{steps[$getActiveIndex()-1].title}}</h2>
+
+    <header class="clearfix">
+      <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="float-left btn btn-default" ng-click="$previousStep()">
           <span class="fa fa-chevron-left"></span>
-          Previous
+          <span class="fa fa-chevron-left"></span>
       </button>
 
-      <button ng-disabled="$isLast()" class="btn btn-default" ng-click="$nextStep()">
-          Next
+      <button ng-disabled="$isLast()" ng-hide="$isLast()" class="float-right btn btn-default" ng-click="$nextStep()">
+          <span class="fa fa-chevron-right"></span>
           <span class="fa fa-chevron-right"></span>
       </button>
     </header>
