@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('StepOneCtrl', function($scope, $compile, $timeout) {
+  .controller('StepOneCtrl', function($scope, $compile, $timeout, $http) {
 
     $scope.tutorial.StepOneCtrl = getStepOneConfiguration();
     /*
