@@ -8,13 +8,13 @@
 
 angular.module('hydramaze')
   .controller('TutorialCtrl', function($scope) {
-    
+
     $scope.tutorial = {};
 
     $scope.steps = [
       {
         templateUrl: '/app/views/laboratory-content/tutorial/step-one/step-one.html',
-        title: 'Escolha um dataset',
+        title: 'Escolha um algoritmo',
         controller: 'StepOneCtrl'
       },
       {
@@ -28,11 +28,11 @@ angular.module('hydramaze')
         controller: 'StepThreeCtrl'
       }
     ];
-  
+
     start();
 
     console.log("Tutorial Controller as been loaded!");
- 
+
   });
 
 

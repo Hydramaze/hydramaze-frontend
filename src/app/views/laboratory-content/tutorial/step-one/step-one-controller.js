@@ -18,7 +18,7 @@ angular.module('hydramaze')
     } */
 
     $timeout(function() {
-      
+
       angular.forEach($scope.tutorial.StepOneCtrl, function (val, key) {
 
         var newBlock = document.createElement("div");
@@ -28,12 +28,13 @@ angular.module('hydramaze')
         var content = document.createElement(val.component);
         content.setAttribute("data", val.data);
         newBlock.append(content);
-        
+
         $('#step-one-content').append(newBlock);
-        
+
       });
 
       $compile($('#step-one-content').contents())($scope);
+      console.log('Scope: ',$scope);
 
     });
 
@@ -42,19 +43,10 @@ angular.module('hydramaze')
   });
 
 function getStepOneConfiguration() {
-  
+
   var screenConfiguration = [
       {
-        component: 'radar-chart-directive',
-        data: '456'
-      },
-      {
-        component: 'radar-chart-directive',
-        data: '456'
-      },
-      {
-        component: 'radar-chart-directive',
-        data: '456'
+        component: 'algorithms-list-directive',
       }
   ];
 
