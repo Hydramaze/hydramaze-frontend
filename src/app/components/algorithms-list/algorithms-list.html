@@ -1,0 +1,12 @@
+<div class="step-one">
+  <div class="input-group" ng-repeat="(key, value) in fields">
+    <h2>{{ key }}</h2>
+    <div class="algorithms-options" ng-repeat="algorithm in value">
+      <h4>{{ algorithm.name }}</h4>
+      <div class="" ng-repeat="option in algorithm.algorithms">
+        <input type="radio" name="algorithm-option" value="{{ option }}" id="{{ option }}">
+        <label class="list-group-item" for="{{ option }}">{{ option }}</label>
+      </div>
+    </div>
+  </div>
+</div>
