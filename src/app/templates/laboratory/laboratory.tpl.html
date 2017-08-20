@@ -18,13 +18,18 @@
             <li><a href='#'>Downloads<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-download-alt"></span></a></li>
             <li class="active"><a href='#'>Laboratório<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-education"></span></a></li>
             <li><a href='#'>Sobre Nós<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tag"></span></a></li>
+            <li data-toggle="collapse" data-target="#laboratory-sub-menu" class="active"><a href="#"><i class="pull-right hidden-xs showopacity"></i> Laboratório <span class="arrow"></span></a></li>
+              <ul class="sub-menu collapse in" id="laboratory-sub-menu" style="">
+                <li><a href="/#/laboratorio/tutorial">Tutorial</a></li>
+                <li><a href="/#/laboratorio/exercises">Exercises</a></li>
+              </ul>
           </ul>
         </div>
         <div ui-view="laboratorycontent" id="laboratory-content" class="col-xs-12 col-sm-9 col-md-9"></div> 
     </div>
 </div>
 <footer id="footer-container" class="structure-block">
-    <div class="container-fluid">
-        <footer-block-directive></footer-block-directive>
-    </div>
+  <div class="container-fluid">
+    <footer-block-directive></footer-block-directive>
+  </div>
 </footer>

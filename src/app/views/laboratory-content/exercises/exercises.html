@@ -1,0 +1,15 @@
+<multi-step-container id="exercises" steps="steps" class="simple-prev-next">
+    <h2><span class='text-color-hydra-lighter'>Beginner - Exercise {{$getActiveIndex()}}:</span> {{steps[$getActiveIndex()-1].title}}</h2>
+    <main step-container></main>
+    <section class="clearfix">
+      <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="float-left btn btn-default" ng-click="$previousStep()">
+        <span class="fa fa-chevron-left"></span>
+        <span class="fa fa-chevron-left"></span>
+      </button>
+
+      <button ng-disabled="$isLast()" ng-hide="$isLast()" class="float-right btn btn-default" ng-click="$nextStep()" style="font-weight: bold;">
+        Próximo
+        <span class="fa fa-chevron-right"></span>
+      </button>
+    </section>
+</multi-step-container>
