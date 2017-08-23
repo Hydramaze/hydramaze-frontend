@@ -13,8 +13,16 @@
       import matplotlib.pyplot as plt
 
       # Declare X as an array with 9 positions of arrays, using the square footage to compose its value
+      X = [[300], [920], [1389], [1976], [3789], [1400], [1301], [972], [2158]]
 
       # Declare y as an array with 9 positions of arrays, using the price to compose its value
+      y = [[37000], [235000], [157000], [164900], [1430000], [59900], [159900], [1500000], [899000]]
+
+      # Plot the X of Y using plt
+      plt.figure()
+      
+      plt.grid(True)
+      plt.show()
 
     </code>
     <code data-type="solution">
@@ -30,12 +38,19 @@
       # Declare y as an array with 9 positions of arrays, using the price to compose its value
       y = [[37000], [235000], [157000], [164900], [1430000], [59900], [159900], [1500000], [899000]]
 
+      # Plot the X of Y using plt
+      plt.figure()
+      plt.plot(X, y, 'k.')
+      plt.grid(True)
+      plt.show()
+
     </code>
     <code data-type="sct">
       test_object("np")
       test_object("plt")
       test_object("X")
       test_object("y")
+      test_function("plt.show()")
       success_msg("We are making progress!")
     </code>
     <div data-type="hint">Use the function (<code>print</code>).</div>

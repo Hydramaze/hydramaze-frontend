@@ -11,18 +11,75 @@ angular.module('hydramaze')
 
     $scope.exercises = {};
 
+    var tplUrl = '/app/views/laboratory-content/exercises/exercise-base/exercise-base.html';
+    var tplCtrl = 'ExerciseBaseCtrl';
+
     $scope.steps = [
       {
-        templateUrl: '/app/views/laboratory-content/exercises/exercise-base/exercise-base.html',
+        templateUrl: tplUrl,
+        controller: tplCtrl,
         title: 'Learning how to use the programming interface',
-        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-one.html',
-        controller: 'ExerciseBaseCtrl'
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-intro.html'
       },
       {
-        templateUrl: '/app/views/laboratory-content/exercises/exercise-base/exercise-base.html',
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Learning how to use the programming interface',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-one.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
         title: 'Importing Numpy and Matplot libraries',
-        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-two.html',
-        controller: 'ExerciseBaseCtrl'
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-two.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-three.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-four.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-five.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-six.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-seven.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-eight.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-nine.html'
+      },
+      {
+        templateUrl: tplUrl,
+        controller: tplCtrl,
+        title: 'Importing Numpy and Matplot libraries',
+        exercise: '/app/views/laboratory-content/exercises/exercises-list/exercise-ten.html'
       }
     ];
 

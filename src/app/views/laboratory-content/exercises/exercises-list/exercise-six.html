@@ -1,9 +1,5 @@
 <div>
-  <p>First of all let's import some libraries which will make some tasks easily. It is important to know which library we are using and why, so be curious and look for that: 
-  <ul>
-    <li><a target="_blank" href="https://docs.scipy.org/doc/numpy/user/quickstart.html">NumPy</a></p></li>
-    <li><a target="_blank" href="https://matplotlib.org/">Matplotlib</a></p></li>
-  </ul>
+  <p>First of all we have to import some libraries which will be very helpful to programming linear regression algorithm. It is important to know which library we are using and why: Numpy, Matplotlib, Scikit Learn. So be curious and <a target="_blank" href="https://docs.scipy.org/doc/numpy/user/quickstart.html">click here</a> to further more.</p>
   <div data-datacamp-exercise data-lang="python">
     <code data-type="pre-exercise-code">
       # None declared
@@ -14,6 +10,8 @@
 
       # Import matplotlib.pyplot as plt
 
+      # from sklearn.linear_model import LinearRegression
+
     </code>
     <code data-type="solution">
       # Import numpy as np
@@ -22,13 +20,18 @@
       # Import matplotlib.pyplot as plt
       import matplotlib.pyplot as plt
 
+      # from sklearn.linear_model import LinearRegression
+      from sklearn.linear_model import LinearRegression
+
     </code>
     <code data-type="sct">
       test_object("np")
       test_object("plt")
+      test_object("LinearRegression")
       success_msg("We are making progress!")
     </code>
     <div data-type="hint">Use the function (<code>print</code>).</div>
+    <div data-type="hint">Use the function (<code>all</code>).</div>
   </div>
 
   <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
