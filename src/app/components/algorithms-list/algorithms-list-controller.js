@@ -17,6 +17,10 @@ angular.module('hydramaze')
         console.log("churros: ", $scope.algorithms);
       });
 
+    $scope.helpModal = function(e) {
+      e.preventDefault();
+    };
+
     function formatterData(algorithms) {
      var algorithmsObj = {};
      angular.forEach(algorithms, function(value, key) {

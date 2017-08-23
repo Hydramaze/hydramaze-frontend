@@ -23,7 +23,7 @@ angular.module('hydramaze')
 
         var newBlock = document.createElement("div");
         newBlock.setAttribute("id", "component-" + key);
-        newBlock.setAttribute("class", "block");
+        newBlock.setAttribute("class", "block container-fluid");
 
         var content = document.createElement(val.component);
         content.setAttribute("data", val.data);
