@@ -34,7 +34,6 @@ angular.module('hydramaze')
       });
 
       $compile($('#step-one-content').contents())($scope);
-      console.log('Scope: ',$scope);
 
     });
 

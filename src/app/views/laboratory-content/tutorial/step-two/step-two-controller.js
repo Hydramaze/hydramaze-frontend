@@ -7,13 +7,17 @@
  */
 
 angular.module('hydramaze')
-  .controller('StepTwoCtrl', function($scope, $http) {
+  .controller('StepTwoCtrl', function($scope, $http, $timeout) {
 
     console.log("StepTwoCtrl Controller as been loaded!");
 
-    $http.get('http://localhost:8080/greeting').
-    then(function(response) {
-        $scope.greeting = response.data;
+    $scope.init = function() {
+      $scope.algorithmId = localStorage.getItem("value");
+    };
+    $timeout(function() {
+      $http.get("http://localhost:8080/api/parameter/getByAlgorithmId?id=" + $scope.algorithmId).
+      then(function(response) {
+        $scope.algorithm = response.data;
+      });
     });
-
   });

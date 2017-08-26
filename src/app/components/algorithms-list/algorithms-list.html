@@ -1,11 +1,11 @@
-<div class="step-one row">
+<div class="step-one row" ng-init="init()">
   <div class=" col-xs-12 col-sm-6 input-group float-left" ng-repeat="(key, value) in algorithms">
     <h2>{{ key }}</h2>
-    <div class="algorithms-options" ng-repeat="(key, value) in value">
+    <div class="algorithms-options" ng-repeat="(key, result) in value">
       <h4>{{ key }}</h4>
-      <div class="algorithm-content" ng-repeat="algorithm in value">
-        <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="{{ algorithm.name }}">
-        <label class="list-group-item" for="{{ algorithm.name }}" title="{{ algorithm.simpleDescription }}">{{ algorithm.name }}<span class="glyphicon glyphicon-question-sign pull-right" ng-click="helpModal($event)" data-toggle="modal" data-target="#modal-{{ algorithm.id }}"></span></label>
+      <div class="algorithm-content" ng-repeat="algorithm in result">
+        <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="algorithm-{{ algorithm.id }}" ng-click=algorithmClick(algorithm.id)>
+        <label class="list-group-item" for="algorithm-{{ algorithm.id }}" title="{{ algorithm.simpleDescription }}">{{ algorithm.name }}<span class="glyphicon glyphicon-question-sign pull-right" ng-click="helpModal($event)" data-toggle="modal" data-target="#modal-{{ algorithm.id }}"></span></label>
 
         <!-- Modal -->
         <div class="modal fade" id="modal-{{ algorithm.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
