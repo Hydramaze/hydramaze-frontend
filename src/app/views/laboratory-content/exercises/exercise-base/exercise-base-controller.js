@@ -13,14 +13,34 @@ angular.module('hydramaze')
 
     $scope.detailFrame = $sce.trustAsResourceUrl($scope.steps[$scope.$getActiveIndex()-1].exercise);
 
+    $scope.$on('$destroy', function() {
+      window.onresize = null;
+      console.log("destr");
+    });
+
   });
 
 function successIframeCall() {
   alert("It works!");
 }
 
+function iframeInitializer(obj) {
+  $(obj).contents().find("head").append('<link rel="stylesheet" href="/tmp/assets/css/main.css" type="text/css" />');
+  
+  $(obj).ready(function() {
+    resizeIframe(obj);
+  });
+
+  window.onresize = function(event) {
+    resizeIframe(obj);
+  };
+}
+
 function resizeIframe(obj) {
   obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  showIframe(obj);
+}
+
+function showIframe(obj) {
   $(obj).removeClass("ng-hide");
-  $(obj).contents().find("head").append('<link rel="stylesheet" href="/tmp/assets/css/main.css" type="text/css" />');
 }

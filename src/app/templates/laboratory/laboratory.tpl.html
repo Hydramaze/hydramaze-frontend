@@ -1,13 +1,7 @@
 <div id="header-container" class="structure-block">
     <div class="container-fluid">
         <navigation-block-directive></navigation-block-directive>
-
-        <ol class = "breadcrumb">
-          <li><a href="#">Início</a></li>
-          <li><a href="#">Laboratório</a></li>
-          <li class="active">Tutorial</li>
-        </ol>
-
+        <breadcrumb-directive></breadcrumb-directive>
     </div>
 </div>
 <div id="content-container" class="structure-block">
@@ -28,8 +22,3 @@
         <div ui-view="laboratorycontent" id="laboratory-content" class="col-xs-12 col-sm-9 col-md-9"></div> 
     </div>
 </div>
-<footer id="footer-container" class="structure-block">
-  <div class="container-fluid">
-    <footer-block-directive></footer-block-directive>
-  </div>
-</footer>
