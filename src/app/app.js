@@ -59,6 +59,15 @@ app.config(['$stateProvider',
           controller: 'TutorialCtrl'
         }
       }
+  })
+  .state('laboratory.exercises', {
+      url: '/exercises',
+      views: {
+        'laboratorycontent': {
+          templateUrl: 'app/views/laboratory-content/exercises/exercises.html',
+          controller: 'ExercisesCtrl'
+        }
+      }
   });
 
 }]);
