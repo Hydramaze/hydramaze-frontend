@@ -13,6 +13,6 @@ angular.module('hydramaze')
       restrict: 'E',
       replace: true,
       templateUrl: '/app/components/algorithms-list/algorithms-list.html',
-      controller: 'algorithmsListCtrl'
+      controller: 'AlgorithmsListCtrl'
     }
   });

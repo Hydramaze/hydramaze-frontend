@@ -7,11 +7,8 @@
  */
 
 angular.module('hydramaze')
-  .controller('LaboratoryTplCtrl', function($state) {
-   
-    console.log($state);
+  .controller('LaboratoryTplCtrl', function() {
 
-    // Choose default template
     console.log("LaboratoryTplCtrl as been loaded!");
 
   });

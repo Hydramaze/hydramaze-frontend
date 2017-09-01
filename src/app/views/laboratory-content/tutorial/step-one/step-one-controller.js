@@ -9,45 +9,35 @@
 angular.module('hydramaze')
   .controller('StepOneCtrl', function($scope, $compile, $timeout, $http) {
 
-    $scope.tutorial.StepOneCtrl = getStepOneConfiguration();
-    /*
-    if ($scope.tutorial.StepOneCtrl) {
-      console.log($scope.tutorial.StepOneCtrl);
-    } else {
-      console.log("Sem dado.");
-    } */
+    console.log("StepOneCtrl Controller as been loaded!");
 
     $timeout(function() {
-
-      angular.forEach($scope.tutorial.StepOneCtrl, function (val, key) {
-
-        var newBlock = document.createElement("div");
-        newBlock.setAttribute("id", "component-" + key);
-        newBlock.setAttribute("class", "block container-fluid");
-
-        var content = document.createElement(val.component);
-        content.setAttribute("data", val.data);
-        newBlock.append(content);
-
-        $('#step-one-content').append(newBlock);
-
-      });
-
-      $compile($('#step-one-content').contents())($scope);
-
+      getAlgorithmsList($http, $scope, $compile);
     });
-
-    console.log("StepOneCtrl Controller as been loaded!");
 
   });
 
-function getStepOneConfiguration() {
+function getAlgorithmsList($http, $scope, $compile) {
+  $http.get('http://localhost:8080/api/algorithm')
+    .then(function(response) {
+      createScreenAlgorithmsList($scope, response.data, $compile);
+    });
+}
 
-  var screenConfiguration = [
-      {
-        component: 'algorithms-list-directive',
-      }
-  ];
+function createScreenAlgorithmsList($scope, data, $compile) {
+  var component = 'algorithms-list-directive';
 
-  return screenConfiguration;
+  var newBlock = document.createElement("div");
+  newBlock.setAttribute("id", "algorithms-list-directive");
+  newBlock.setAttribute("class", "block container-fluid");
+
+  var content = document.createElement(component);
+  newBlock.append(content);
+
+  $('#step-one-content').append(newBlock);
+
+  var newScope = $scope.$new(true);
+  newScope.data = data;
+
+  $compile($('#step-one-content').contents())(newScope);
 }

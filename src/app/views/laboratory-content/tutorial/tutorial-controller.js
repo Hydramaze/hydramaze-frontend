@@ -29,13 +29,7 @@ angular.module('hydramaze')
       }
     ];
 
-    start();
-
     console.log("Tutorial Controller as been loaded!");
 
   });
-
-
-function start() {
-  console.log("Hello World!");
-}
+  
