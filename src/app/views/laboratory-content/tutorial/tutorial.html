@@ -1,13 +1,13 @@
 <multi-step-container id="tutorial" steps="steps" class="steps-container-style simple-prev-next">
-    <h2><span class='text-color-hydra-lighter'>Passo {{$getActiveIndex()}}:</span> {{steps[$getActiveIndex()-1].title}}</h2>
-    <main step-container></main>
+    <h2><span class='text-color-hydra-lighter'>Step {{$getActiveIndex()}}:</span> {{steps[$getActiveIndex()-1].title}}</h2>
+    <main id="main-step-content" step-container></main>
     <section class="clearfix footer-section">
       <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="float-left btn btn-default" ng-click="$previousStep()">
         <span class="fa fa-chevron-left"></span>
         <span class="fa fa-chevron-left"></span>
       </button>
 
-      <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button float-right btn btn-default" ng-click="$nextStep()" style="font-weight: bold;">
+      <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button float-right btn btn-default" ng-click="nextStepCall(this)" style="font-weight: bold;">
         <span class="fa fa-chevron-right"></span>
         <span class="fa fa-chevron-right"></span>
       </button>

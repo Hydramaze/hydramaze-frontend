@@ -8,7 +8,7 @@
  * Main module of the application.
  */
 
-var app = angular.module('hydramaze', ['ngRoute', 'ui.router', 'chart.js', 'multiStepForm']);
+var app = angular.module('hydramaze', ['ngRoute', 'ui.router', 'chart.js', 'multiStepForm', 'cgNotify']);
 
 app.config(['$stateProvider', 
             '$urlRouterProvider', 

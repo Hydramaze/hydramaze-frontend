@@ -7,84 +7,89 @@
  */
 
 angular.module('hydramaze')
-  .controller('StepTwoCtrl', function($scope, $http, $timeout, $compile) {
-    $timeout(function() {
-      getParametersByAlgorithmID($http, $scope, $compile, '4');
-    });
-/*
-    $scope.init = function() {
-      $scope.algorithmId = localStorage.getItem("value");
-    };
-    $timeout(function() {
-      $http.get("http://localhost:8080/api/parameter/getByAlgorithmId?id=" + $scope.algorithmId).
-      then(function(response) {
-        $scope.algorithm = response.data;
-        $scope.tutorial.StepTwoCtrl = defineParameters($scope.algorithm);
+  .controller('StepTwoCtrl', function($scope, $http, $timeout, $compile, tutorialService, stepTwoService, notify) {
 
-        angular.forEach($scope.tutorial.StepTwoCtrl, function (val, key) {
+    /*
+    * Declared scope functions
+    */
 
-          var newBlock = document.createElement("div");
-          newBlock.setAttribute("id", "component-" + key);
-          newBlock.setAttribute("class", "block container-fluid");
+    // Scope functions
+    $scope.saveDataServiceTutorialStep = function() {
 
-          var content = document.createElement(val.component);
-          content.setAttribute("data", val.data);
-          newBlock.append(content);
-
-          $('#step-two-content').append(newBlock);
-
-        });
-
-        $compile($('#step-two-content').contents())($scope);
+      $(".algorithm-parameter").each(function() {
+        var elementScope = angular.element("#" + $(this).attr("id")).scope();
+        console.log(angular.element("#" + $(this).attr("id")));
+        stepTwoService.addData(elementScope.getComponentKey(), elementScope.getComponentValue());
       });
-    });*/
-    console.log("StepTwoCtrl Controller as been loaded!");
 
-  });
+      tutorialService.setStepTwoData(stepTwoService.getAllData());
+    };
 
-/*
-function defineParameters(algorithm) {
-  var parameters = [];
-  $.each(algorithm, function(key, value) {
-    parameters.push(value.component);
-  });
-  return getStepTwoConfiguration(parameters);
-}
+    $scope.$getParametersByAlgorithmID = function(idValue) {
+      $http.get('http://localhost:8080/api/parameter/getByAlgorithmId?id=' + idValue)
+        .then(function successCallback(response) {
+          if (response.status == 200) {
+            console.log(response);
+            $scope.$createScreenAlgorithmsParameters(response.data);
+          }
+          else {
+            notify({
+              message: "Algorithm parameters not found.",
+              classes: "alert-danger"
+            });
+          }
+        }, function errorCallback(responseError) {
+          notify({
+            message: "Sorry, an error has occurred. Try again!",
+            classes: "alert-danger"
+          });
+        });
+    }
 
-function getStepTwoConfiguration(parameters) {
-  var screenConfiguration = [];
-  $.each(parameters, function(key, value) {
-    screenConfiguration.push(value + "-directive");
-  });
-  return screenConfiguration;
-}
-*/
+    $scope.$createScreenAlgorithmsParameters = function(data) {
+      angular.forEach(data, function (val, key) {
+        
+        var newBlock = document.createElement("div");
+        newBlock.setAttribute("id", "algorithm-parameter-" + key);
+        newBlock.setAttribute("class", "algorithm-parameter block col-xs-12 col-sm-6 col-md-4 container-fluid");
 
-function getParametersByAlgorithmID($http, $scope, $compile, idValue) {
-  $http.get('http://localhost:8080/api/parameter/getByAlgorithmId?id=' + idValue)
-    .then(function(response) {
-      console.log(response);
-      createScreenAlgorithmsParameters($scope, response.data, $compile);
+        var directiveComponent = document.createElement(val.component + "-directive");
+        newBlock.append(directiveComponent);
+
+        var newScope = $scope.$new(true);
+        newScope.data = val;
+        
+        var el = $compile(newBlock)(newScope);
+
+        $('#step-two-content').append(newBlock);
+      });
+    }
+
+
+    /*
+    * Functions usage
+    */
+    $timeout(function() {
+
+      // clear previous selected options
+      stepTwoService.initData([]);
+
+      var stepOneSharedData = tutorialService.getStepOneData();
+      var algorithmId = stepOneSharedData[0].value;
+
+      console.log(algorithmId);
+
+      if (algorithmId) {
+        
+          $scope.$getParametersByAlgorithmID(algorithmId);
+        
+      } else {
+        notify({
+          message: "AlgorithmId is not a valid value",
+          classes: "alert-warning"
+        });
+      }
+
+      console.log("StepTwoCtrl Controller as been loaded!");
     });
-}
-
-function createScreenAlgorithmsParameters($scope, data, $compile) {
-
-  angular.forEach(data, function (val, key) {
-    
-    var newBlock = document.createElement("div");
-    newBlock.setAttribute("id", "algorithm-parameter-" + key);
-    newBlock.setAttribute("class", "block col-xs-12 col-sm-6 col-md-4 container-fluid");
-
-    var directiveComponent = document.createElement(val.component + "-directive");
-    newBlock.append(directiveComponent);
-
-    var newScope = $scope.$new(true);
-    newScope.data = val;
-    
-    var el = $compile(newBlock)(newScope);
-
-    $('#step-two-content').append(newBlock);
   });
-
-}
