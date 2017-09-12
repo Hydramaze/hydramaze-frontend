@@ -35,6 +35,7 @@
     "chart.js": "^2.6.0",
     "angular-chart.js": "1.1.1",
     "angular-multi-step-form": "^1.3.0",
-    "bootstrap-social": "^5.1.1"
+    "bootstrap-social": "^5.1.1",
+    "angular-notify": "^2.5.1"
   }
 }

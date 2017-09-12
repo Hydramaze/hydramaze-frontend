@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('AlgorithmsListCtrl', function($scope, $attrs, $http) {
+  .controller('AlgorithmsListCtrl', function($scope, $attrs, $http, stepOneService) {
 
     console.log('Algorithms list has been loaded');
 
@@ -21,8 +21,9 @@ angular.module('hydramaze')
       jQuery('#button-next').prop('disabled', true);
     };
 
-    $scope.algorithmClick = function() {
-      $('#button-next').prop('disabled', false);
+    $scope.algorithmClick = function(algorithmId) {
+      console.log("Selected id = " + algorithmId);
+      stepOneService.addData("algorithmId", algorithmId);
     };
 
 });
