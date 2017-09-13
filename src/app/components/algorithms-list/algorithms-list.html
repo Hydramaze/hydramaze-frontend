@@ -1,4 +1,4 @@
-<div class="step-one row panel-group" ng-init="init()" id="accordion" role="tablist" aria-multiselectable="false">
+<div class="step-one row panel-group" id="accordion" role="tablist" aria-multiselectable="false">
   <div class="col-xs-12 col-sm-6 input-group float-left" ng-repeat="(key, value) in algorithms">
     <h2>{{ key }}</h2>
     <div class="algorithms-options" ng-repeat="(key, result) in value">
@@ -6,12 +6,31 @@
       <div class="algorithm-content" ng-repeat="algorithm in result">
         <div class="" id="heading-{{algorithm.id}}" role="tab">
           <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="algorithm-{{ algorithm.id }}" ng-click=algorithmClick(algorithm.id)>
-          <label class="list-group-item" for="algorithm-{{ algorithm.id }}" title="{{ algorithm.simpleDescription }}">{{ algorithm.name }}<span role="button" class="collapsed glyphicon glyphicon-question-sign pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{algorithm.id}}" aria-controls="collapse-{{algorithm.id}}" aria-expanded="true"></span></label>
+          <label class="list-group-item" for="algorithm-{{ algorithm.id }}">{{ algorithm.name }}<span ng-click="toggleDown = !toggleDown" ng-class="{'glyphicon-chevron-down' : toggleDown, 'glyphicon-chevron-up' : toggleUp}" role="button" class="collapsed glyphicon pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{algorithm.id}}" aria-controls="collapse-{{algorithm.id}}" aria-expanded="true"></span></label>
         </div>
-        <!-- Modal -->
+        <!-- Accordion -->
         <div class="panel-collapse collapse" id="collapse-{{ algorithm.id }}" role="tabpanel" aria-labelledby="heading-{{algorithm.id}}">
           <div class="panel-body">
-            <p>{{ algorithm.completeDescription }}</p>
+            <p>{{ algorithm.simpleDescription }}</p>
+            <label class="saiba-mais" data-toggle="modal" data-target="#modal-{{algorithm.id}}">Saiba Mais<span class="glyphicon glyphicon-question-sign"></span></label>
+          </div>
+        </div>
+        <!-- End accordion -->
+        <!-- Modal -->
+        <div class="modal fade" id="modal-{{algorithm.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{algorithm.name}}</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{algorithm.completeDescription}}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
         <!-- End modal -->

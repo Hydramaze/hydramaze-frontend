@@ -10,14 +10,6 @@
       .make-xs-column(12);
       padding: 0 0 10px 0;
 
-      @media @tablet {
-        margin: 0 15px;
-        width: ~"calc(50% - 30px)";
-      }
-
-      @media @desk {
-      }
-
       h2 {
         border: none;
         margin-bottom: 0;
@@ -32,6 +24,24 @@
       .algorithms-options {
         margin-top: 15px;
         padding: 0 15px;
+
+        .panel-collapse {
+          border: 1px solid #eee;
+
+          .saiba-mais {
+            float: right;
+            cursor: pointer;
+
+            span {
+              padding-left: 5px;
+            }
+
+            &:hover {
+              color: @darker-color;
+            }
+          }
+        }
+
         input[type="radio"] {
           display: none;
           & ~ label {

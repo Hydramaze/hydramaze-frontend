@@ -13,18 +13,13 @@ angular.module('hydramaze')
 
     $scope.algorithms = formatterData($scope.data);
 
-    $scope.helpModal = function(e) {
-      e.preventDefault();
-    };
-
-    $scope.init = function() {
-      jQuery('#button-next').prop('disabled', true);
-    };
-
     $scope.algorithmClick = function(algorithmId) {
       console.log("Selected id = " + algorithmId);
       stepOneService.addData("algorithmId", algorithmId);
     };
+
+    $scope.toggleDown = true;
+    $scope.toggleUp = true;
 
 });
 
