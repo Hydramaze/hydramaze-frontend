@@ -26,7 +26,7 @@ angular.module('hydramaze')
     };
 
     $scope.$getParametersByAlgorithmID = function(idValue) {
-      $http.get('http://localhost:8080/api/parameter/getByAlgorithmId?id=' + idValue)
+      $http.get('http://localhost:8080/api/parameter/getByAlgorithmId?id=' + 4)
         .then(function successCallback(response) {
           if (response.status == 200) {
             console.log(response);
@@ -47,21 +47,45 @@ angular.module('hydramaze')
     }
 
     $scope.$createScreenAlgorithmsParameters = function(data) {
+      var components = document.createElement("div");
+      var components2 = document.createElement("div");
+      components.setAttribute("class", "components");
+      components2.setAttribute("class", "components");
+
       angular.forEach(data, function (val, key) {
-        
+
         var newBlock = document.createElement("div");
         newBlock.setAttribute("id", "algorithm-parameter-" + key);
-        newBlock.setAttribute("class", "algorithm-parameter block col-xs-12 col-sm-6 col-md-4 container-fluid");
+        newBlock.setAttribute("class", "algorithm-parameter block col-xs-12 col-sm-6 col-md-4 container-fluid ");
 
         var directiveComponent = document.createElement(val.component + "-directive");
-        newBlock.append(directiveComponent);
 
-        var newScope = $scope.$new(true);
-        newScope.data = val;
-        
-        var el = $compile(newBlock)(newScope);
+        if (val.component != 'check-box') {
+          var directiveName = document.createElement("h3");
+          directiveName.innerHTML = val.name;
+          newBlock.append(directiveName);
+          newBlock.append(directiveComponent);
 
-        $('#step-two-content').append(newBlock);
+          var newScope = $scope.$new(true);
+          newScope.data = val;
+
+          var el = $compile(newBlock)(newScope);
+
+          components.append(newBlock);
+        }
+        else {
+          newBlock.append(directiveComponent);
+
+          var newScope = $scope.$new(true);
+          newScope.data = val;
+
+          var el = $compile(newBlock)(newScope);
+
+          components2.append(newBlock);
+        }
+        $('#step-two-content').append(components);
+        $('#step-two-content').append(components2);
+
       });
     }
 
@@ -80,9 +104,9 @@ angular.module('hydramaze')
       console.log(algorithmId);
 
       if (algorithmId) {
-        
+
           $scope.$getParametersByAlgorithmID(algorithmId);
-        
+
       } else {
         notify({
           message: "AlgorithmId is not a valid value",
