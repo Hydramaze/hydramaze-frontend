@@ -12,6 +12,8 @@ angular.module('hydramaze')
     /*
     * Declared scope functions
     */
+    $scope.toggleVisibility = false;
+    $scope.toggleClass = false;
 
     $scope.$init = function() {
       jQuery('#button-next').prop('disabled', true);
