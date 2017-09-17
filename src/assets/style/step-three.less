@@ -1,16 +1,52 @@
 .datasets {
   cursor: pointer;
+  @media @phone {
+    padding-top: 20px;
+  }
   .flipper {
+    margin: auto;
+    transition: 0.6s;
     height: 315px;
     width: 285px;
-    transition: 0.6s;
   	transform-style: preserve-3d;
   	position: relative;
-    &.card-hidden {
-      transform: rotateY(180deg);
+    border-radius: 4px;
+    span {
+      display: none;
+      box-shadow: 0 1px 15px #666;
     }
     &.selected {
-      box-shadow: 3px 3px 15px #666;
+      .card-front,
+      .card-back {
+        box-shadow: 3px 3px 15px #666;
+      }
+      span {
+        display: block;
+        left: -7px;
+        top: -7px;
+        width: 35px;
+        height: 35px;
+        z-index: 11;
+        background: #00aa8d;
+        border-radius: 50%;
+        &::before {
+          content: "\e013";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          color: #fff;
+          font-size: 15px;
+        }
+      }
+    }
+    &.card-hidden {
+      transform: rotateY(180deg);
+      width: 100%;
+      margin-bottom: 20px;
+      span {
+        display: none;
+      }
     }
   }
 
@@ -22,7 +58,7 @@
   	position: absolute;
   	top: 0;
   	left: 0;
-
+    transition: 0.6s;
   }
   .card-front {
     z-index: 2;

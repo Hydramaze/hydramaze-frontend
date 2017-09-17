@@ -1,21 +1,21 @@
 <div class="step-three row" ng-init="$init()">
   <div class="row">
-    <div class="col-sm-6 col-md-4 datasets" ng-repeat="(key, dataset) in datasets" ng-click="toggleClass = !toggleClass">
-      <div class="flipper" ng-class="{'card-hidden' : toggleVisibility, 'selected' : toggleClass}">
+    <div class="col-xs-12 col-sm-6 col-lg-4 datasets" ng-repeat="(key, dataset) in datasets">
+      <div class="flipper" ng-click="toggleSelected($event)">
+        <span class="glyphicon glyphicon-ok"></span>
         <div class="thumbnail card-front">
           <img src="/assets/img/download.jpg" alt="...">
           <div class="caption">
             <h3>{{dataset.name}}</h3>
             <p>{{dataset.simpleDescription}}</p>
-            <p><a class="btn btn-primary" role="button" ng-click="toggleVisibility = !toggleVisibility">Saiba Mais</a></p>
-            <span class="glyphicon glyphicon-ok"></span>
+            <a class="btn btn-primary" role="button" ng-click="toggleVisibility($event)">Saiba Mais</a>
           </div>
         </div>
         <div class="thumbnail card-back">
           <div class="caption">
             <h3>{{dataset.name}}</h3>
             <p>{{dataset.completeDescription}}</p>
-            <p><a class="btn btn-primary" role="button" ng-click="toggleVisibility = !toggleVisibility">Saiba Mais</a></p>
+            <p><a class="btn btn-primary" role="button" ng-click="toggleVisibility($event)">Saiba Mais</a></p>
           </div>
         </div>
       </div>

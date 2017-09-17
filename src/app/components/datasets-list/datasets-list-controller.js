@@ -12,8 +12,16 @@ angular.module('hydramaze')
     /*
     * Declared scope functions
     */
-    $scope.toggleVisibility = false;
-    $scope.toggleClass = false;
+    $scope.toggleVisibility = function($event) {
+      var bla = $($event.target);
+      bla.closest('.flipper').toggleClass('card-hidden');
+      bla.closest('.datasets').toggleClass('col-sm-6 col-lg-4');
+    };
+    $scope.toggleSelected = function(e) {
+      if (e.target.nodeName == "DIV") {
+        $(e.currentTarget).toggleClass('selected');
+      }
+    };
 
     $scope.$init = function() {
       jQuery('#button-next').prop('disabled', true);
