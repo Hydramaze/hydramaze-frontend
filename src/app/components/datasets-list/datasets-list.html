@@ -1,24 +1,38 @@
 <div class="step-three row" ng-init="$init()">
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-lg-4 datasets" ng-repeat="(key, dataset) in datasets">
-      <div class="flipper" ng-click="toggleSelected($event)">
-        <span class="glyphicon glyphicon-ok"></span>
-        <div class="thumbnail card-front">
-          <img src="/assets/img/download.jpg" alt="...">
-          <div class="caption">
-            <h3>{{dataset.name}}</h3>
-            <p>{{dataset.simpleDescription}}</p>
-            <a class="btn btn-primary" role="button" ng-click="toggleVisibility($event)">Saiba Mais</a>
+      <input type="radio" name="datasets" value="{{ dataset.name }}" id="dataset-{{ dataset.id }}" ng-click=$datasetClick(dataset.id)>
+      <label class="dataset" for="dataset-{{ dataset.id }}">
+        <div class="flipper" ng-click="toggleSelected($event)">
+          <span class="glyphicon glyphicon-ok"></span>
+          <div class="thumbnail card-front">
+            <img src="/assets/img/download.jpg" alt="...">
+            <div class="caption">
+              <h3>{{dataset.name}}</h3>
+              <p>{{dataset.simpleDescription}}</p>
+              <label class="saiba-mais btn btn-primary" data-toggle="modal" data-target="#modal-{{dataset.id}}">Saiba Mais</label>
+            </div>
           </div>
         </div>
-        <div class="thumbnail card-back">
-          <div class="caption">
-            <h3>{{dataset.name}}</h3>
-            <p>{{dataset.completeDescription}}</p>
-            <p><a class="btn btn-primary" role="button" ng-click="toggleVisibility($event)">Saiba Mais</a></p>
+      </label>
+      <!-- Modal -->
+      <div class="modal fade" id="modal-{{dataset.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">{{dataset.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{dataset.completeDescription}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>
+      <!-- End modal -->
     </div>
   </div>
 </div>

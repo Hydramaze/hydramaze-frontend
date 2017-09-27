@@ -23,11 +23,12 @@ angular.module('hydramaze')
           }
         }
 
-      $http.post('http://localhost:8080/api/algorithmExecuter?algorithmId=' + algorithmId + "&dataSetId=" + datasetId + "&learningCurve=" + testSize, data, config)
+      $http.post('http://localhost:8080/api/algorithmExecuter?algorithmId=' + 4 + "&dataSetId=" + datasetId + "&learningCurve=" + testSize, data, config)
         .then(function successCallback(response) {
           if (response.status == 200) {
             $scope.accuracy = response.data.accuracy;
             console.log(response.data.accuracy);
+            console.log("resposta: ", response);
           }
           else {
             notify({
