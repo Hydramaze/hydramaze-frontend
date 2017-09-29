@@ -27,8 +27,9 @@ angular.module('hydramaze')
         .then(function successCallback(response) {
           if (response.status == 200) {
             $scope.accuracy = response.data.accuracy;
+            $scope.confusion_matrix = response.data.confusion_matrix;
             console.log(response.data.accuracy);
-            console.log("resposta: ", response);
+            console.log("resposta: ", response.data.confusion_matrix);
           }
           else {
             notify({

@@ -1,5 +1,15 @@
 <div>
   <div id="step-four-content" class="step-main-content-view">
     <p>Accuracy: {{accuracy}}</p>
+    <table class="table table-bordered text-capitalize">
+      <tr>
+        <th></th>
+        <th ng-repeat="(key, value) in confusion_matrix.class_names">{{ value }}</th>
+      </tr>
+      <tr ng-repeat="(key, value) in confusion_matrix.class_names">
+        <td>{{ value }}</td>
+        <td ng-repeat="result in confusion_matrix.matrix[key] track by $index" ng-style="{'background-color': result? 'rgba(0, 161, 255, 0.4)' : 'rgba(255, 0, 0, 0.3)'}">{{ result }}</td>
+      </tr>
+    </table>
   </div>
 </div>
