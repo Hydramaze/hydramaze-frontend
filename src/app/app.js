@@ -17,24 +17,30 @@ app.config(['$stateProvider',
 
   $locationProvider.hashPrefix('');
 
-  $urlRouterProvider.when('', '/inicio');
+  $urlRouterProvider.when('', '/home');
   $urlRouterProvider.otherwise('/404');
 
   $stateProvider
+  .state('start', {
+      abstract: true,
+      url: '',
+      templateUrl: 'app/templates/start/start.tpl.html',
+      controller: 'StartTplCtrl'
+  })
+  .state('start.home', {
+      url: '/home',
+      views: {
+        'startcontent': {
+          templateUrl: 'app/views/home/home.html',
+          controller: 'HomeCtrl'
+        }
+      }
+  })
   .state('default', {
       abstract: true,
       url: '',
       templateUrl: 'app/templates/default/default.tpl.html',
       controller: 'DefaultTplCtrl'
-  })
-  .state('default.home', {
-      url: '/inicio',
-      views: {
-        'defaultcontent': {
-          templateUrl: 'app/views/home/home.html',
-          controller: 'HomeCtrl'
-        }
-      }
   })
   .state('default.404', {
       url: '/404',
@@ -47,7 +53,7 @@ app.config(['$stateProvider',
   })
   .state('laboratory', {
       abstract: true,
-      url: '/laboratorio',
+      url: '/laboratory',
       templateUrl: 'app/templates/laboratory/laboratory.tpl.html',
       controller: 'LaboratoryTplCtrl'
   })
