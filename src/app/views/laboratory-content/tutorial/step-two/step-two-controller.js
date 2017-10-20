@@ -26,7 +26,7 @@ angular.module('hydramaze')
     };
 
     $scope.$getParametersByAlgorithmID = function(idValue) {
-      $http.get('http://localhost:8080/api/parameter/getByAlgorithmId?id=' + 4)
+      $http.get('http://localhost:8080/api/algorithm/' + idValue + '/parameter')
         .then(function successCallback(response) {
           if (response.status == 200) {
             console.log(response);
@@ -37,56 +37,35 @@ angular.module('hydramaze')
               message: "Algorithm parameters not found.",
               classes: "alert-danger"
             });
+            $scope.$previousStep();
           }
         }, function errorCallback(responseError) {
           notify({
             message: "Sorry, an error has occurred. Try again!",
             classes: "alert-danger"
           });
+          $scope.$previousStep();
         });
     }
 
     $scope.$createScreenAlgorithmsParameters = function(data) {
-      var components = document.createElement("div");
-      var components2 = document.createElement("div");
-      components.setAttribute("class", "components");
-      components2.setAttribute("class", "components");
 
-      angular.forEach(data, function (val, key) {
 
-        var newBlock = document.createElement("div");
-        newBlock.setAttribute("id", "algorithm-parameter-" + key);
-        newBlock.setAttribute("class", "algorithm-parameter block col-xs-12 col-sm-6 col-md-4 container-fluid ");
+      var component = 'parameters-list-directive';
 
-        var directiveComponent = document.createElement(val.component + "-directive");
+      var newBlock = document.createElement("div");
+      newBlock.setAttribute("id", "parameters-list-directive");
+      newBlock.setAttribute("class", "block container-fluid");
 
-        if (val.component != 'check-box') {
-          var directiveName = document.createElement("h3");
-          directiveName.innerHTML = val.name;
-          newBlock.append(directiveName);
-          newBlock.append(directiveComponent);
+      var content = document.createElement(component);
+      newBlock.append(content);
 
-          var newScope = $scope.$new(true);
-          newScope.data = val;
+      $('#step-two-content').append(newBlock);
 
-          var el = $compile(newBlock)(newScope);
+      var newScope = $scope.$new(true);
+      newScope.data = data;
 
-          components.append(newBlock);
-        }
-        else {
-          newBlock.append(directiveComponent);
-
-          var newScope = $scope.$new(true);
-          newScope.data = val;
-
-          var el = $compile(newBlock)(newScope);
-
-          components2.append(newBlock);
-        }
-        $('#step-two-content').append(components);
-        $('#step-two-content').append(components2);
-
-      });
+      $compile($('#step-two-content').contents())(newScope);
     }
 
 
@@ -95,23 +74,24 @@ angular.module('hydramaze')
     */
     $timeout(function() {
 
-      // clear previous selected options
-      stepTwoService.initData([]);
+      // retrieve previous data and init data
+      if (tutorialService.getStepTwoData() === undefined) {
+        stepTwoService.initData({});
+      } else {
+        stepTwoService.initData(angular.copy(tutorialService.getStepTwoData()));
+      }
 
       var stepOneSharedData = tutorialService.getStepOneData();
-      var algorithmId = stepOneSharedData[0].value;
-
-      console.log(algorithmId);
+      var algorithmId = stepOneSharedData["algorithmId"];
 
       if (algorithmId) {
-
           $scope.$getParametersByAlgorithmID(algorithmId);
-
       } else {
         notify({
           message: "AlgorithmId is not a valid value",
           classes: "alert-warning"
         });
+        $scope.$previousStep();
       }
 
       console.log("StepTwoCtrl Controller as been loaded!");

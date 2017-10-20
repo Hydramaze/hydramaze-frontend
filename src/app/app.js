@@ -77,3 +77,25 @@ app.config(['$stateProvider',
   });
 
 }]);
+
+function showLoading(loadingContainer) {
+  loadingContainer.append('<div id="loading-container"><div class="center-vertical-horizontal"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i><span class="sr-only">Loading...</span></div></div>');
+  loadingContainer.addClass("disable-scroll");
+  $("#loading-container").fadeIn("slow");
+
+}
+
+function hideLoading(loadingContainer) {
+  $("#loading-container").fadeOut( "slow", function() {
+    $("#loading-container").remove();
+    loadingContainer.removeClass("disable-scroll");
+  });
+}
+
+function arraysEqual(a,b) {
+    if (JSON.stringify(a) == JSON.stringify(b)) {
+      return true;
+    }
+
+    return false;
+}

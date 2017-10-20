@@ -19,13 +19,25 @@ angular.module('hydramaze')
     };
 
     $scope.$getDatasetList = function(idValue) {
-      $http.get('http://localhost:8080/api/data-set/getByAlgorithmId?id=' + idValue)
-      .then(function successCallback(response) {
-        console.log(response);
-        $scope.$createScreenDatasetList(response.data);
-      }, function errorCallback(response) {
-        console.log(response);
-      });
+      $http.get('http://localhost:8080/api/algorithm/' + idValue + '/data-set')
+        .then(function successCallback(response) {
+          if (response.status == 200) {
+            $scope.$createScreenDatasetList(response.data);
+          }
+          else {
+            notify({
+              message: "Datasets not found.",
+              classes: "alert-danger"
+            });
+            $scope.$previousStep();
+          }
+        }, function errorCallback(responseError) {
+          notify({
+            message: "Sorry, an error has occurred. Try again!",
+            classes: "alert-danger"
+          });
+          $scope.$previousStep();
+        });
     }
 
     $scope.$createScreenDatasetList = function(data) {
@@ -44,6 +56,8 @@ angular.module('hydramaze')
       var el = $compile(newBlock)(newScope);
 
       $('#step-three-content').append(newBlock);
+
+      hideLoading($("#laboratory-content"));
     }
 
 
@@ -52,8 +66,12 @@ angular.module('hydramaze')
     */
     $timeout(function() {
 
-      // clear previous selected options
-      stepThreeService.initData([]);
+      // retrieve previous data and init data
+      if (tutorialService.getStepThreeData() === undefined) {
+        stepThreeService.initData({});
+      } else {
+        stepThreeService.initData(angular.copy(tutorialService.getStepThreeData()));
+      }
 
       $scope.$getDatasetList(4);
     });

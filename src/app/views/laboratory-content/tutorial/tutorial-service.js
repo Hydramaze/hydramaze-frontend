@@ -16,7 +16,7 @@ angular.module('hydramaze')
 
   // Step one
   var setStepOneData = function(data) {
-      tutorialStepOneData = data;
+      tutorialStepOneData = angular.copy(data);
   };
 
   var getStepOneData = function() {
@@ -25,7 +25,7 @@ angular.module('hydramaze')
 
   // Step two
   var setStepTwoData = function(data) {
-      tutorialStepTwoData = data;
+      tutorialStepTwoData = angular.copy(data);
   };
 
   var getStepTwoData = function() {
@@ -34,7 +34,7 @@ angular.module('hydramaze')
 
   // Step three
   var setStepThreeData = function(data) {
-      tutorialStepThreeData = data;
+      tutorialStepThreeData = angular.copy(data);
   };
 
   var getStepThreeData = function() {
@@ -43,11 +43,49 @@ angular.module('hydramaze')
 
   // Step four
   var setStepFourData = function(data) {
-      tutorialStepFourData = data;
+      tutorialStepFourData = angular.copy(data);
   };
 
   var getStepFourData = function() {
       return tutorialStepFourData;
+  };
+
+  var emptyAllData = function() {
+    tutorialStepOneData = undefined;
+    tutorialStepTwoData = undefined;
+    tutorialStepThreeData = undefined;
+    tutorialStepFourData = undefined;
+  };
+
+  var hasDataInStep = function(step) {
+    var hasData;
+
+    switch(step) {
+      case 0:
+        if (tutorialStepOneData != undefined) {
+          hasData = true;
+        }
+        break;
+      case 1:
+        if (tutorialStepTwoData != undefined) {
+          hasData = true;
+        }
+        break;
+      case 2:
+        if (tutorialStepThreeData != undefined) {
+          hasData = true;
+        }
+        break;
+      case 3:
+        if (tutorialStepFourData != undefined) {
+          hasData = true;
+        }
+        break;
+      default:
+        hasData = false;
+    }
+
+    return hasData;
   };
 
   return {
@@ -61,7 +99,10 @@ angular.module('hydramaze')
     getStepThreeData: getStepThreeData,
 
     setStepFourData: setStepFourData,
-    getStepFourData: getStepFourData
+    getStepFourData: getStepFourData,
+
+    emptyAllData: emptyAllData,
+    hasDataInStep: hasDataInStep
   };
 
 });

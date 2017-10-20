@@ -1,7 +1,7 @@
 <div class="step-three row" ng-init="$init()">
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-lg-4 datasets" ng-repeat="(key, dataset) in datasets">
-      <input type="radio" name="datasets" value="{{ dataset.name }}" id="dataset-{{ dataset.id }}" ng-click=$datasetClick(dataset.id)>
+      <input type="radio" name="datasets" value="{{ dataset.name }}" id="dataset-{{ dataset.id }}" ng-click="$datasetClick(dataset.id)">
       <label class="dataset" for="dataset-{{ dataset.id }}">
         <div class="flipper" ng-click="toggleSelected($event)">
           <span class="glyphicon glyphicon-ok"></span>
@@ -34,5 +34,10 @@
       </div>
       <!-- End modal -->
     </div>
+  </div>
+  <div>
+    <h3>How much data do you want to use for training the model?</h3>
+    <input id="test-size" ng-model="testSize" type="range" name="range" min="10" max="90" value="{{testSize}}" ng-change="$onSliderRangeChange()">
+    <output id="rangePrimary">{{testSize}} %</output>
   </div>
 </div>

@@ -13,9 +13,14 @@ angular.module('hydramaze')
     * Declared scope functions
     */
 
-    // Scope functions
     $scope.saveDataServiceTutorialStep = function() {
-      tutorialService.setStepOneData(stepOneService.getAllData());
+      // validate if had change on this step
+      if (!arraysEqual(tutorialService.getStepOneData(), stepOneService.getAllData())) {
+        // clear all data
+        tutorialService.emptyAllData();
+        // save state
+        tutorialService.setStepOneData(stepOneService.getAllData());
+      }
     };
 
     $scope.$createScreenAlgorithmsList = function(data) {
@@ -34,9 +39,9 @@ angular.module('hydramaze')
       newScope.data = data;
 
       $compile($('#step-one-content').contents())(newScope);
-    }
+    };
 
-    $scope.$getAlgorithmsList = function() {
+    $scope.$getAlgorithmsList = function() {      
       $http.get('http://localhost:8080/api/algorithm')
         .then(function successCallback(response) {
           if (response.status == 200) {
@@ -54,15 +59,19 @@ angular.module('hydramaze')
             classes: "alert-danger"
           });
         });
-    }
+    };
 
     /*
     * Functions usage
     */
     $timeout(function() {
 
-      // clear previous selected options
-      stepOneService.initData([]);
+      // retrieve previous data and init data
+      if (tutorialService.getStepOneData() === undefined) {
+        stepOneService.initData({});
+      } else {
+        stepOneService.initData(angular.copy(tutorialService.getStepOneData()));
+      }
 
       // Wait for components render to trigger internal code
       $timeout(function() {

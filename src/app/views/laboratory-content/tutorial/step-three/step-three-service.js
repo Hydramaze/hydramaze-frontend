@@ -9,24 +9,29 @@
 angular.module('hydramaze')
   .service('stepThreeService', function() {
 
-    var stepThreeMapData = [];
+    var stepThreeMapData = {};
 
     var initData = function(starterMap) {
       stepThreeMapData = starterMap;
     };
 
     var addData = function(key, value) {
-      stepThreeMapData.push({"parameterId": key, "value": value});
+      stepThreeMapData[key] = value;
     };
 
     var getAllData = function(){
       return stepThreeMapData;
     };
 
+    var empty = function() {
+      stepThreeMapData = {};
+    };
+
     return {
       initData: initData,
       addData: addData,
-      getAllData: getAllData
+      getAllData: getAllData,
+      empty: empty
     };
 
   });

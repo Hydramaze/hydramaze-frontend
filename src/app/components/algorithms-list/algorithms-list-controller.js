@@ -7,19 +7,32 @@
  */
 
 angular.module('hydramaze')
-  .controller('AlgorithmsListCtrl', function($scope, $attrs, $http, stepOneService) {
+  .controller('AlgorithmsListCtrl', function($scope, $attrs, $timeout, $http, stepOneService) {
 
     console.log('Algorithms list has been loaded');
 
     $scope.algorithms = formatterData($scope.data);
 
-    $scope.algorithmClick = function(algorithmId) {
+    $scope.$algorithmClick = function(algorithmId) {
       console.log("Selected id = " + algorithmId);
       stepOneService.addData("algorithmId", algorithmId);
     };
 
+    $scope.$setupPreviousChoices = function() {
+      var previousData = stepOneService.getAllData();
+
+      if (Object.keys(previousData).length > 0) {
+        $("#algorithm-" + previousData["algorithmId"]).prop("checked", true);
+      }
+    };
+
     $scope.toggleDown = true;
     $scope.toggleUp = true;
+
+    /* Called when finish render */
+    $timeout(function () {
+      $scope.$setupPreviousChoices();
+    });
 
 });
 
