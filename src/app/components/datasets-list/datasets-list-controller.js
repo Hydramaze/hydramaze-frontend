@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('DatasetsListCtrl', function($scope, $attrs, $http, stepThreeService) {
+  .controller('DatasetsListCtrl', function($scope, $timeout, stepThreeService) {
 
     /*
     * Declared scope functions
@@ -34,7 +34,11 @@ angular.module('hydramaze')
     $scope.$datasetClick = function(datasetId) {
       console.log("Selected id = " + datasetId);
       stepThreeService.addData("datasetId", datasetId);
-      stepThreeService.addData("test_size", 0.1);
+    };
+
+    $scope.$onSliderRangeChange = function() {
+      stepThreeService.addData("testSize", ($scope.testSize / 100));
+      console.log("Stored testSize: " + ($scope.testSize / 100));
     };
 
     $scope.$formatterData = function(dataset) {
@@ -55,11 +59,28 @@ angular.module('hydramaze')
       return datasetObj;
     };
 
+    $scope.$setupPreviousChoices = function() {
+      var previousData = stepThreeService.getAllData();
+
+      if (Object.keys(previousData).length > 0) {
+        $("#dataset-" + previousData["datasetId"]).prop("checked", true);
+        $scope.testSize = previousData["testSize"] * 100;
+      }
+
+      stepThreeService.addData("testSize", ($scope.testSize / 100));
+    };
+
     /*
     * Functions usage
     */
 
     $scope.datasets = $scope.data;
+    $scope.testSize = 50;
+
+    /* Called when finish render */
+    $timeout(function () {
+      $scope.$setupPreviousChoices();
+    });
 
     console.log('Dataset list has been loaded');
 

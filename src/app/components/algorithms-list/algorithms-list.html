@@ -5,7 +5,7 @@
       <h4>{{ key }}</h4>
       <div class="algorithm-content" ng-repeat="algorithm in result">
         <div class="" id="heading-{{algorithm.id}}" role="tab">
-          <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="algorithm-{{ algorithm.id }}" ng-click=algorithmClick(algorithm.id)>
+          <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="algorithm-{{ algorithm.id }}" ng-click="$algorithmClick(algorithm.id)">
           <label class="list-group-item" for="algorithm-{{ algorithm.id }}">{{ algorithm.name }}<span ng-click="toggleDown = !toggleDown" ng-class="{'glyphicon-chevron-down' : toggleDown, 'glyphicon-chevron-up' : toggleUp}" role="button" class="collapsed glyphicon pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{algorithm.id}}" aria-controls="collapse-{{algorithm.id}}" aria-expanded="true"></span></label>
         </div>
         <!-- Accordion -->

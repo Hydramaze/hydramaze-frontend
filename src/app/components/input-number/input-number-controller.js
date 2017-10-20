@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('InputNumberCtrl', function($scope) {
+  .controller('InputNumberCtrl', function($scope, $timeout) {
   	
     $scope.id = $scope.data["id"];
     $scope.completeDescription = $scope.data["completeDescription"];
@@ -22,12 +22,27 @@ angular.module('hydramaze')
     };
 
     $scope.getComponentValue = function() {
-      return $scope.defaultValue;
+      var returnValue = undefined;
+      
+      if ($scope.value === undefined) {
+        returnValue = $scope.defaultValue;
+      } else {
+        returnValue = $scope.value;
+      }
+      return returnValue;
+    };
+    
+    $scope.$setupPreviousChoice = function() {
+      if ($scope.data["previousValue"] != undefined &&
+        $scope.data["previousValue"] != $scope.data["defaultValue"]) {
+        $scope.value = $scope.data["previousValue"];
+      }
     };
 
-  	$scope.click = function() {
-  		console.log($scope.value);
-  	};
+    /* Called when finish render */
+    $timeout(function () {
+      $scope.$setupPreviousChoice();
+    });
 
   	console.log('input has been loaded');
   });

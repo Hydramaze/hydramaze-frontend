@@ -9,24 +9,29 @@
 angular.module('hydramaze')
   .service('stepOneService', function() {
 
-    var stepOneMapData = [];
+    var stepOneMapData = {};
 
     var initData = function(starterMap) {
       stepOneMapData = starterMap;
     };
 
     var addData = function(key, value) {
-      stepOneMapData.push({"parameterId": key, "value": value});
+      stepOneMapData[key] = value;
     };
 
     var getAllData = function(){
       return stepOneMapData;
     };
 
+    var empty = function() {
+      stepOneMapData = {};
+    };
+
     return {
       initData: initData,
       addData: addData,
-      getAllData: getAllData
+      getAllData: getAllData,
+      empty: empty
     };
 
   });

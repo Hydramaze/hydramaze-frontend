@@ -1,5 +1,5 @@
 <div>
-  <select title="{{title}}" class="form-control">
-    <option ng-repeat="x in comboValues">{{x}}</option>
+  <select title="{{title}}" class="form-control" ng-model="value">
+    <option ng-repeat="x in comboValues" ng-value="x">{{x}}</option>
   </select>
 </div>

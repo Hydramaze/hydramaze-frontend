@@ -15,27 +15,33 @@ angular.module('hydramaze')
 
     // Scope functions
 
-    $scope.$getAlgorithmExecution = function(algorithmId, datasetId, testSize, data) {
-
+    $scope.$getAlgorithmExecution = function(algorithmId, datasetId, testSize, parametersData) {
       var config = {
           headers : {
             'Content-Type': 'application/json;charset=utf-8;'
           }
         }
 
-      $http.post('http://localhost:8080/api/algorithmExecuter?algorithmId=' + 4 + "&dataSetId=" + datasetId + "&learningCurve=" + testSize, data, config)
+      $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/execute?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
         .then(function successCallback(response) {
-          if (response.status == 200) {
+          if (response.status == 200 && !response.data.error) {
             $scope.accuracy = response.data.accuracy;
             $scope.confusion_matrix = response.data.confusion_matrix;
             console.log(response.data.accuracy);
             console.log("resposta: ", response.data.confusion_matrix);
+
+            $scope.$createScreenAlgorithmExecutionResult(response.data);
           }
           else {
+            var errorMessage = "Algorithm cannot be executed.";
+            if (response.data.error) {
+              errorMessage = response.data.error;
+            }
             notify({
-              message: "Algorithm cannot be executed.",
+              message: errorMessage,
               classes: "alert-danger"
             });
+            $scope.$previousStep();
           }
         }, function errorCallback(responseError) {
           notify({
@@ -43,11 +49,12 @@ angular.module('hydramaze')
             classes: "alert-danger"
           });
           console.log(responseError);
+          $scope.$previousStep();
         });
     }
 
     $scope.$createScreenAlgorithmExecutionResult = function(data) {
-
+      hideLoading($("#laboratory-content"));
     }
 
 
@@ -61,13 +68,19 @@ angular.module('hydramaze')
       var stepTwoSharedData = tutorialService.getStepTwoData();
       var stepThreeSharedData = tutorialService.getStepThreeData();
 
-      // get data
-      var algorithmId = stepOneSharedData[0].value;
-      var datasetId = stepThreeSharedData[0].value;
-      var testSize = stepThreeSharedData[1].value;
+      // prepare data to send
+      var algorithmId = stepOneSharedData["algorithmId"];
+      var datasetId = stepThreeSharedData["datasetId"];
+      var testSize = stepThreeSharedData["testSize"];
+
+      var parametersData = [];
+
+      $.each(stepTwoSharedData, function(key, value) {
+        parametersData.push({"parameterId": key, "value": value});
+      });
 
       // call algorithm execution
-      $scope.$getAlgorithmExecution(algorithmId, datasetId, testSize, stepTwoSharedData);
+      $scope.$getAlgorithmExecution(algorithmId, datasetId, testSize, parametersData);
 
       console.log("StepFourCtrl Controller as been loaded!");
     });

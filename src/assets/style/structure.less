@@ -237,15 +237,23 @@ th, td {
 }
 
 .steps-container-style {
+  position: relative;
+
   .floating-button {
     font-weight: bold;
     position: fixed;
     bottom: 20px;
-    right: 30px;
     background-color: #00aa8d;
     color: @white-color;
     border-radius: 25px;
     height: 50px;
+
+    &.right {
+      right: 30px;
+    }
+    &.left {
+      left: 30px;
+    }
   }
 }
 
@@ -392,14 +400,15 @@ th, td {
         top: 50%;
         transform: translateY(-50%);
         font-size: 20px;
-        color: #424242;
+        color: #ffffff;
         opacity: 0;
+        visibility: hidden;
         -webkit-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
         -ms-transition: all 0.3s ease;
         z-index: 10;
-        background-color: #00aa8d;
+        background-color: #424242;
         padding: 5px;
         padding-left: 10px;
         padding-right: 10px;
@@ -420,6 +429,7 @@ th, td {
         .description {
           left: 100%;
           opacity: 1;
+          visibility: visible;
         }
       }
     }
@@ -562,6 +572,8 @@ th, td {
   a {
     color: #00aa8d;
     position: relative;
+    box-shadow: none;
+    outline: none;
 
     .description {
       position: absolute;
@@ -614,4 +626,108 @@ th, td {
       }
     }   
   }
+}
+
+#loading-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  top: 0px;
+  left: 0px;
+  z-index: 999;
+}
+
+.center-vertical-horizontal {
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.disable-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+#stepper {
+  margin-top: 10px;
+
+  .steps-list {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    .steps-item {
+      display: table-cell;
+      cursor: not-allowed;
+
+      &.allowed {
+        cursor: pointer;
+
+        &:hover {
+          hr {
+            width: 100%;
+          }
+        }
+      }
+
+      hr {
+        margin-top: 10px;
+        margin-bottom: 0px;
+        width: 0px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+      }
+
+      p {
+        text-align: center;
+        position: relative;
+        line-height: 30px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        border-radius: 15px;
+        padding-left: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        span {
+          position: absolute;
+          left: 0px;
+          top: 50%;
+          height: 30px;
+          width: 30px;
+          background-color: #dddddd;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 30px;
+          color: white;
+          transform: translateY(-50%);
+        }
+      }
+      &.step-active {
+        cursor: pointer;
+        p {
+          color: #00aa8d;
+          font-weight: bold;
+          span {
+            background-color: #00aa8d;
+          }
+        }
+        hr {
+          width: 100%;
+          border-top-color: #00aa8d;
+        }
+      }
+    }
+  }
+}
+
+
+#main-step-content {
+  margin-top: 10px;
 }
