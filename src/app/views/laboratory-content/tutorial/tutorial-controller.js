@@ -65,7 +65,7 @@ angular.module('hydramaze')
 
     // Check if step is valid and enable / disable the next step
     $scope.$isValidStep = function() {
-
+      return true;
     };
 
     $scope.$on("$destroy", function() {
