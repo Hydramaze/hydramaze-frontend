@@ -1,7 +1,76 @@
 .components {
   overflow: hidden;
+  .input-group {
+    .help-button {
+      cursor: pointer;
+      border-radius: 0 4px 4px 0;
+      border-left: 0;
+    }
+    .glyphicon {
+      cursor: pointer;
+      padding-left: 10px;
 
-  .input-group-addon {
-    cursor: pointer;
+      &:hover {
+        color: @lighter-color;
+      }
+    }
+  }
+  .checkbox-group {
+    width: 100%;
+    label {
+      cursor: pointer;
+    }
+    input {
+      display: none;
+      &:checked {
+        & ~ .check-component::after {
+          background-color: @lighter-color;
+          left: 15px;
+        }
+        & ~ .check-component {
+          background-image: none;
+          box-shadow: none !important;
+        }
+      }
+      &:focus {
+        & ~ .check-component {
+          box-shadow: none !important;
+        }
+      }
+    }
+    .check-component {
+      content: "";
+      display: inline-block;
+      position: relative;
+      width: 30px;
+      height: 10px;
+      background-color: #818181;
+      border-radius: 15px;
+      margin-right: 10px;
+      -webkit-transition: background .3s ease;
+      transition: background .3s ease;
+      vertical-align: middle;
+      margin: 0 16px;
+      box-shadow: none;
+
+      &::after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: #f1f1f1;
+        border-radius: 21px;
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+        left: -2px;
+        top: -4px;
+        -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+        transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+      }
+    }
+    h4 {
+      display: unset;
+      font-size: 16px;
+    }
   }
 }
