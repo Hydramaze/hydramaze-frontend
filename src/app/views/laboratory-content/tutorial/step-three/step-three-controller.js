@@ -79,7 +79,18 @@ angular.module('hydramaze')
         stepThreeService.initData(angular.copy(tutorialService.getStepThreeData()));
       }
 
-      $scope.$getDatasetList(4);
+      var stepOneSharedData = tutorialService.getStepOneData();
+      var algorithmId = stepOneSharedData["algorithmId"];
+
+      if (algorithmId) {
+          $scope.$getDatasetList(algorithmId);
+      } else {
+        notify({
+          message: "AlgorithmId is not a valid value",
+          classes: "alert-warning"
+        });
+        $scope.$previousStep();
+      }
     });
 
     console.log("StepThreeCtrl Controller as been loaded!");
