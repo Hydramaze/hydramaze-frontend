@@ -120,6 +120,10 @@ th, td {
   float: right !important;
 }
 
+.panel-group {
+  margin-bottom: 0px;
+}
+
 #mq-detector {
   visibility: hidden;
 }
@@ -232,27 +236,53 @@ th, td {
 
   #laboratory-content {
     height: calc(~"100vh - 123px");
-    overflow-y: auto;
+    overflow-y: scroll;
   }
 }
 
-.steps-container-style {
+#step-content-container {
   position: relative;
+
+  .button-left-container {
+    position: absolute;
+    left: 0px;
+  }
+
+  .button-right-container {
+    position: absolute;
+    right: 50px;
+  }
 
   .floating-button {
     font-weight: bold;
     position: fixed;
     bottom: 20px;
-    background-color: #00aa8d;
+    background-color: #7d7d7d;
     color: @white-color;
     border-radius: 25px;
     height: 50px;
+    border: none;
+    opacity: 0.3;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    z-index: 999;
 
-    &.right {
-      right: 30px;
+    &:hover {
+      opacity: 1;
     }
-    &.left {
-      left: 30px;
+
+    &.btn:focus,
+    &.btn:active:focus {
+      outline: none;
+    }
+
+    span {
+      &.btn:focus,
+      &.btn:active:focus {
+        outline: none;
+      }
     }
   }
 }
@@ -730,4 +760,5 @@ th, td {
 
 #main-step-content {
   margin-top: 10px;
+  margin-bottom: 70px;
 }
