@@ -15,7 +15,13 @@ angular.module('hydramaze')
 
     // Scope functions
     $scope.saveDataServiceTutorialStep = function() {
-      tutorialService.setStepThreeData(stepThreeService.getAllData());
+      // validate if had change on this step
+      if (!arraysEqual(tutorialService.getStepThreeData(), stepThreeService.getAllData())) {
+        // clear all data
+        tutorialService.emptyFourData();
+        // save state
+        tutorialService.setStepThreeData(stepThreeService.getAllData());
+      }
     };
 
     $scope.$getDatasetList = function(idValue) {

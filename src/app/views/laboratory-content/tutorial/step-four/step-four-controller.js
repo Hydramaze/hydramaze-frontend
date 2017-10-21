@@ -14,6 +14,9 @@ angular.module('hydramaze')
     */
 
     // Scope functions
+    $scope.saveDataServiceTutorialStep = function() {
+      // Do nothing
+    };
 
     $scope.$getAlgorithmExecution = function(algorithmId, datasetId, testSize, parametersData) {
       var config = {
@@ -26,10 +29,9 @@ angular.module('hydramaze')
         .then(function successCallback(response) {
           if (response.status == 200 && !response.data.error) {
             $scope.accuracy = response.data.accuracy;
-            $scope.confusion_matrix = response.data.confusion_matrix;
-            console.log(response.data.accuracy);
-            console.log("resposta: ", response.data.confusion_matrix);
+            console.log("resposta: ", response.data);
 
+            tutorialService.setStepFourData(response.data);
             $scope.$createScreenAlgorithmExecutionResult(response.data);
           }
           else {
@@ -54,7 +56,21 @@ angular.module('hydramaze')
     }
 
     $scope.$createScreenAlgorithmExecutionResult = function(data) {
-      hideLoading($("#laboratory-content"));
+      var component = 'results-list-directive';
+
+      var newBlock = document.createElement("div");
+      newBlock.setAttribute("id", "results-list-directive");
+      newBlock.setAttribute("class", "block container-fluid");
+
+      var content = document.createElement(component);
+      newBlock.append(content);
+
+      $('#step-four-content').append(newBlock);
+
+      var newScope = $scope.$new(true);
+      newScope.data = data;
+
+      $compile($('#step-four-content').contents())(newScope)
     }
 
 
@@ -63,24 +79,31 @@ angular.module('hydramaze')
     */
     $timeout(function() {
 
-      // Retrieve data from previous steps
-      var stepOneSharedData = tutorialService.getStepOneData();
-      var stepTwoSharedData = tutorialService.getStepTwoData();
-      var stepThreeSharedData = tutorialService.getStepThreeData();
+      // Retrieve prvious execution result
+      var stepFourRetrievedData = tutorialService.getStepFourData();
 
-      // prepare data to send
-      var algorithmId = stepOneSharedData["algorithmId"];
-      var datasetId = stepThreeSharedData["datasetId"];
-      var testSize = stepThreeSharedData["testSize"];
+      if (stepFourRetrievedData == undefined) {
+        // Retrieve data from previous steps
+        var stepOneSharedData = tutorialService.getStepOneData();
+        var stepTwoSharedData = tutorialService.getStepTwoData();
+        var stepThreeSharedData = tutorialService.getStepThreeData();
 
-      var parametersData = [];
+        // prepare data to send
+        var algorithmId = stepOneSharedData["algorithmId"];
+        var datasetId = stepThreeSharedData["datasetId"];
+        var testSize = stepThreeSharedData["testSize"];
 
-      $.each(stepTwoSharedData, function(key, value) {
-        parametersData.push({"parameterId": key, "value": value});
-      });
+        var parametersData = [];
 
-      // call algorithm execution
-      $scope.$getAlgorithmExecution(algorithmId, datasetId, testSize, parametersData);
+        $.each(stepTwoSharedData, function(key, value) {
+          parametersData.push({"parameterId": key, "value": value});
+        });
+
+        // call algorithm execution
+        $scope.$getAlgorithmExecution(algorithmId, datasetId, testSize, parametersData);
+      } else {
+        $scope.$createScreenAlgorithmExecutionResult(stepFourRetrievedData);
+      }
 
       console.log("StepFourCtrl Controller as been loaded!");
     });

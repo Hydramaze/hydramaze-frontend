@@ -2,10 +2,15 @@
 
 /**
  * @ngdoc overview
- * @name hydramaze.controller:confusionMatrixCtrl
+ * @name hydramaze.controller:ConfusionMatrixCtrl
  * @description Confusion Matrix Controller.
  */
 
 angular.module('hydramaze')
-  .controller('confusionMatrixCtrl', function($scope) {
+  .controller('ConfusionMatrixCtrl', function($scope) {
+
+    $scope.classNames = $scope.data["class_names"];
+    $scope.matrix = $scope.data["matrix"];
+
+    console.log("ConfusionMatrixCtrl has been loaded");
   });

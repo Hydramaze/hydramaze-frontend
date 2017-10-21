@@ -23,6 +23,10 @@ angular.module('hydramaze')
       return tutorialStepOneData;
   };
 
+  var emptyOneData = function() {
+    tutorialStepOneData = undefined;
+  };
+
   // Step two
   var setStepTwoData = function(data) {
       tutorialStepTwoData = angular.copy(data);
@@ -30,6 +34,10 @@ angular.module('hydramaze')
 
   var getStepTwoData = function() {
       return tutorialStepTwoData;
+  };
+
+  var emptyTwoData = function() {
+    tutorialStepTwoData = undefined;
   };
 
   // Step three
@@ -41,6 +49,10 @@ angular.module('hydramaze')
       return tutorialStepThreeData;
   };
 
+  var emptyThreeData = function() {
+    tutorialStepThreeData = undefined;
+  };
+
   // Step four
   var setStepFourData = function(data) {
       tutorialStepFourData = angular.copy(data);
@@ -48,6 +60,10 @@ angular.module('hydramaze')
 
   var getStepFourData = function() {
       return tutorialStepFourData;
+  };
+
+  var emptyFourData = function() {
+    tutorialStepFourData = undefined;
   };
 
   var emptyAllData = function() {
@@ -91,15 +107,19 @@ angular.module('hydramaze')
   return {
     setStepOneData: setStepOneData,
     getStepOneData: getStepOneData,
+    emptyOneData: emptyOneData,
 
     setStepTwoData: setStepTwoData,
     getStepTwoData: getStepTwoData,
+    emptyTwoData: emptyTwoData,
 
     setStepThreeData: setStepThreeData,
     getStepThreeData: getStepThreeData,
+    emptyThreeData: emptyThreeData,
 
     setStepFourData: setStepFourData,
     getStepFourData: getStepFourData,
+    emptyFourData: emptyFourData,
 
     emptyAllData: emptyAllData,
     hasDataInStep: hasDataInStep

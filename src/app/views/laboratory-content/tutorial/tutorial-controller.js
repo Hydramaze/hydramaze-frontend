@@ -33,6 +33,10 @@ angular.module('hydramaze')
     ];
 
     $scope.previousStepCall = function(elementScope) {
+      // get step scope and call a common function to save step data
+      var stepChildScope = angular.element($(".step-main-content-view")).scope();
+      stepChildScope.saveDataServiceTutorialStep();
+      
       // call previous step
       elementScope.$previousStep();
     };

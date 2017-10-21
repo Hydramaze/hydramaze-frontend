@@ -16,13 +16,20 @@ angular.module('hydramaze')
     // Scope functions
     $scope.saveDataServiceTutorialStep = function() {
 
+      // Read user selections data
       $(".algorithm-parameter").each(function() {
         var elementScope = angular.element("#" + $(this).attr("id")).scope();
         console.log(angular.element("#" + $(this).attr("id")));
         stepTwoService.addData(elementScope.getComponentKey(), elementScope.getComponentValue());
       });
 
-      tutorialService.setStepTwoData(stepTwoService.getAllData());
+      // validate if had change on this step
+      if (!arraysEqual(tutorialService.getStepTwoData(), stepTwoService.getAllData())) {
+        // clear all data
+        tutorialService.emptyFourData();
+        // save state
+        tutorialService.setStepTwoData(stepTwoService.getAllData());
+      }
     };
 
     $scope.$getParametersByAlgorithmID = function(idValue) {
@@ -49,8 +56,6 @@ angular.module('hydramaze')
     }
 
     $scope.$createScreenAlgorithmsParameters = function(data) {
-
-
       var component = 'parameters-list-directive';
 
       var newBlock = document.createElement("div");

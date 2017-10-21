@@ -1,10 +1,12 @@
-<table class="table table-bordered text-capitalize text-center" style="border: none; width: 50%;">
-  <tr style="border: none;" class="text-center">
-    <th style="border: none;"></th>
-    <th ng-repeat="(key, value) in confusion_matrix.class_names" style="border: none;">{{ value }}</th>
-  </tr>
-  <tr ng-repeat="(key, value) in confusion_matrix.class_names">
-    <td style="border: none;">{{ value }}</td>
-    <td ng-repeat="result in confusion_matrix.matrix[key] track by $index" ng-style="{'background-color': result? 'rgba(0, 161, 255, 0.4)' : 'none', 'font-weight': result? 'bold' : 'normal'}">{{ result }}</td>
-  </tr>
-</table>
+<div>
+  <table class="table table-bordered text-capitalize text-center" style="border: none; width: 50%;">
+    <tr style="border: none;" class="text-center">
+      <th style="border: none;"></th>
+      <th ng-repeat="(key, value) in classNames" style="border: none;">{{ value }}</th>
+    </tr>
+    <tr ng-repeat="(key, value) in classNames">
+      <td style="border: none;">{{ value }}</td>
+      <td ng-repeat="result in matrix[key] track by $index" ng-style="{'background-color': result? 'rgba(0, 161, 255, 0.4)' : 'none', 'font-weight': result? 'bold' : 'normal'}">{{ result }}</td>
+    </tr>
+  </table>
+</div>

@@ -13,6 +13,6 @@ angular.module('hydramaze')
       restrict: 'E',
       replace: true,
       templateUrl: '/app/components/confusion-matrix/confusion-matrix.html',
-      controller: 'confusionMatrixCtrl'
+      controller: 'ConfusionMatrixCtrl'
     }
   });
