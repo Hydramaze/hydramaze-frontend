@@ -1,7 +1,11 @@
 .datasets {
-  cursor: pointer;
   @media @phone {
     padding-top: 20px;
+  }
+  .caption {
+    height: 105px;
+    overflow: auto;
+    margin-top: 10px;
   }
   .flipper {
     margin: auto;
@@ -56,24 +60,15 @@
     }
   }
 
-  .card-front,
-  .card-back {
+  .thumbnail {
+    cursor: pointer;
     height: 100%;
     width: 100%;
-    backface-visibility: hidden;
   	position: absolute;
   	top: 0;
   	left: 0;
     transition: 0.6s;
   }
-  .card-front {
-    z-index: 2;
-  	transform: rotateY(0deg);
-  }
-  .card-back {
-  	transform: rotateY(180deg);
-  }
-
 }
 
 .slider-group {
