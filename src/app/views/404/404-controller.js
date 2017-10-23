@@ -7,8 +7,23 @@
  */
 
 angular.module('hydramaze')
-  .controller('404Ctrl', function($scope) {
+  .controller('404Ctrl', function($scope, $timeout) {
     
-    console.log("404 Controller as been loaded!");
+    /*
+    * Declared scope functions
+    */
+
+    /*
+    * Declared scope variables
+    */
+
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
+    $timeout(function () {
+      console.log("404 Controller as been loaded!");
+    });
 
   });

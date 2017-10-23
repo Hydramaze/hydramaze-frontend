@@ -7,9 +7,23 @@
  */
 
 angular.module('hydramaze')
-  .controller('DefaultTplCtrl', function($scope) {
+  .controller('DefaultTplCtrl', function($timeout) {
     
-    // Choose default template
-    console.log("DefaultTplCtrl as been loaded!");
+    /*
+    * Declared scope functions
+    */
+
+    /*
+    * Declared scope variables
+    */
+
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
+    $timeout(function () {
+      console.log("DefaultTplCtrl as been loaded!");
+    });
 
   });

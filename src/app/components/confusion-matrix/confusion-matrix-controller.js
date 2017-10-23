@@ -7,10 +7,26 @@
  */
 
 angular.module('hydramaze')
-  .controller('ConfusionMatrixCtrl', function($scope) {
+  .controller('ConfusionMatrixCtrl', function($scope, $timeout) {
+
+    /*
+    * Declared scope functions
+    */
+
+    /*
+    * Declared scope variables
+    */
 
     $scope.classNames = $scope.data["class_names"];
     $scope.matrix = $scope.data["matrix"];
 
-    console.log("ConfusionMatrixCtrl has been loaded");
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
+    $timeout(function () {
+      console.log("ConfusionMatrixCtrl has been loaded");
+    });
+    
   });

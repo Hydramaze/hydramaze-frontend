@@ -4,13 +4,13 @@
  * @ngdoc function
  * @name hydramaze.directive
  * @description
- * # navigationDirectives
+ * # navigationBlockDirective
  */
 
 angular.module('hydramaze')
   .directive('navigationBlockDirective', function() {
     return {
-      restrict: 'E', // C: class, E: element, M: comments, A: attributes
+      restrict: 'E',
       replace: true,
       templateUrl: '/app/shared/navigation/navigation-block.html'
     }

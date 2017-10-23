@@ -1,15 +1,17 @@
-<div id="menu-container" class="structure-block">
-    <div class="container-fluid">
-        <navigation-block-directive></navigation-block-directive>
-    </div>
+<div id="default-tpl">
+  <div id="menu-container" class="structure-block">
+      <div class="container-fluid">
+          <navigation-block-directive></navigation-block-directive>
+      </div>
+  </div>
+  <div id="content-container" class="structure-block">
+      <div class="container-fluid">
+          <div ui-view="defaultcontent"></div>
+      </div>
+  </div>
+  <footer id="footer-container" class="structure-block">
+      <div class="container-fluid">
+          <footer-block-directive></footer-block-directive>
+      </div>
+  </footer>
 </div>
-<div id="content-container" class="structure-block">
-    <div class="container-fluid">
-        <div ui-view="defaultcontent"></div>
-    </div>
-</div>
-<footer id="footer-container" class="structure-block">
-    <div class="container-fluid">
-        <footer-block-directive></footer-block-directive>
-    </div>
-</footer>

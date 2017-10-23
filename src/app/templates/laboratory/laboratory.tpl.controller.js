@@ -7,8 +7,23 @@
  */
 
 angular.module('hydramaze')
-  .controller('LaboratoryTplCtrl', function() {
+  .controller('LaboratoryTplCtrl', function($timeout) {
 
-    console.log("LaboratoryTplCtrl as been loaded!");
+    /*
+    * Declared scope functions
+    */
+
+    /*
+    * Declared scope variables
+    */
+
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
+    $timeout(function () {
+      console.log("LaboratoryTplCtrl as been loaded!");
+    });
 
   });

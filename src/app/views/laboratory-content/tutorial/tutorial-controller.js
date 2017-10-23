@@ -9,6 +9,59 @@
 angular.module('hydramaze')
   .controller('TutorialCtrl', function($scope, $timeout, $controller, tutorialService) {
 
+    /*
+    * Declared scope functions
+    */
+
+    $scope.$previousStepCall = function(elementScope) {
+      // get step scope and call a common function to save step data
+      var stepChildScope = angular.element($(".step-main-content-view")).scope();
+      stepChildScope.$saveDataServiceTutorialStep();
+
+      // call previous step
+      elementScope.$previousStep();
+    };
+
+    $scope.$nextStepCall = function(elementScope) {
+      // get step scope and call a common function to save step data
+      var stepChildScope = angular.element($(".step-main-content-view")).scope();
+      stepChildScope.$saveDataServiceTutorialStep();
+
+      if ($scope.$isValidatedStep()) {
+        // call next step
+        elementScope.$nextStep();
+      }
+    };
+
+    $scope.$setStepAsActive = function(elementScope, index) {
+      if (elementScope.$getActiveIndex() != index + 1) {
+        // save screen state
+        var stepChildScope = angular.element($(".step-main-content-view")).scope();
+        stepChildScope.$saveDataServiceTutorialStep();
+
+        if ($scope.$isAllowed(index)) {
+          // set an active step
+          elementScope.$setActiveIndex(index + 1);
+        }
+      }
+    };
+
+    // Validate if step is allowed for changes between tabs
+    $scope.$isAllowed = function (index) {
+      return tutorialService.$hasDataInStep(index) || index == 0;
+    };
+
+    // Check if step is valid and enable / disable the next step
+    $scope.$isValidatedStep = function(elementScope) {
+      // call step validation
+      var stepChildScope = angular.element($(".step-main-content-view")).scope();
+      return stepChildScope.$stepValidation();
+    };
+
+    /*
+    * Declared scope variables
+    */
+
     $scope.steps = [
       {
         templateUrl: '/app/views/laboratory-content/tutorial/step-one/step-one.html',
@@ -32,56 +85,17 @@ angular.module('hydramaze')
       }
     ];
 
-    $scope.previousStepCall = function(elementScope) {
-      // get step scope and call a common function to save step data
-      var stepChildScope = angular.element($(".step-main-content-view")).scope();
-      stepChildScope.saveDataServiceTutorialStep();
-      
-      // call previous step
-      elementScope.$previousStep();
-    };
-
-    $scope.nextStepCall = function(elementScope) {
-      // get step scope and call a common function to save step data
-      var stepChildScope = angular.element($(".step-main-content-view")).scope();
-      stepChildScope.saveDataServiceTutorialStep();
-
-      // call next step
-      elementScope.$nextStep();
-    };
-
-    $scope.$setStepAsActive = function(elementScope, index) {
-      if (elementScope.$getActiveIndex() != index + 1) {
-        // save screen state
-        var stepChildScope = angular.element($(".step-main-content-view")).scope();
-        stepChildScope.saveDataServiceTutorialStep();
-
-        if ($scope.$isAllowed(index)) {
-          // set an active step
-          elementScope.$setActiveIndex(index + 1);
-        }
-      }
-    };
-
-    $scope.$isAllowed = function (index) {
-      return tutorialService.hasDataInStep(index) || index == 0;
-    };
-
-    // Check if step is valid and enable / disable the next step
-    $scope.$isValidStep = function() {
-      return true;
-    };
-
-    $scope.$on("$destroy", function() {
-      tutorialService.emptyAllData();
-    });
-
     /*
     * Functions usage
     */
-    $timeout(function() {
+
+    // Called when finish render
+    $timeout(function () {
       console.log("Tutorial Controller as been loaded!");
     });
 
+    $scope.$on("$destroy", function() {
+      tutorialService.$emptyAllData();
+    });
+
   });
-  

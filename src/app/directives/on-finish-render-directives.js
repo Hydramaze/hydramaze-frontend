@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name serviceiros.directive
+ * @name hydramaze.directive
  * @description
  * # Trigger an event when angular finish render objects
  * Directives of hydramaze

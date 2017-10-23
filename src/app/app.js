@@ -53,9 +53,10 @@ app.config(['$stateProvider',
   })
   .state('laboratory', {
       abstract: true,
-      url: '/laboratory',
+      url: '/lab',
       templateUrl: 'app/templates/laboratory/laboratory.tpl.html',
-      controller: 'LaboratoryTplCtrl'
+      controller: 'LaboratoryTplCtrl',
+      breadcrumbName: 'Laboratory'
   })
   .state('laboratory.tutorial', {
       url: '/tutorial',
@@ -64,7 +65,8 @@ app.config(['$stateProvider',
           templateUrl: 'app/views/laboratory-content/tutorial/tutorial.html',
           controller: 'TutorialCtrl'
         }
-      }
+      },
+      breadcrumbName: 'Tutorial — Machine Learning'
   })
   .state('laboratory.exercises', {
       url: '/exercises',
@@ -73,7 +75,8 @@ app.config(['$stateProvider',
           templateUrl: 'app/views/laboratory-content/exercises/exercises.html',
           controller: 'ExercisesCtrl'
         }
-      }
+      },
+      breadcrumbName: 'Exercises — Machine Learning'
   });
 
 }]);

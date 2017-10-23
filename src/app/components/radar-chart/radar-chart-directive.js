@@ -4,15 +4,15 @@
  * @ngdoc function
  * @name hydramaze.directive
  * @description
- * # radarDirective
+ * # radarChartDirective
  */
 
 angular.module('hydramaze')
   .directive('radarChartDirective', function() {
     return {
-      restrict: 'E', // C: class, E: element, M: comments, A: attributes
+      restrict: 'E',
       replace: true,
       templateUrl: '/app/components/radar-chart/radar-chart.html',
-      controller: 'radarChartCtrl'
+      controller: 'RadarChartCtrl'
     }
   });

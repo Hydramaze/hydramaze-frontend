@@ -3,25 +3,21 @@
 /**
  * @ngdoc overview
  * @name hydramaze.controller:CheckBoxCtrl
- * @description Checkbox Controller.
+ * @description CheckBox Controller.
  */
 
 angular.module('hydramaze')
   .controller('CheckBoxCtrl', function($scope, $timeout) {
 
-    $scope.id = $scope.data["id"];
-    $scope.completeDescription = $scope.data["completeDescription"];
-    $scope.value = $scope.data["defaultValue"];
-    $scope.comboValues = $scope.data["listData"];
-    $scope.name = $scope.data["name"];
-    $scope.observation = $scope.data["observation"];
-    $scope.title = $scope.data["simpleDescription"];
+    /*
+    * Declared scope functions
+    */
 
-    $scope.getComponentKey = function() {
+    $scope.$getComponentKey = function() {
       return $scope.id;
     };
 
-    $scope.getComponentValue = function() {
+    $scope.$getComponentValue = function() {
       return $scope.value;
     };
 
@@ -32,11 +28,27 @@ angular.module('hydramaze')
       }
     };
 
-    /* Called when finish render */
+    /*
+    * Declared scope variables
+    */
+
+    $scope.id = $scope.data["id"];
+    $scope.completeDescription = $scope.data["completeDescription"];
+    $scope.value = $scope.data["defaultValue"];
+    $scope.comboValues = $scope.data["listData"];
+    $scope.name = $scope.data["name"];
+    $scope.observation = $scope.data["observation"];
+    $scope.title = $scope.data["simpleDescription"];
+
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
     $timeout(function () {
       $scope.$setupPreviousChoice();
+
+      console.log('check box has been loaded');
     });
 
-    console.log('check box has been loaded');
-
-});
+  });

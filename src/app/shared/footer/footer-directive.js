@@ -4,13 +4,13 @@
  * @ngdoc function
  * @name hydramaze.directive
  * @description
- * # navigationDirectives
+ * # footerBlockDirective
  */
 
 angular.module('hydramaze')
   .directive('footerBlockDirective', function() {
     return {
-      restrict: 'E', // C: class, E: element, M: comments, A: attributes
+      restrict: 'E',
       replace: true,
       templateUrl: '/app/shared/footer/footer-block.html'
     }

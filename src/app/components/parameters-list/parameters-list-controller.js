@@ -2,15 +2,19 @@
 
 /**
  * @ngdoc overview
- * @name hydramaze.controller:parametersListCtrl
- * @description parameters List Controller.
+ * @name hydramaze.controller:ParametersListCtrl
+ * @description Parameters List Controller.
  */
 
 angular.module('hydramaze')
-  .controller('ParametersListCtrl', function($scope, $attrs, $compile, $timeout, $http, stepTwoService) {
+  .controller('ParametersListCtrl', function($scope, $compile, $timeout, stepTwoService) {
+
+    /*
+    * Declared scope functions
+    */
 
     $scope.$createScreenAlgorithmsParameters = function(data) {
-      var previousData = stepTwoService.getAllData();
+      var previousData = stepTwoService.$getAllData();
 
       var components = document.createElement("div");
       var components2 = document.createElement("div");
@@ -58,11 +62,19 @@ angular.module('hydramaze')
       });
     }
 
-    /* Called when finish render */
+    /*
+    * Declared scope variables
+    */
+
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
     $timeout(function () {
       $scope.$createScreenAlgorithmsParameters($scope.data);
+
+      console.log('Parameters list has been loaded');
     });
 
-    console.log('Parameters list has been loaded');
-
-});
+  });

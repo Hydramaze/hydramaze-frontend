@@ -10,9 +10,9 @@
 angular.module('hydramaze')
   .directive('breadcrumbDirective', function() {
     return {
-      restrict: 'E', // C: class, E: element, M: comments, A: attributes
+      restrict: 'E',
       replace: true,
       templateUrl: '/app/components/breadcrumb/breadcrumb.html',
-      controller: 'breadcrumbCtrl'
+      controller: 'BreadcrumbCtrl'
     }
   });

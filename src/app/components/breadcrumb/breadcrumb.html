@@ -1,8 +1,6 @@
 <div class="breadcrumb-container">
-
   <ol class = "breadcrumb">
     <li ng-repeat="x in pathArray" ng-if="!$last"><a href="#">{{x}}</a></li>
     <li class="active" ng-repeat="x in pathArray" ng-if="$last">{{x}}</li>
   </ol>
-
 </div>

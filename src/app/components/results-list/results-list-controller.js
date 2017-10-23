@@ -2,15 +2,19 @@
 
 /**
  * @ngdoc overview
- * @name hydramaze.controller:restultsListCtrl
- * @description restults List Controller.
+ * @name hydramaze.controller:RestultsListCtrl
+ * @description Restults List Controller.
  */
 
 angular.module('hydramaze')
-  .controller('ResultsListCtrl', function($scope, $attrs, $compile, $timeout, $http, stepFourService) {
+  .controller('ResultsListCtrl', function($scope, $compile, $timeout, stepFourService) {
+
+    /*
+    * Declared scope functions
+    */
 
     $scope.$createScreenResults = function(data) {
-      var previousData = stepFourService.getAllData();
+      var previousData = stepFourService.$getAllData();
 
       var components = document.createElement("div");
       components.setAttribute("class", "components");
@@ -33,13 +37,21 @@ angular.module('hydramaze')
         
         $('#results-list').append(components);
       });
-    }
+    };
 
-    /* Called when finish render */
+    /*
+    * Declared scope variables
+    */
+
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
     $timeout(function () {
       $scope.$createScreenResults($scope.data);
+
+      console.log('Results list has been loaded');
     });
 
-    console.log('Results list has been loaded');
-
-});
+  });

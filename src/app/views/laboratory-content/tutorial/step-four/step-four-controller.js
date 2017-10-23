@@ -13,8 +13,11 @@ angular.module('hydramaze')
     * Declared scope functions
     */
 
-    // Scope functions
-    $scope.saveDataServiceTutorialStep = function() {
+    $scope.$stepValidation = function() {
+      return true;
+    };
+
+    $scope.$saveDataServiceTutorialStep = function() {
       // Do nothing
     };
 
@@ -28,10 +31,7 @@ angular.module('hydramaze')
       $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/execute?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
         .then(function successCallback(response) {
           if (response.status == 200 && !response.data.error) {
-            $scope.accuracy = response.data.accuracy;
-            console.log("resposta: ", response.data);
-
-            tutorialService.setStepFourData(response.data);
+            tutorialService.$setStepFourData(response.data);
             $scope.$createScreenAlgorithmExecutionResult(response.data);
           }
           else {
@@ -50,7 +50,6 @@ angular.module('hydramaze')
             message: "Sorry, an error has occurred. Try again!",
             classes: "alert-danger"
           });
-          console.log(responseError);
           $scope.$previousStep();
         });
     }
@@ -73,20 +72,24 @@ angular.module('hydramaze')
       $compile($('#step-four-content').contents())(newScope)
     }
 
+    /*
+    * Declared scope variables
+    */
 
     /*
     * Functions usage
     */
-    $timeout(function() {
 
+    // Called when finish render
+    $timeout(function () {
       // Retrieve prvious execution result
-      var stepFourRetrievedData = tutorialService.getStepFourData();
+      var stepFourRetrievedData = tutorialService.$getStepFourData();
 
       if (stepFourRetrievedData == undefined) {
         // Retrieve data from previous steps
-        var stepOneSharedData = tutorialService.getStepOneData();
-        var stepTwoSharedData = tutorialService.getStepTwoData();
-        var stepThreeSharedData = tutorialService.getStepThreeData();
+        var stepOneSharedData = tutorialService.$getStepOneData();
+        var stepTwoSharedData = tutorialService.$getStepTwoData();
+        var stepThreeSharedData = tutorialService.$getStepThreeData();
 
         // prepare data to send
         var algorithmId = stepOneSharedData["algorithmId"];

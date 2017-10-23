@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name hydramaze.directive
  * @description
- * # radarDirective
+ * # algorithmsListDirective
  */
 
 angular.module('hydramaze')

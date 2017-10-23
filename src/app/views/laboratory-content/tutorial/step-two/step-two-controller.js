@@ -13,22 +13,24 @@ angular.module('hydramaze')
     * Declared scope functions
     */
 
-    // Scope functions
-    $scope.saveDataServiceTutorialStep = function() {
+    $scope.$stepValidation = function() {
+      return true;
+    };
+
+    $scope.$saveDataServiceTutorialStep = function() {
 
       // Read user selections data
       $(".algorithm-parameter").each(function() {
         var elementScope = angular.element("#" + $(this).attr("id")).scope();
-        console.log(angular.element("#" + $(this).attr("id")));
-        stepTwoService.addData(elementScope.getComponentKey(), elementScope.getComponentValue());
+        stepTwoService.$addData(elementScope.$getComponentKey(), elementScope.$getComponentValue());
       });
 
       // validate if had change on this step
-      if (!arraysEqual(tutorialService.getStepTwoData(), stepTwoService.getAllData())) {
+      if (!arraysEqual(tutorialService.$getStepTwoData(), stepTwoService.$getAllData())) {
         // clear all data
-        tutorialService.emptyFourData();
+        tutorialService.$emptyFourData();
         // save state
-        tutorialService.setStepTwoData(stepTwoService.getAllData());
+        tutorialService.$setStepTwoData(stepTwoService.$getAllData());
       }
     };
 
@@ -36,7 +38,6 @@ angular.module('hydramaze')
       $http.get('http://localhost:8080/api/algorithm/' + idValue + '/parameter')
         .then(function successCallback(response) {
           if (response.status == 200) {
-            console.log(response);
             $scope.$createScreenAlgorithmsParameters(response.data);
           }
           else {
@@ -73,20 +74,24 @@ angular.module('hydramaze')
       $compile($('#step-two-content').contents())(newScope);
     }
 
+    /*
+    * Declared scope variables
+    */
 
     /*
     * Functions usage
     */
-    $timeout(function() {
 
+    // Called when finish render
+    $timeout(function () {
       // retrieve previous data and init data
-      if (tutorialService.getStepTwoData() === undefined) {
-        stepTwoService.initData({});
+      if (tutorialService.$getStepTwoData() === undefined) {
+        stepTwoService.$initData({});
       } else {
-        stepTwoService.initData(angular.copy(tutorialService.getStepTwoData()));
+        stepTwoService.$initData(angular.copy(tutorialService.$getStepTwoData()));
       }
 
-      var stepOneSharedData = tutorialService.getStepOneData();
+      var stepOneSharedData = tutorialService.$getStepOneData();
       var algorithmId = stepOneSharedData["algorithmId"];
 
       if (algorithmId) {
@@ -101,4 +106,5 @@ angular.module('hydramaze')
 
       console.log("StepTwoCtrl Controller as been loaded!");
     });
+
   });

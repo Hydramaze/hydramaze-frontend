@@ -28,10 +28,10 @@ angular.module('hydramaze')
     };
 
     return {
-      initData: initData,
-      addData: addData,
-      getAllData: getAllData,
-      empty: empty
+      $initData: initData,
+      $addData: addData,
+      $getAllData: getAllData,
+      $empty: empty
     };
 
   });

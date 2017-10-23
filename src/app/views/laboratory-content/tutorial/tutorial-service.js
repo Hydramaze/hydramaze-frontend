@@ -105,24 +105,24 @@ angular.module('hydramaze')
   };
 
   return {
-    setStepOneData: setStepOneData,
-    getStepOneData: getStepOneData,
-    emptyOneData: emptyOneData,
+    $setStepOneData: setStepOneData,
+    $getStepOneData: getStepOneData,
+    $emptyOneData: emptyOneData,
 
-    setStepTwoData: setStepTwoData,
-    getStepTwoData: getStepTwoData,
-    emptyTwoData: emptyTwoData,
+    $setStepTwoData: setStepTwoData,
+    $getStepTwoData: getStepTwoData,
+    $emptyTwoData: emptyTwoData,
 
-    setStepThreeData: setStepThreeData,
-    getStepThreeData: getStepThreeData,
-    emptyThreeData: emptyThreeData,
+    $setStepThreeData: setStepThreeData,
+    $getStepThreeData: getStepThreeData,
+    $emptyThreeData: emptyThreeData,
 
-    setStepFourData: setStepFourData,
-    getStepFourData: getStepFourData,
-    emptyFourData: emptyFourData,
+    $setStepFourData: setStepFourData,
+    $getStepFourData: getStepFourData,
+    $emptyFourData: emptyFourData,
 
-    emptyAllData: emptyAllData,
-    hasDataInStep: hasDataInStep
+    $emptyAllData: emptyAllData,
+    $hasDataInStep: hasDataInStep
   };
 
 });

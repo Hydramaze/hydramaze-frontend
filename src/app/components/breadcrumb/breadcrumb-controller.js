@@ -2,29 +2,60 @@
 
 /**
  * @ngdoc overview
- * @name hydramaze.controller:breadcrumbCtrl
+ * @name hydramaze.controller:BreadcrumbCtrl
  * @description Breadcrumb Controller.
  */
 
 angular.module('hydramaze')
-  .controller('breadcrumbCtrl', function($scope, $attrs, $location) {
+  .controller('BreadcrumbCtrl', function($scope, $timeout, $location, $state) {
 
-    console.log("Breadcrumb Controller as been loaded!");
+    /*
+    * Declared scope functions
+    */
+
+    $scope.$breadcrumbUpdate = function(value, statesList) {
+      var breadcrumbValue = "";
+      var pathArray = value.split("/");
+
+      pathArray = pathArray.splice(1, pathArray.length);
+
+      $.each(pathArray, function(key, value) {
+        var strToCompare = "/" + value;
+
+        $.each(statesList, function(key, value) {
+          if (value.url == strToCompare) {
+            breadcrumbValue = value.breadcrumbName;
+            return 0;
+          }
+        });
+
+        if (breadcrumbValue != undefined && breadcrumbValue != "") {
+          pathArray[key] = breadcrumbValue;
+          console.log
+        }
+
+      });
+
+      return pathArray;
+    }
+
+    /*
+    * Declared scope variables
+    */
 
     // Watch path url changes and update the breadcrumb value
     $scope.$watch(function(){
       return $location.path();
     }, function(value){
-      $scope.pathArray = breadcrumbUpdate(value);
+      $scope.pathArray = $scope.$breadcrumbUpdate(value, $state.get());
     });
 
+    /*
+    * Functions usage
+    */
+
+    $timeout(function () {
+      console.log("Breadcrumb Controller as been loaded!");
+    });
+    
   });
-
-function breadcrumbUpdate(value) {
-  var pathArray = value.split("/");
-  return pathArray.splice(1, pathArray.length);
-}
-
-function toTitleCase(str) {
-  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}

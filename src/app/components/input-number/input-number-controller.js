@@ -9,19 +9,15 @@
 angular.module('hydramaze')
   .controller('InputNumberCtrl', function($scope, $timeout) {
   	
-    $scope.id = $scope.data["id"];
-    $scope.completeDescription = $scope.data["completeDescription"];
-    $scope.defaultValue = $scope.data["defaultValue"];
-    $scope.comboValues = $scope.data["listData"];
-    $scope.name = $scope.data["name"];
-    $scope.observation = $scope.data["observation"];
-    $scope.title = $scope.data["simpleDescription"];
+    /*
+    * Declared scope functions
+    */
 
-    $scope.getComponentKey = function() {
+    $scope.$getComponentKey = function() {
       return $scope.id;
     };
 
-    $scope.getComponentValue = function() {
+    $scope.$getComponentValue = function() {
       var returnValue = undefined;
       
       if ($scope.value === undefined) {
@@ -39,10 +35,27 @@ angular.module('hydramaze')
       }
     };
 
-    /* Called when finish render */
+    /*
+    * Declared scope variables
+    */
+
+    $scope.id = $scope.data["id"];
+    $scope.completeDescription = $scope.data["completeDescription"];
+    $scope.defaultValue = $scope.data["defaultValue"];
+    $scope.comboValues = $scope.data["listData"];
+    $scope.name = $scope.data["name"];
+    $scope.observation = $scope.data["observation"];
+    $scope.title = $scope.data["simpleDescription"];
+
+    /*
+    * Functions usage
+    */
+
+    // Called when finish render
     $timeout(function () {
       $scope.$setupPreviousChoice();
+
+      console.log('input has been loaded');
     });
 
-  	console.log('input has been loaded');
   });

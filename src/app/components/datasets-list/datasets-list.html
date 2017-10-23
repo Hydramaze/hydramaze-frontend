@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-sm-6 col-lg-4 datasets" ng-repeat="(key, dataset) in datasets">
       <input type="radio" name="datasets" value="{{ dataset.name }}" id="dataset-{{ dataset.id }}" ng-click="$datasetClick(dataset.id)">
       <label class="dataset" for="dataset-{{ dataset.id }}">
-        <div class="flipper" ng-click="toggleSelected($event)">
+        <div class="flipper" ng-click="$toggleSelected($event)">
           <span class="glyphicon glyphicon-ok"></span>
           <div class="thumbnail card-front">
             <img src="/assets/img/download.jpg" alt="...">

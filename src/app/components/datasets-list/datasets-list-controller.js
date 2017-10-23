@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc overview
- * @name hydramaze.controller:datasetsListCtrl
+ * @name hydramaze.controller:DatasetsListCtrl
  * @description Datasets List Controller.
  */
 
@@ -12,12 +12,14 @@ angular.module('hydramaze')
     /*
     * Declared scope functions
     */
-    $scope.toggleVisibility = function($event) {
+
+    $scope.$toggleVisibility = function($event) {
       var bla = $($event.target);
       bla.closest('.flipper').toggleClass('card-hidden');
       bla.closest('.datasets').toggleClass('col-sm-6 col-lg-4');
     };
-    $scope.toggleSelected = function(e) {
+    
+    $scope.$toggleSelected = function(e) {
       if (e.target.nodeName == "DIV") {
         $(e.currentTarget).toggleClass('selected');
       }
@@ -27,18 +29,16 @@ angular.module('hydramaze')
       jQuery('#button-next').prop('disabled', true);
     };
 
-    $scope.helpModal = function(e) {
+    $scope.$helpModal = function(e) {
       e.preventDefault();
     };
 
     $scope.$datasetClick = function(datasetId) {
-      console.log("Selected id = " + datasetId);
-      stepThreeService.addData("datasetId", datasetId);
+      stepThreeService.$addData("datasetId", datasetId);
     };
 
     $scope.$onSliderRangeChange = function() {
-      stepThreeService.addData("testSize", ($scope.testSize / 100));
-      console.log("Stored testSize: " + ($scope.testSize / 100));
+      stepThreeService.$addData("testSize", ($scope.testSize / 100));
     };
 
     $scope.$formatterData = function(dataset) {
@@ -60,28 +60,32 @@ angular.module('hydramaze')
     };
 
     $scope.$setupPreviousChoices = function() {
-      var previousData = stepThreeService.getAllData();
+      var previousData = stepThreeService.$getAllData();
 
       if (Object.keys(previousData).length > 0) {
         $("#dataset-" + previousData["datasetId"]).prop("checked", true);
         $scope.testSize = previousData["testSize"] * 100;
       }
 
-      stepThreeService.addData("testSize", ($scope.testSize / 100));
+      stepThreeService.$addData("testSize", ($scope.testSize / 100));
     };
 
     /*
-    * Functions usage
+    * Declared scope variables
     */
 
     $scope.datasets = $scope.data;
     $scope.testSize = 50;
+    
+    /*
+    * Functions usage
+    */
 
-    /* Called when finish render */
+    // Called when finish render
     $timeout(function () {
       $scope.$setupPreviousChoices();
+
+      console.log('Dataset list has been loaded');
     });
 
-    console.log('Dataset list has been loaded');
-
-});
+  });

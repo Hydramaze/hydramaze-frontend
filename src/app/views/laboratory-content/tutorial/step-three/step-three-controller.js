@@ -13,14 +13,17 @@ angular.module('hydramaze')
     * Declared scope functions
     */
 
-    // Scope functions
-    $scope.saveDataServiceTutorialStep = function() {
+    $scope.$stepValidation = function() {
+      return true;
+    };
+
+    $scope.$saveDataServiceTutorialStep = function() {
       // validate if had change on this step
-      if (!arraysEqual(tutorialService.getStepThreeData(), stepThreeService.getAllData())) {
+      if (!arraysEqual(tutorialService.$getStepThreeData(), stepThreeService.$getAllData())) {
         // clear all data
-        tutorialService.emptyFourData();
+        tutorialService.$emptyFourData();
         // save state
-        tutorialService.setStepThreeData(stepThreeService.getAllData());
+        tutorialService.$setStepThreeData(stepThreeService.$getAllData());
       }
     };
 
@@ -62,24 +65,26 @@ angular.module('hydramaze')
       var el = $compile(newBlock)(newScope);
 
       $('#step-three-content').append(newBlock);
-
-      hideLoading($("#laboratory-content"));
     }
 
+    /*
+    * Declared scope variables
+    */
 
     /*
     * Functions usage
     */
-    $timeout(function() {
 
+    // Called when finish render
+    $timeout(function () {
       // retrieve previous data and init data
-      if (tutorialService.getStepThreeData() === undefined) {
-        stepThreeService.initData({});
+      if (tutorialService.$getStepThreeData() === undefined) {
+        stepThreeService.$initData({});
       } else {
-        stepThreeService.initData(angular.copy(tutorialService.getStepThreeData()));
+        stepThreeService.$initData(angular.copy(tutorialService.$getStepThreeData()));
       }
 
-      var stepOneSharedData = tutorialService.getStepOneData();
+      var stepOneSharedData = tutorialService.$getStepOneData();
       var algorithmId = stepOneSharedData["algorithmId"];
 
       if (algorithmId) {
@@ -91,8 +96,8 @@ angular.module('hydramaze')
         });
         $scope.$previousStep();
       }
-    });
 
-    console.log("StepThreeCtrl Controller as been loaded!");
+      console.log("StepThreeCtrl Controller as been loaded!");
+    });
 
   });

@@ -13,13 +13,32 @@ angular.module('hydramaze')
     * Declared scope functions
     */
 
-    $scope.saveDataServiceTutorialStep = function() {
+    $scope.$stepValidation = function() {
+      var isValid = false;
+
+      var stepData = tutorialService.$getStepOneData();
+      
+      var algorithmId = stepData["algorithmId"];
+
+      if (algorithmId) {
+          isValid = true;
+      } else {
+        notify({
+          message: "Please select an algorithm",
+          classes: "alert-warning"
+        });
+      }
+
+      return isValid;
+    }
+
+    $scope.$saveDataServiceTutorialStep = function() {
       // validate if had change on this step
-      if (!arraysEqual(tutorialService.getStepOneData(), stepOneService.getAllData())) {
+      if (!arraysEqual(tutorialService.$getStepOneData(), stepOneService.$getAllData())) {
         // clear all data
-        tutorialService.emptyAllData();
+        tutorialService.$emptyAllData();
         // save state
-        tutorialService.setStepOneData(stepOneService.getAllData());
+        tutorialService.$setStepOneData(stepOneService.$getAllData());
       }
     };
 
@@ -62,21 +81,23 @@ angular.module('hydramaze')
     };
 
     /*
+    * Declared scope variables
+    */
+
+    /*
     * Functions usage
     */
-    $timeout(function() {
 
+    // Called when finish render
+    $timeout(function () {
       // retrieve previous data and init data
-      if (tutorialService.getStepOneData() === undefined) {
-        stepOneService.initData({});
+      if (tutorialService.$getStepOneData() === undefined) {
+        stepOneService.$initData({});
       } else {
-        stepOneService.initData(angular.copy(tutorialService.getStepOneData()));
+        stepOneService.$initData(angular.copy(tutorialService.$getStepOneData()));
       }
 
-      // Wait for components render to trigger internal code
-      $timeout(function() {
-        $scope.$getAlgorithmsList();
-      });
+      $scope.$getAlgorithmsList();
 
       console.log("StepOneCtrl Controller as been loaded!");
     });
