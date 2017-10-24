@@ -20,8 +20,10 @@ angular.module('hydramaze')
       pathArray = pathArray.splice(1, pathArray.length);
 
       $.each(pathArray, function(key, value) {
+
         var strToCompare = "/" + value;
 
+        console.log(value);
         $.each(statesList, function(key, value) {
           if (value.url == strToCompare) {
             breadcrumbValue = value.breadcrumbName;
@@ -54,6 +56,7 @@ angular.module('hydramaze')
     * Functions usage
     */
 
+    // Called when finish render
     $timeout(function () {
       console.log("Breadcrumb Controller as been loaded!");
     });

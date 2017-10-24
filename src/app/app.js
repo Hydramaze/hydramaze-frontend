@@ -34,7 +34,8 @@ app.config(['$stateProvider',
           templateUrl: 'app/views/home/home.html',
           controller: 'HomeCtrl'
         }
-      }
+      },
+      breadcrumbName: 'Home'
   })
   .state('default', {
       abstract: true,
@@ -50,6 +51,36 @@ app.config(['$stateProvider',
           controller: '404Ctrl'
         }
       }
+  })
+  .state('default.about-the-project', {
+      url: '/about-the-project',
+      views: {
+        'defaultcontent': {
+          templateUrl: 'app/views/about-the-project/about-the-project.html',
+          controller: 'AboutTheProjectCtrl'
+        }
+      },
+      breadcrumbName: 'About The Project'
+  })
+  .state('default.contributors', {
+      url: '/contributors',
+      views: {
+        'defaultcontent': {
+          templateUrl: 'app/views/contributors/contributors.html',
+          controller: 'ContributorsCtrl'
+        }
+      },
+      breadcrumbName: 'Contributors'
+  })
+  .state('default.environment-configuration', {
+      url: '/environment-configuration',
+      views: {
+        'defaultcontent': {
+          templateUrl: 'app/views/environment-configuration/environment-configuration.html',
+          controller: 'EnvironmentConfigurationCtrl'
+        }
+      },
+      breadcrumbName: 'Environment Configuration'
   })
   .state('laboratory', {
       abstract: true,
