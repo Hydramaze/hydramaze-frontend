@@ -7,11 +7,19 @@
  */
 
 angular.module('hydramaze')
-  .controller('EnvironmentConfigurationCtrl', function($timeout) {
+  .controller('EnvironmentConfigurationCtrl', function($scope, $timeout) {
     
     /*
     * Declared scope functions
     */
+
+    $scope.$addControllerNameAsBodyClass = function () {
+      $("body").addClass("environment-configuration");
+    }
+
+    $scope.$removeControllerNameAsBodyClass = function () {
+      $("body").removeClass("environment-configuration");
+    }
 
     /*
     * Declared scope variables
@@ -21,9 +29,15 @@ angular.module('hydramaze')
     * Functions usage
     */
 
+    $scope.$addControllerNameAsBodyClass();
+
     // Called when finish render
-    $timeout(function () {
+    $timeout(function () {  
       console.log("Environment Configuration Controller as been loaded!");
+    });
+
+    $scope.$on("$destroy", function() {
+      $scope.$removeControllerNameAsBodyClass();
     });
 
   });

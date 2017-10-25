@@ -15,12 +15,9 @@ angular.module('hydramaze')
 
     $scope.$stepValidation = function() {
       var isValid = false;
-
       var stepData = tutorialService.$getStepOneData();
-      
-      var algorithmId = stepData["algorithmId"];
 
-      if (algorithmId) {
+      if (stepData && stepData["algorithmId"]) {
           isValid = true;
       } else {
         notify({

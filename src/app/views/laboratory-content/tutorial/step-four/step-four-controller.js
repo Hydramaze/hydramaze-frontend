@@ -14,6 +14,7 @@ angular.module('hydramaze')
     */
 
     $scope.$stepValidation = function() {
+      // Do nothing just return true
       return true;
     };
 

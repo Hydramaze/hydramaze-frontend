@@ -13,17 +13,18 @@ angular.module('hydramaze')
     * Declared scope functions
     */
 
-    $scope.$breadcrumbUpdate = function(value, statesList) {
+    $scope.$getUpdatedPathArray = function(value, statesList) {
       var breadcrumbValue = "";
       var pathArray = value.split("/");
 
-      pathArray = pathArray.splice(1, pathArray.length);
-
       $.each(pathArray, function(key, value) {
+
+        if (value == "") {
+          value = "home";         
+        }
 
         var strToCompare = "/" + value;
 
-        console.log(value);
         $.each(statesList, function(key, value) {
           if (value.url == strToCompare) {
             breadcrumbValue = value.breadcrumbName;
@@ -41,6 +42,12 @@ angular.module('hydramaze')
       return pathArray;
     }
 
+    $scope.$breadcrumbUpdate = function(value, statesList) {
+      $timeout(function () {
+        $scope.pathArray = $scope.$getUpdatedPathArray(value, statesList);
+      });
+    }
+
     /*
     * Declared scope variables
     */
@@ -49,7 +56,7 @@ angular.module('hydramaze')
     $scope.$watch(function(){
       return $location.path();
     }, function(value){
-      $scope.pathArray = $scope.$breadcrumbUpdate(value, $state.get());
+      $scope.$breadcrumbUpdate(value, $state.get());
     });
 
     /*

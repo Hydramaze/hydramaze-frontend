@@ -51,6 +51,14 @@ angular.module('hydramaze')
       });
     }
 
+    $scope.$addControllerNameAsBodyClass = function () {
+      $("body").addClass("home");
+    }
+
+    $scope.$removeControllerNameAsBodyClass = function () {
+      $("body").removeClass("home");
+    }
+
     /*
     * Declared scope variables
     */
@@ -59,8 +67,10 @@ angular.module('hydramaze')
     * Functions usage
     */
 
+    $scope.$addControllerNameAsBodyClass();
+
     // Called when finish render
-    $timeout(function () {
+    $timeout(function () {  
       $scope.$scaleVideoContainer();
 
       $scope.$initBannerVideoSize('.video-container .poster img');
@@ -75,6 +85,10 @@ angular.module('hydramaze')
       });
 
       console.log("Home Controller as been loaded!");
+    });
+
+    $scope.$on("$destroy", function() {
+      $scope.$removeControllerNameAsBodyClass();
     });
 
   });

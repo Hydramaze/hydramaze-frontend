@@ -7,7 +7,23 @@
  */
 
 angular.module('hydramaze')
-  .controller('ExercisesCtrl', function($scope) {
+  .controller('ExercisesCtrl', function($scope, $timeout) {
+
+    /*
+    * Declared scope functions
+    */
+
+    $scope.$addControllerNameAsBodyClass = function () {
+      $("body").addClass("laboratory-exercises");
+    }
+
+    $scope.$removeControllerNameAsBodyClass = function () {
+      $("body").removeClass("laboratory-exercises");
+    }
+
+    /*
+    * Declared scope variables
+    */
 
     $scope.exercises = {};
 
@@ -83,13 +99,19 @@ angular.module('hydramaze')
       }
     ];
 
-    start();
+    /*
+    * Functions usage
+    */
 
-    console.log("Exercises Controller as been loaded!");
+    $scope.$addControllerNameAsBodyClass();
+
+    // Called when finish render
+    $timeout(function () {
+      console.log("Exercises Controller as been loaded!");
+    });
+
+    $scope.$on("$destroy", function() {
+      $scope.$removeControllerNameAsBodyClass();
+    });
 
   });
-
-
-function start() {
-  console.log("Hello World!");
-}

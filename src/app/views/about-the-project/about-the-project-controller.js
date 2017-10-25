@@ -7,11 +7,19 @@
  */
 
 angular.module('hydramaze')
-  .controller('AboutTheProjectCtrl', function($timeout) {
+  .controller('AboutTheProjectCtrl', function($scope, $timeout) {
     
     /*
     * Declared scope functions
     */
+
+    $scope.$addControllerNameAsBodyClass = function () {
+      $("body").addClass("about-the-project");
+    }
+
+    $scope.$removeControllerNameAsBodyClass = function () {
+      $("body").removeClass("about-the-project");
+    }
 
     /*
     * Declared scope variables
@@ -21,9 +29,15 @@ angular.module('hydramaze')
     * Functions usage
     */
 
+    $scope.$addControllerNameAsBodyClass();
+
     // Called when finish render
     $timeout(function () {
       console.log("About The Project Controller as been loaded!");
+    });
+
+    $scope.$on("$destroy", function() {
+      $scope.$removeControllerNameAsBodyClass();
     });
 
   });

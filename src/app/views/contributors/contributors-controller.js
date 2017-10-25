@@ -7,11 +7,19 @@
  */
 
 angular.module('hydramaze')
-  .controller('ContributorsCtrl', function($timeout) {
+  .controller('ContributorsCtrl', function($scope, $timeout) {
     
     /*
     * Declared scope functions
     */
+
+    $scope.$addControllerNameAsBodyClass = function () {
+      $("body").addClass("contributors");
+    }
+
+    $scope.$removeControllerNameAsBodyClass = function () {
+      $("body").removeClass("contributors");
+    }
 
     /*
     * Declared scope variables
@@ -21,9 +29,15 @@ angular.module('hydramaze')
     * Functions usage
     */
 
+    $scope.$addControllerNameAsBodyClass();
+
     // Called when finish render
-    $timeout(function () {
+    $timeout(function () {  
       console.log("Contributors Controller as been loaded!");
+    });
+
+    $scope.$on("$destroy", function() {
+      $scope.$removeControllerNameAsBodyClass();
     });
 
   });

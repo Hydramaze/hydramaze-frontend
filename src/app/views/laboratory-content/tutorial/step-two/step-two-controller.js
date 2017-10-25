@@ -14,8 +14,20 @@ angular.module('hydramaze')
     */
 
     $scope.$stepValidation = function() {
-      return true;
-    };
+      var isValid = false;
+      var stepData = tutorialService.$getStepTwoData();
+
+      if (stepData) {
+          isValid = true;
+      } else {
+        notify({
+          message: "Please set the parameters values",
+          classes: "alert-warning"
+        });
+      }
+      
+      return isValid;
+    }
 
     $scope.$saveDataServiceTutorialStep = function() {
 

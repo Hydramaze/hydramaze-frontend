@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('TutorialCtrl', function($scope, $timeout, $controller, tutorialService) {
+  .controller('TutorialCtrl', function($scope, $timeout, $controller, tutorialService, notify) {
 
     /*
     * Declared scope functions
@@ -20,6 +20,7 @@ angular.module('hydramaze')
 
       // call previous step
       elementScope.$previousStep();
+      notify.closeAll();
     };
 
     $scope.$nextStepCall = function(elementScope) {
@@ -30,6 +31,7 @@ angular.module('hydramaze')
       if ($scope.$isValidatedStep()) {
         // call next step
         elementScope.$nextStep();
+        notify.closeAll();
       }
     };
 
@@ -42,6 +44,7 @@ angular.module('hydramaze')
         if ($scope.$isAllowed(index)) {
           // set an active step
           elementScope.$setActiveIndex(index + 1);
+          notify.closeAll();
         }
       }
     };
@@ -57,6 +60,14 @@ angular.module('hydramaze')
       var stepChildScope = angular.element($(".step-main-content-view")).scope();
       return stepChildScope.$stepValidation();
     };
+
+    $scope.$addControllerNameAsBodyClass = function () {
+      $("body").addClass("laboratory-tutorial");
+    }
+
+    $scope.$removeControllerNameAsBodyClass = function () {
+      $("body").removeClass("laboratory-tutorial");
+    }
 
     /*
     * Declared scope variables
@@ -89,6 +100,8 @@ angular.module('hydramaze')
     * Functions usage
     */
 
+    $scope.$addControllerNameAsBodyClass();
+
     // Called when finish render
     $timeout(function () {
       console.log("Tutorial Controller as been loaded!");
@@ -96,6 +109,7 @@ angular.module('hydramaze')
 
     $scope.$on("$destroy", function() {
       tutorialService.$emptyAllData();
+      $scope.$removeControllerNameAsBodyClass();
     });
 
   });

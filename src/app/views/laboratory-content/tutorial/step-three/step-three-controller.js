@@ -14,8 +14,20 @@ angular.module('hydramaze')
     */
 
     $scope.$stepValidation = function() {
-      return true;
-    };
+      var isValid = false;
+      var stepData = tutorialService.$getStepThreeData();
+
+      if (stepData && stepData["datasetId"] && stepData["testSize"]) {
+          isValid = true;
+      } else {
+        notify({
+          message: "Please set a dataset choice and the test percentage size",
+          classes: "alert-warning"
+        });
+      }
+      
+      return isValid;
+    }
 
     $scope.$saveDataServiceTutorialStep = function() {
       // validate if had change on this step
