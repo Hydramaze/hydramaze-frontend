@@ -83,6 +83,8 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
+      showLoading(tutorialService.$getLoadingContainer());
+      
       // Retrieve prvious execution result
       var stepFourRetrievedData = tutorialService.$getStepFourData();
 

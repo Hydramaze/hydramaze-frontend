@@ -1,3 +1,21 @@
 <div id="contributors" class="default page">
-  <p>Contributors content</p>
+  
+  <h1>Contributors</h1>
+  
+  <div id="contributor-page-content" class="page-content">
+  
+    <p>The following people share the same view about this project purpose, that is providing an optimized way to learn Artificial Intelligence - read more on <a href="/#/about-the-project">About The Project</a>. So, they are donating their times to develop this tool, night and day.</p>
+    <p>We believe that open-sourcing project is one of the best way to keep an idea alive, and also to share programming knowledges. We will be so happy if you want to join us!</p>
+
+    <div id="contributors-container" class="clearfix">
+      <div ng-repeat="contributor in contributors" id="contributor-{{contributor.id}}" class="contributor-card col-xs-12 col-sm-3 col-md-3">
+        <a href="{{contributor.html_url}}" target="_blank">
+        <img src="{{contributor.avatar_url}}" class="contributor-image">
+        <p class="contributor-alias"><i class="fa fa-github"></i> {{contributor.login}}</p>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
 </div>

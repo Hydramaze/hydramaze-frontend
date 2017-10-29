@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('DatasetsListCtrl', function($scope, $timeout, stepThreeService) {
+  .controller('DatasetsListCtrl', function($scope, $timeout, stepThreeService, tutorialService) {
 
     /*
     * Declared scope functions
@@ -70,6 +70,12 @@ angular.module('hydramaze')
       stepThreeService.$addData("testSize", ($scope.testSize / 100));
     };
 
+    $scope.$hideLoading = function() {
+      $timeout(function() {
+        hideLoading(tutorialService.$getLoadingContainer()); 
+      }, 1000);
+    };
+
     /*
     * Declared scope variables
     */
@@ -84,6 +90,8 @@ angular.module('hydramaze')
     // Called when finish render
     $timeout(function () {
       $scope.$setupPreviousChoices();
+
+      $scope.$hideLoading();
 
       console.log('Dataset list has been loaded');
     });

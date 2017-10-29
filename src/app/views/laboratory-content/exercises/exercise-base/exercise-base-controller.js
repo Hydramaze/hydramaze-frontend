@@ -15,7 +15,6 @@ angular.module('hydramaze')
 
     $scope.$on('$destroy', function() {
       window.onresize = null;
-      console.log("destr");
     });
 
   });

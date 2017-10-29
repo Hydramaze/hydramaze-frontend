@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('AlgorithmsListCtrl', function($scope, $timeout, stepOneService) {
+  .controller('AlgorithmsListCtrl', function($scope, $timeout, stepOneService, tutorialService) {
 
     /*
     * Declared scope functions
@@ -25,7 +25,8 @@ angular.module('hydramaze')
         algorithmsObj[value.learningType][value.type].push({
           id: value.id, name: value.name,
           completeDescription: value.completeDescription,
-          simpleDescription: value.simpleDescription
+          simpleDescription: value.simpleDescription,
+          references: $scope.$prepareReferences(value.references)
         });
       });
       return algorithmsObj;
@@ -43,6 +44,32 @@ angular.module('hydramaze')
       }
     };
 
+    $scope.$prepareReferences = function(references) {
+      var sites = [];
+      var videos = [];
+
+      $.each(references, function(key, value) {
+        if (value.type == "site") {
+          sites.push(value);
+        } else if (value.type == "video") {
+          value.url = value.url.replace('watch?v=', 'embed/');
+          videos.push(value);
+        }
+      });
+
+      return {
+        sites: sites,
+        videos: videos
+      };
+
+    };
+
+    $scope.$hideLoading = function() {
+      $timeout(function() {
+        hideLoading(tutorialService.$getLoadingContainer()); 
+      }, 1000);
+    }
+
     /*
     * Declared scope variables
     */
@@ -56,10 +83,17 @@ angular.module('hydramaze')
     */
 
     // Called when finish render
-    $timeout(function () {
+    $timeout(function() {
       $scope.$setupPreviousChoices();
+
+      $scope.$hideLoading();
 
       console.log('Algorithms list has been loaded');
     });
 
-  });
+  })
+  .filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+      return $sce.trustAsResourceUrl(url);
+    };
+  }]);

@@ -9,10 +9,21 @@
 angular.module('hydramaze')
   .service('tutorialService', function() {
 
+  var loadingContainer = undefined;
+
   var tutorialStepOneData = undefined;
   var tutorialStepTwoData = undefined;
   var tutorialStepThreeData = undefined;
   var tutorialStepFourData = undefined;
+
+  // Loading
+  var setLoadingContainer = function(container) {
+    loadingContainer = container;
+  };
+
+  var getLoadingContainer = function() {
+    return loadingContainer;
+  }
 
   // Step one
   var setStepOneData = function(data) {
@@ -105,6 +116,9 @@ angular.module('hydramaze')
   };
 
   return {
+    $setLoadingContainer: setLoadingContainer,
+    $getLoadingContainer: getLoadingContainer,
+
     $setStepOneData: setStepOneData,
     $getStepOneData: getStepOneData,
     $emptyOneData: emptyOneData,

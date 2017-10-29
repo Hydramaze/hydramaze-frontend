@@ -89,6 +89,8 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
+      showLoading(tutorialService.$getLoadingContainer());
+      
       // retrieve previous data and init data
       if (tutorialService.$getStepThreeData() === undefined) {
         stepThreeService.$initData({});

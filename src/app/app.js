@@ -120,9 +120,9 @@ function showLoading(loadingContainer) {
 }
 
 function hideLoading(loadingContainer) {
+  loadingContainer.removeClass("disable-scroll");
   $("#loading-container").fadeOut( "slow", function() {
     $("#loading-container").remove();
-    loadingContainer.removeClass("disable-scroll");
   });
 }
 

@@ -54,7 +54,7 @@ angular.module('hydramaze')
           }
           else {
             notify({
-              message: "Algorithm parameters not found.",
+              message: "Algorithm parameters not found. Please try another one.",
               classes: "alert-danger"
             });
             $scope.$previousStep();
@@ -96,6 +96,8 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
+      showLoading(tutorialService.$getLoadingContainer());
+      
       // retrieve previous data and init data
       if (tutorialService.$getStepTwoData() === undefined) {
         stepTwoService.$initData({});

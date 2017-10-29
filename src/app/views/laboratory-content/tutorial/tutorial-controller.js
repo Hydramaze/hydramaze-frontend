@@ -104,6 +104,8 @@ angular.module('hydramaze')
 
     $scope.$addControllerNameAsBodyClass();
 
+    tutorialService.$setLoadingContainer($("#step-content-container"));
+
     // Called when finish render
     $timeout(function () {
       console.log("Tutorial Controller as been loaded!");

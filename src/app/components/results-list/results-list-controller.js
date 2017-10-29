@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('ResultsListCtrl', function($scope, $compile, $timeout, stepFourService) {
+  .controller('ResultsListCtrl', function($scope, $compile, $timeout, stepFourService, tutorialService) {
 
     /*
     * Declared scope functions
@@ -39,6 +39,12 @@ angular.module('hydramaze')
       });
     };
 
+    $scope.$hideLoading = function() {
+      $timeout(function() {
+        hideLoading(tutorialService.$getLoadingContainer()); 
+      }, 1000);
+    };
+
     /*
     * Declared scope variables
     */
@@ -50,6 +56,8 @@ angular.module('hydramaze')
     // Called when finish render
     $timeout(function () {
       $scope.$createScreenResults($scope.data);
+
+      $scope.$hideLoading();
 
       console.log('Results list has been loaded');
     });

@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('ParametersListCtrl', function($scope, $compile, $timeout, stepTwoService) {
+  .controller('ParametersListCtrl', function($scope, $compile, $timeout, stepTwoService, tutorialService) {
 
     /*
     * Declared scope functions
@@ -60,7 +60,13 @@ angular.module('hydramaze')
         $('#parameters-list').append(components2);
 
       });
-    }
+    };
+
+    $scope.$hideLoading = function() {
+      $timeout(function() {
+        hideLoading(tutorialService.$getLoadingContainer()); 
+      }, 1000);
+    };
 
     /*
     * Declared scope variables
@@ -73,6 +79,8 @@ angular.module('hydramaze')
     // Called when finish render
     $timeout(function () {
       $scope.$createScreenAlgorithmsParameters($scope.data);
+
+      $scope.$hideLoading();
 
       console.log('Parameters list has been loaded');
     });

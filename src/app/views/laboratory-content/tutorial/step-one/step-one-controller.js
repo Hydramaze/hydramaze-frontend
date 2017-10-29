@@ -57,7 +57,7 @@ angular.module('hydramaze')
       $compile($('#step-one-content').contents())(newScope);
     };
 
-    $scope.$getAlgorithmsList = function() {      
+    $scope.$getAlgorithmsList = function() { 
       $http.get('http://localhost:8080/api/algorithm')
         .then(function successCallback(response) {
           if (response.status == 200) {
@@ -87,6 +87,8 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
+      showLoading(tutorialService.$getLoadingContainer());
+
       // retrieve previous data and init data
       if (tutorialService.$getStepOneData() === undefined) {
         stepOneService.$initData({});
