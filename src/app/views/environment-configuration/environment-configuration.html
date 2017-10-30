@@ -1,3 +1,61 @@
 <div id="environment-configuration" class="default page">
-  <p>Environment Configuration content</p>
+
+  <h1>Environment Configuration</h1>
+  
+  <div class="page-content">
+  
+    <p>To get started in the Artificial Intelligence programming you will need to setup an environment to properly work. In this section we will show you how to do that.</p>
+
+    <p>It’s highly recommended that you use a Unix based operational system, because some libraries and tools may not work in different platforms. Straight to the point, let’s get to work.</p>
+
+    <hr>
+
+    <article id="linux-configuration" class="unix environment-configuration-article">
+      <h2>Linux (Ubuntu)</h2>
+      
+      <section class="environment-configuration-section">
+        <h3>Python</h3>
+
+        <p>Most of the recent Linux distributions already come with some version of Python installed, to check the version open the Linux terminal <strong>(Ctrl + Shift + t)</strong> and execute the following command:</p>
+        <div class="code-line-container"><span class="code-line-command">python --version</span></div>
+
+        <p>If the version is equal or greater than 2.7 we’re all set, if you have some older version of Python installed the command below should do the trick:</p>
+        <div class="code-line-container"><span class="code-line-command">sudo apt-get update</span></div>
+
+        <p>If you don’t have any version installed <strike>you’re really unlucky</strike> it’s recommended that you <a href="https://wiki.python.org/moin/BeginnersGuide/Download" target="_blank">read this</a>.</p>
+
+      </section>
+
+      <section class="environment-configuration-section">
+        <h3>Python tools and libraries</h3>
+
+        <p>Okay, we already have Python installed, but that alone don’t do too much, so we will install some other tools which is very helpful.</p>
+
+        <ul>
+          <li>
+            <h4>pip</h4>
+            <p>First of all we will need pip to make the download of dependencies easier. To install pip open the linux terminal and execute the command:</p>
+            <div class="code-line-container"><span class="code-line-command">sudo apt-get install python-pip</span></div>
+          </li>
+          <li>
+            <h4>Every other library</h4>
+            <p>With pip installed other libraries will be even easier to install, these ones should be enough for you now:</p>
+            <div class="code-line-container"><span class="code-line-command">pip install --user numpy scipy matplotlib ipython pandas sympy nose</span></div>
+            <p>Executing the previous command you will install the scikit-learn dependencies and some other cool stuff. Once that's done, we can go further and install the scikit-learn library:</p>
+            <div class="code-line-container"><span class="code-line-command">pip install -U scikit-learn</span></div>
+          </li>
+        </ul>
+
+      </section>
+
+      <hr>
+
+      <section class="environment-configuration-section">
+        <p>Congratulations, your environment is ready to use. =)</p>
+      </section>
+
+    </article>
+
+  </div>
+
 </div>

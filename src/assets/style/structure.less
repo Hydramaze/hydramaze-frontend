@@ -62,8 +62,11 @@ p {
 }
 
 a {
+  color: #ff7f50;
   text-decoration: none;
   &:hover {
+    color: #ff7f50;
+
     text-decoration: none;
   }
 }
@@ -105,6 +108,10 @@ th, td {
   padding-right: 0px !important;
   padding-bottom: 0px !important;
   padding-left: 0px !important;
+}
+
+.relative {
+  position: relative;
 }
 
 .content {
@@ -911,6 +918,57 @@ th, td {
   }
 }
 
+.environment-configuration-section {
+  margin-bottom: 20px;
+
+  h3 {
+    font-style: italic;
+  }
+}
+
+.code-line-container {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.code-line-command {
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 5px;
+  font-size: 16px;
+
+  &:before {
+    content:"$ ";
+  }
+
+  &:after {
+    content:"_";
+    opacity: 0;
+    animation: cursor 1s infinite;
+  }
+
+  @keyframes cursor {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+}
+
 #default-tpl {
   #default-content {
     overflow-y: scroll;
@@ -924,6 +982,17 @@ th, td {
     margin-top: 20px;
     line-height: 22px;
     margin-right: 40px;
+
+    h2, h3, h4, h5, h6 {
+      margin-bottom: 15px;
+    }
+
+    a {
+      &:hover {
+        font-weight: bold;
+      }
+    }
+
   }
 
   #footer-container {
@@ -952,6 +1021,7 @@ th, td {
 
 #contributor-page-content {
   position: relative;
+  min-height: calc(~"100vh - 276px");
 }
 
 #contributors {
