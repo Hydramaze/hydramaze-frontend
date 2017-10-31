@@ -24,6 +24,32 @@
         margin-top: 15px;
         padding: 0 15px;
 
+        .algorithm-content {
+          position: relative;
+          display: block;
+          margin-top: 5px;
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+
+          label {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            width: ~"calc(100% - 40px)";
+          }
+
+          .glyphicon-question-sign {
+            line-height: 2.5em;
+            text-align: center;
+            width: 40px;
+            height: 35px;
+            &:hover {
+              color: @darker-color;
+            }
+          }
+        }
+
         .panel-collapse {
           border: 1px solid #eee;
 
@@ -45,7 +71,6 @@
           display: none;
           & ~ label {
             cursor: pointer;
-            margin-top: 5px;
             padding: 0;
             line-height: 2.5em;
             text-indent: 3.25em;
@@ -66,9 +91,7 @@
             span {
               line-height: inherit;
 
-              &:hover {
-                color: @darker-color;
-              }
+
 
               &::before {
                 position: absolute;
