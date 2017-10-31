@@ -62,7 +62,6 @@ angular.module('hydramaze')
         .then(function successCallback(response) {
           if (response.status == 200) {
             $scope.$createScreenAlgorithmsList(response.data);
-            console.log("nao entendiiii");
           }
           else {
             notify({
