@@ -8,7 +8,7 @@
     <p>We believe that open-sourcing project is one of the best way to keep an idea alive, and also to share programming knowledges. We will be so happy if you want to join us!</p>
 
     <div id="contributors-container" class="clearfix">
-      <div ng-repeat="contributor in contributors" id="contributor-{{contributor.id}}" class="contributor-card col-xs-12 col-sm-3 col-md-3">
+      <div ng-repeat="contributor in contributors | orderBy: 'login'" id="contributor-{{contributor.id}}" class="contributor-card col-xs-12 col-sm-3 col-md-3">
         <a href="{{contributor.html_url}}" target="_blank">
         <img src="{{contributor.avatar_url}}" class="contributor-image">
         <p class="contributor-alias"><i class="fa fa-github"></i> {{contributor.login}}</p>

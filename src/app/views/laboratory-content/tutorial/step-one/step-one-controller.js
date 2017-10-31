@@ -68,12 +68,14 @@ angular.module('hydramaze')
               message: "Algorithms list not found.",
               classes: "alert-danger"
             });
+            hideLoading(tutorialService.$getLoadingContainer());
           }
         }, function errorCallback(responseError) {
           notify({
             message: "Sorry, an error has occurred. Try again!",
             classes: "alert-danger"
           });
+          hideLoading(tutorialService.$getLoadingContainer());
         });
     };
 

@@ -7,15 +7,33 @@
   <span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#modal-{{id}}"></span>
   <!-- Modal -->
 	<div class="modal fade" id="modal-{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog references-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">{{name}}</h4>
 				</div>
 				<div class="modal-body">
-					<p>{{completeDescription}}</p>
-				</div>
+          <p>{{simpleDescription}}</p>
+          <p ng-hide="(references.videos == null || references.videos.length == 0) && (references.sites == null || references.sites.length == 0)">We have selected some references to help your understanding about this one. Enjoy your learning!</p>
+
+          <section class="site-modal-section" ng-hide="references.sites == null || references.sites.length == 0">
+            <hr>
+            <h3 class="modal-section-title">Sites</h3>
+            <ul>
+              <li ng-repeat="site in references.sites">
+                Selected <a href="{{site.url}}" target="_blank">link {{$index}}</a>: {{site.description}} Some description.
+              </li>
+            </ul>
+          </section>
+          <section class="video-modal-section" ng-hide="references.videos == null || references.videos.length == 0">
+            <hr>
+            <h3 class="modal-section-title">Videos</h3>
+            <div ng-repeat="video in references.videos">
+              <iframe class="video-container" width="420" height="345" ng-src="{{video.url | trusted}}" allowfullscreen></iframe>
+            </div>
+          </section>
+        </div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>

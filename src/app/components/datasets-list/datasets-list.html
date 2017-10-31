@@ -1,5 +1,5 @@
 <div class="step-three row" ng-init="$init()">
-  <div class="row">
+  <div class="clearfix">
     <div class="col-xs-12 col-sm-6 col-lg-4 datasets" ng-repeat="(key, dataset) in datasets">
       <input type="radio" name="datasets" value="{{ dataset.name }}" id="dataset-{{ dataset.id }}" ng-click="$datasetClick(dataset.id)">
       <label class="dataset" for="dataset-{{ dataset.id }}">
@@ -17,15 +17,33 @@
       </label>
       <!-- Modal -->
       <div class="modal fade" id="modal-{{dataset.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog references-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="myModalLabel">{{dataset.name}}</h4>
             </div>
             <div class="modal-body">
-              <p>{{dataset.completeDescription}}</p>
-            </div>
+                <p>{{dataset.simpleDescription}}</p>
+                <p ng-hide="(dataset.references.videos == null || dataset.references.videos.length == 0) && (dataset.references.sites == null || dataset.references.sites.length == 0)">We have selected some references to help your understanding about this one. Enjoy your learning!</p>
+
+                <section class="site-modal-section" ng-hide="dataset.references.sites == null || dataset.references.sites.length == 0">
+                  <hr>
+                  <h3 class="modal-section-title">Sites</h3>
+                  <ul>
+                    <li ng-repeat="site in dataset.references.sites">
+                      Selected <a href="{{site.url}}" target="_blank">link {{$index}}</a>: {{site.description}} Some description.
+                    </li>
+                  </ul>
+                </section>
+                <section class="video-modal-section" ng-hide="dataset.references.videos == null || dataset.references.videos.length == 0">
+                  <hr>
+                  <h3 class="modal-section-title">Videos</h3>
+                  <div ng-repeat="video in dataset.references.videos">
+                    <iframe class="video-container" width="420" height="345" ng-src="{{video.url | trusted}}" allowfullscreen></iframe>
+                  </div>
+                </section>
+              </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>

@@ -22,6 +22,7 @@ angular.module('hydramaze')
         .then(function successCallback(response) {
           if (response.status == 200) {
             $scope.$createScreenContributorsList(response.data);
+            console.log(response.data);
           }
           else {
             notify({

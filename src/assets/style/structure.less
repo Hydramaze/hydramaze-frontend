@@ -444,6 +444,54 @@ th, td {
   }
 }
 
+.custom-navbar {
+
+  .navbar-header {
+    .navbar-toggle {
+      margin-top: 23px;
+    }
+  }
+
+  .hydramaze-mobile-menu {
+    background-color: rgba(0, 137, 117, 0.95);
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    border: 1px solid #424242;
+    color: white;
+
+    @media (min-width: @screen-sm-min) {
+      display: none !important;
+    }
+
+    ul {
+      margin: 0px;
+      margin-left: -15px;
+      margin-right: -15px;
+
+      li {
+        border-bottom: 1px solid #424242;
+        border-radius: 0px;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .fa {
+          margin-right: 5px;
+        }
+
+        a {
+          &:active {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+  }
+}
+
 #laboratory-tpl,
 #default-tpl {
   // Main menu custom style
@@ -590,6 +638,7 @@ th, td {
       border-right: none;
       border-left: none;
       position: relative;
+      
   }
   .no-video .video-container video,
   .touch .video-container video {

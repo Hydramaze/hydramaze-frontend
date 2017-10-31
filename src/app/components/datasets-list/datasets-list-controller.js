@@ -53,10 +53,31 @@ angular.module('hydramaze')
         datasetObj[value.learningType][value.type].push({
           id: value.id, name: value.name,
           completeDescription: value.completeDescription,
-          simpleDescription: value.simpleDescription
+          simpleDescription: value.simpleDescription,
+          references: $scope.$prepareReferences(value.references)
         });
       });
       return datasetObj;
+    };
+
+    $scope.$prepareReferences = function(references) {
+      var sites = [];
+      var videos = [];
+
+      $.each(references, function(key, value) {
+        if (value.type == "site") {
+          sites.push(value);
+        } else if (value.type == "video") {
+          value.url = value.url.replace('watch?v=', 'embed/');
+          videos.push(value);
+        }
+      });
+
+      return {
+        sites: sites,
+        videos: videos
+      };
+
     };
 
     $scope.$setupPreviousChoices = function() {
