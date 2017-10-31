@@ -113,17 +113,20 @@ app.config(['$stateProvider',
 }]);
 
 function showLoading(loadingContainer) {
-  loadingContainer.append('<div id="loading-container"><div class="center-vertical-horizontal"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i><span class="sr-only">Loading...</span></div></div>');
-  loadingContainer.addClass("disable-scroll");
-  $("#loading-container").fadeIn("slow");
-
+  if ($("#loading-container").length == 0) {
+    loadingContainer.append('<div id="loading-container"><div class="center-vertical-horizontal"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i><span class="sr-only">Loading...</span></div></div>');
+    loadingContainer.addClass("disable-scroll");
+    $("#loading-container").fadeIn("slow");
+  }
 }
 
 function hideLoading(loadingContainer) {
-  loadingContainer.removeClass("disable-scroll");
-  $("#loading-container").fadeOut( "slow", function() {
-    $("#loading-container").remove();
-  });
+  if ($("#loading-container").length > 0) {
+    loadingContainer.removeClass("disable-scroll");
+    $("#loading-container").fadeOut( "slow", function() {
+      $("#loading-container").remove();
+    });
+  }
 }
 
 function arraysEqual(a,b) {
