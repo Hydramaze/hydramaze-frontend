@@ -18,6 +18,11 @@
         <span class="fa fa-chevron-left"></span>
       </button>
     </div>
+    <div class="button-left-container-mobile">
+      <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="floating-button btn btn-default" ng-click="$previousStepCall(this)" style="font-weight: bold;">
+        <span class="">Previous</span>
+      </button>
+    </div>
 
     <div class="button-right-container">
       <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button btn btn-default" ng-click="$nextStepCall(this)" style="font-weight: bold;">
@@ -25,6 +30,11 @@
         <span class="fa fa-chevron-right"></span>
       </button>
     </div>
+    <div class="button-right-container-mobile">
+      <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button btn btn-default" ng-click="$nextStepCall(this)" style="font-weight: bold;">
+        <span class="">Next</span>
+      </button>
+    </div>
   </div>
-  
+
 </multi-step-container>
