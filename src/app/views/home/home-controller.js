@@ -14,9 +14,12 @@ angular.module('hydramaze')
     */
 
     $scope.$scaleVideoContainer = function() {
-      var height = $(window).height() + 5;
+      var width = $(window).width();
+      var height = $(window).height();
+      var unitWidth = parseInt(width) + 'px';
       var unitHeight = parseInt(height) + 'px';
-      $('.homepage-hero-module').css('height',unitHeight);
+      $('.homepage-hero-module').css('width', unitWidth);
+      $('.homepage-hero-module').css('height', unitHeight);
     }
 
     $scope.$initBannerVideoSize = function(element){
@@ -30,21 +33,22 @@ angular.module('hydramaze')
 
     $scope.$scaleBannerVideoSize = function(element) {
       var windowWidth = $(window).width(),
-      windowHeight = $(window).height() + 5,
+      windowHeight = $(window).height(),
       videoWidth,
       videoHeight;
 
       $(element).each(function(){
-          var videoAspectRatio = $(this).data('height') / $(this).data('width');
+          var videoAspectRatio = 9/16;
 
-          $(this).width(windowWidth);
-
-          if(windowWidth < 1000){
-              videoHeight = windowHeight;
-              videoWidth = videoHeight / videoAspectRatio;
-              $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
-
-              $(this).width(videoWidth).height(videoHeight);
+          if ((windowWidth * videoAspectRatio) > windowHeight) {
+            $(this).width(windowWidth);
+            $(this).height("auto");
+          } else if ((windowWidth * videoAspectRatio) < windowHeight) {
+            $(this).width("auto");
+            $(this).height(windowHeight);
+          } else {
+            $(this).width(windowWidth);
+            $(this).height(windowHeight);
           }
 
           $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
@@ -74,14 +78,15 @@ angular.module('hydramaze')
       $scope.$scaleVideoContainer();
 
       $scope.$initBannerVideoSize('.video-container .poster img');
-      $scope.$initBannerVideoSize('.video-container .filter');
       $scope.$initBannerVideoSize('.video-container video');
 
       $(window).on('resize', function() {
-        $scope.$scaleVideoContainer();
-        $scope.$scaleBannerVideoSize('.video-container .poster img');
-        $scope.$scaleBannerVideoSize('.video-container .filter');
-        $scope.$scaleBannerVideoSize('.video-container video');
+        $timeout(function() {
+          console.log("funcionou");
+          $scope.$scaleVideoContainer();
+          $scope.$scaleBannerVideoSize('.video-container .poster img');
+          $scope.$scaleBannerVideoSize('.video-container video');
+        });
       });
 
       console.log("Home Controller as been loaded!");
