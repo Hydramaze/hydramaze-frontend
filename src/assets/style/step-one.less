@@ -1,14 +1,24 @@
 #step-one-content {
   .step-one {
     overflow: hidden;
+    text-align: center;
+    @media @phone {
+      padding: 0 10px;
+    }
     .input-group {
       display: block;
       margin: 0 auto 25px;
       border: 1px solid #dddddd;
       border-radius: 5px 5px 0 0;
-      .make-xs-column(12);
       padding: 0 0 10px 0;
-
+      width: 100%;
+      max-width: 471px;
+      @media @tablet {
+        display: inline-block;
+        margin: 0 15px 25px;
+        padding: 0 0 10px 0;
+        width: ~"calc(50% - 30px)";
+      }
       h2 {
         border: none;
         margin-bottom: 0;

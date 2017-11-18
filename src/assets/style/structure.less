@@ -386,6 +386,90 @@ th, td {
     margin-bottom: 10px;
     padding-bottom: 10px;
   }
+  .button-left-container {
+    position: absolute;
+    left: 15px;
+    @media @phone {
+      display: none;
+    }
+  }
+
+  .button-left-container-mobile {
+    position: absolute;
+    left: 0;
+    display: none;
+    @media @phone {
+      display: block;
+    }
+  }
+
+  .button-right-container {
+    position: absolute;
+    right: 65px;
+    @media @phone {
+      display: none;
+    }
+  }
+
+  .button-right-container-mobile {
+    position: absolute;
+    right: 50%;
+    display: none;
+    .floating-button {
+      &:after {
+        height: 20px;
+        color: #fff;
+        background-color: #fff;
+        width: 2px;
+        content: '';
+        display: block;
+        position: absolute;
+        left: -1px;
+        bottom: 15px;
+      }
+    }
+    @media @phone {
+      display: block;
+    }
+  }
+  .floating-button {
+    font-weight: bold;
+    position: fixed;
+    bottom: 20px;
+    background-color: #ff7f50;
+    color: @white-color;
+    border-radius: 25px;
+    height: 50px;
+    border: none;
+    opacity: 0.5;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    z-index: 999;
+
+    @media @phone {
+      width: 50%;
+      border-radius: 0;
+      bottom: 0;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.btn:focus,
+    &.btn:active:focus {
+      outline: none;
+    }
+
+    span {
+      &.btn:focus,
+      &.btn:active:focus {
+        outline: none;
+      }
+    }
+  }
 }
 
 #step-two-content {
@@ -911,9 +995,12 @@ th, td {
     display: table;
     table-layout: fixed;
     .steps-item {
+      position: relative;
       display: table-cell;
       cursor: not-allowed;
-
+      // @media @phone {
+      //   display: none;
+      // }
       &.allowed {
         cursor: pointer;
 
@@ -944,20 +1031,18 @@ th, td {
         padding-left: 30px;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
-        span {
-          position: absolute;
-          left: 0px;
-          top: 50%;
-          height: 30px;
-          width: 30px;
-          background-color: #dddddd;
-          border-radius: 50%;
-          text-align: center;
-          line-height: 30px;
-          color: white;
-          transform: translateY(-50%);
-        }
+        width: 181px;
+      }
+      span {
+        position: absolute;
+        left: 0px;
+        height: 30px;
+        width: 30px;
+        background-color: #dddddd;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        color: white;
       }
       &.step-active {
         cursor: pointer;
@@ -973,6 +1058,20 @@ th, td {
           border-top-color: #00aa8d;
         }
       }
+      // &.mobile {
+      //   width: 25%;
+      //   p {
+      //     height: 30px;
+      //     width: 30px;
+      //     padding: 0;
+      //   }
+      //   @media @phone {
+      //     display: inline-block;
+      //   }
+      //   @media @tablet {
+      //     display: none;
+      //   }
+      // }
     }
   }
 }
@@ -1021,6 +1120,10 @@ th, td {
   h3 {
     font-style: italic;
   }
+
+  ul {
+    padding-left: 25px;
+  }
 }
 
 .code-line-container {
@@ -1068,17 +1171,19 @@ th, td {
 
 #default-tpl {
   #default-content {
-    overflow-y: scroll;
-    height: calc(~"100vh - 153px");
-    padding-right: 27px;
     padding-bottom: 70px;
+
+    #environment-configuration {
+      overflow-y: scroll;
+      height: calc(~"100vh - 153px");
+    }
   }
 
   .page-content {
-    margin-left: 25px;
+    margin-left: 10px;
     margin-top: 20px;
     line-height: 22px;
-    margin-right: 40px;
+    margin-right: 20px;
 
     h2, h3, h4, h5, h6 {
       margin-bottom: 15px;
