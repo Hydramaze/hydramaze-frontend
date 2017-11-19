@@ -1,13 +1,13 @@
-<multi-step-container id="exercises" steps="steps" class="steps-container-style simple-prev-next">
+<div id="stepper">
+  <ul id="stepper-list-container" class="steps-list">
+    <li ng-show="$isValidStep(x.title)" id="step-{{$index}}" ng-click="$setStepAsActive(this, $index)" ng-class="{'step-active': $index == $getActiveMultiStepContainerIndex(), 'allowed': $isAllowed($index)}" class="steps-item" ng-repeat="x in steps">
+      <span>{{$index + 1}}</span><p>{{x.title}}</p>
+      <hr>
+    </li>
+  </ul>
+</div>
 
-  <div id="stepper">
-    <ul class="steps-list">
-      <li id="step-{{$index}}" ng-click="$setStepAsActive(this, $index)" ng-class="{'step-active': $index == $getActiveIndex()-1, 'allowed': $isAllowed($index)}" class="steps-item" ng-repeat="x in steps">
-        <span>{{$index + 1}}</span><p>{{x.title}}</p>
-        <hr>
-      </li>
-    </ul>
-  </div>
+<multi-step-container id="exercises" steps="steps" class="steps-container-style simple-prev-next">
 
   <div id="step-content-container">
     <main id="main-step-content" step-container></main>

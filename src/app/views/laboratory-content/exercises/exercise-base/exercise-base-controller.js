@@ -33,7 +33,7 @@ function iframeInitializer(obj) {
   
   $(obj).ready(function() {
     resizeIframe(obj);
-    hideLoading($("#step-content-container"));
+    hideLoading($("#exercises #step-content-container"));
   });
 
   window.onresize = function(event) {

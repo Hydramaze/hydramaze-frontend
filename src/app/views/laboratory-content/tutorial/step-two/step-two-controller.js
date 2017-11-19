@@ -107,6 +107,7 @@ angular.module('hydramaze')
 
       var stepOneSharedData = tutorialService.$getStepOneData();
       var algorithmId = stepOneSharedData["algorithmId"];
+      $scope.algorithmName = stepOneSharedData["algorithmName"];
 
       if (algorithmId) {
           $scope.$getParametersByAlgorithmID(algorithmId);

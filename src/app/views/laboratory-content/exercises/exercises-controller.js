@@ -28,14 +28,20 @@ angular.module('hydramaze')
     };
 
     $scope.$setStepAsActive = function(elementScope, index) {
-      if (elementScope.$getActiveIndex() != index + 1) {
+      var stepChildScope = angular.element($("multi-step-container")).scope();
+      if (stepChildScope.$getActiveIndex() != index + 1) {
         if ($scope.$isAllowed(index)) {
           // set an active step
           showLoading($("#step-content-container"));
-          elementScope.$setActiveIndex(index + 1);
+          stepChildScope.$setActiveIndex(index + 1);
           notify.closeAll();
         }
       }
+    };
+
+    $scope.$getActiveMultiStepContainerIndex = function() {
+      var stepChildScope = angular.element($("multi-step-container")).scope();
+      return stepChildScope.$getActiveIndex() - 1;
     };
 
     // Validate if step is allowed for changes between tabs
@@ -103,6 +109,23 @@ angular.module('hydramaze')
       return steps;
     };
 
+    $scope.$removeDuplicateItems = function(id) {
+      var ul = $('#' + id);
+
+      $('li', ul).each(function() {
+        if($('li:contains("' + $(this).text() + '")', ul).length > 1)
+          $(this).remove();
+      });
+    }
+
+    $scope.$isValidStep = function(text) {
+      var isValid = false;
+      if (text != "") {
+        isValid = true;
+      }
+      return isValid;
+    };
+
     /*
     * Declared scope variables
     */
@@ -112,7 +135,15 @@ angular.module('hydramaze')
 
     $scope.exercises = {};
 
-    $scope.steps = $scope.$createSteps();
+    //$scope.steps = $scope.$createSteps();
+
+    $scope.steps = [
+      {
+        templateUrl: '/app/components/exercise/empty.html',
+        title: '',
+        controller: ''
+      }
+    ];
 
     /*
     * Functions usage
@@ -122,7 +153,15 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      showLoading($("#step-content-container"));
+      showLoading($("#exercises #step-content-container"));
+
+      setTimeout(function() {
+        $scope.steps = $scope.$createSteps();
+        $scope.$apply();
+        $compile($('#exercises'))($scope);
+
+      }, 5000);
+
       console.log("Exercises Controller as been loaded!");
     });
 

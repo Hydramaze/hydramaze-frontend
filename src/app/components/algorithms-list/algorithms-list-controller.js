@@ -32,18 +32,6 @@ angular.module('hydramaze')
       return algorithmsObj;
     }
 
-    $scope.$algorithmClick = function(algorithmId) {
-      stepOneService.$addData("algorithmId", algorithmId);
-    };
-
-    $scope.$setupPreviousChoices = function() {
-      var previousData = stepOneService.$getAllData();
-
-      if (Object.keys(previousData).length > 0) {
-        $("#algorithm-" + previousData["algorithmId"]).prop("checked", true);
-      }
-    };
-
     $scope.$prepareReferences = function(references) {
       var sites = [];
       var videos = [];
@@ -64,11 +52,24 @@ angular.module('hydramaze')
 
     };
 
+    $scope.$algorithmClick = function(algorithmId, algorithmName) {
+      stepOneService.$addData("algorithmId", algorithmId);
+      stepOneService.$addData("algorithmName", algorithmName);
+    };
+
+    $scope.$setupPreviousChoices = function() {
+      var previousData = stepOneService.$getAllData();
+
+      if (Object.keys(previousData).length > 0) {
+        $("#algorithm-" + previousData["algorithmId"]).prop("checked", true);
+      }
+    };
+
     $scope.$hideLoading = function() {
       $timeout(function() {
         hideLoading(tutorialService.$getLoadingContainer()); 
       }, 1000);
-    }
+    };
 
     /*
     * Declared scope variables

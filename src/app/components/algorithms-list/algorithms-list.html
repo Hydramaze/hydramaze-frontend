@@ -6,7 +6,7 @@
         <h4>{{ key }}</h4>
         <div class="algorithm-content" ng-repeat="algorithm in result">
           <div class="" id="heading-{{algorithm.id}}" role="tab">
-            <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="algorithm-{{ algorithm.id }}" ng-click="$algorithmClick(algorithm.id)">
+            <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="algorithm-{{ algorithm.id }}" ng-click="$algorithmClick(algorithm.id, algorithm.name)">
             <label class="" for="algorithm-{{ algorithm.id }}">{{ algorithm.name }}</label>
             <span role="button" class="collapsed glyphicon glyphicon-question-sign pull-right" data-toggle="modal" data-target="#modal-{{algorithm.id}}"></span>
           </div>

@@ -8,7 +8,7 @@
  * Main module of the application.
  */
 
-var app = angular.module('hydramaze', ['ngRoute', 'ui.router', 'chart.js', 'multiStepForm', 'cgNotify']);
+var app = angular.module('hydramaze', ['ngRoute', 'ui.router', 'chart.js', 'multiStepForm', 'cgNotify', 'angular.filter']);
 
 app.config(['$stateProvider', 
             '$urlRouterProvider', 
@@ -113,18 +113,18 @@ app.config(['$stateProvider',
 }]);
 
 function showLoading(loadingContainer) {
-  if ($("#loading-container").length == 0) {
-    loadingContainer.append('<div id="loading-container"><div class="center-vertical-horizontal"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i><span class="sr-only">Loading...</span></div></div>');
-    loadingContainer.addClass("disable-scroll");
-    $("#loading-container").fadeIn("slow");
+  if ($(loadingContainer).has("#loading-container").length == 0) {
+    $(loadingContainer).append('<div id="loading-container"><div class="center-vertical-horizontal"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i><span class="sr-only">Loading...</span></div></div>');
+    $(loadingContainer).addClass("disable-scroll");
+    $(loadingContainer).find("#loading-container").fadeIn("slow");
   }
 }
 
 function hideLoading(loadingContainer) {
-  if ($("#loading-container").length > 0) {
-    loadingContainer.removeClass("disable-scroll");
-    $("#loading-container").fadeOut( "slow", function() {
-      $("#loading-container").remove();
+  if ($(loadingContainer).has("#loading-container").length > 0) {
+    $(loadingContainer).removeClass("disable-scroll");
+    $(loadingContainer).find("#loading-container").fadeOut( "slow", function() {
+      $(loadingContainer).find("#loading-container").remove();
     });
   }
 }
