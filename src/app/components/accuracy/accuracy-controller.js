@@ -17,7 +17,8 @@ angular.module('hydramaze')
     * Declared scope variables
     */
 
-    $scope.accuracy = $scope.data;
+    $scope.name = $scope.data.name;
+    $scope.value = $scope.data.value;
 
     /*
     * Functions usage
