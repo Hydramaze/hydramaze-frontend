@@ -12,6 +12,10 @@ angular.module('hydramaze')
     /*
     * Declared scope functions
     */
+    var downloadComponent;
+    var downloadButton;
+    var downloadMessage;
+    console.log("Scope: ",$scope);
 
     $scope.$stepValidation = function() {
       // Do nothing just return true
@@ -53,6 +57,42 @@ angular.module('hydramaze')
           });
           $scope.$previousStep();
         });
+
+      $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/download?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
+        .then(function successCallback(response) {
+          if (response.status == 200 && !response.data.error) {
+            console.log("Download api: ",$scope);
+            var blob = new Blob([response.data], {type: 'text/x-python'});
+            downloadComponent = document.createElement("div");
+            downloadComponent.setAttribute("class", "download-component");
+            downloadMessage = document.createElement("p");
+            downloadMessage.setAttribute("class", "download-message");
+            downloadButton = document.createElement("a");
+            downloadButton.setAttribute("class", "btn btn-lg download-button");
+            downloadButton.innerHTML = "Download";
+            downloadMessage.innerHTML = "Do you want to download the code containing the configuration you set on the steps before? Just click on the button!";
+
+            let url = window.URL.createObjectURL(blob);
+            downloadButton.href = url;
+            downloadButton.download = 'teste.py';
+          }
+          else {
+            var errorMessage = "Algorithm cannot be downloaded.";
+            if (response.data.error) {
+              errorMessage = response.data.error;
+            }
+            notify({
+              message: errorMessage,
+              classes: "alert-danger"
+            });
+            $scope.$previousStep();
+          }
+        }, function errorCallback(responseError) {
+          notify({
+            message: "Sorry, an error has occurred. Try again!",
+            classes: "alert-danger"
+          });
+        });
     }
 
     $scope.$createScreenAlgorithmExecutionResult = function(data) {
@@ -66,6 +106,9 @@ angular.module('hydramaze')
       newBlock.append(content);
 
       $('#step-four-content').append(newBlock);
+      $('#step-four-content').append(downloadComponent);
+      $('#step-four-content .download-component').append(downloadMessage);
+      $('#step-four-content .download-component').append(downloadButton);
 
       var newScope = $scope.$new(true);
       newScope.data = data;
@@ -84,7 +127,7 @@ angular.module('hydramaze')
     // Called when finish render
     $timeout(function () {
       showLoading(tutorialService.$getLoadingContainer());
-      
+
       // Retrieve prvious execution result
       var stepFourRetrievedData = tutorialService.$getStepFourData();
 

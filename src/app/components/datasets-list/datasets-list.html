@@ -4,13 +4,13 @@
       <input type="radio" name="datasets" value="{{ dataset.name }}" id="dataset-{{ dataset.id }}" ng-click="$datasetClick(dataset.id)">
       <label class="dataset" for="dataset-{{ dataset.id }}">
         <div class="flipper" ng-click="$toggleSelected($event)">
-          <span class="glyphicon glyphicon-ok"></span>
+          <span class="glyphicon glyphicon-check"></span>
           <div class="thumbnail card-front">
-            <img src="/assets/img/download.jpg" alt="...">
+            <img src="/assets/img/dataset.jpg" alt="...">
             <div class="caption">
               <h3>{{dataset.name}}</h3>
-              <p>{{dataset.simpleDescription}}</p>
-              <label class="saiba-mais btn btn-primary" data-toggle="modal" data-target="#modal-{{dataset.id}}">Saiba Mais</label>
+              <label class="saiba-mais" data-toggle="modal" data-target="#modal-{{dataset.id}}"><span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#modal-{{id}}"></span>
+</label>
             </div>
           </div>
         </div>

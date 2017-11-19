@@ -1,22 +1,61 @@
-#result-accuracy {
-  div {
-    text-align: center;
-    margin: 80px auto;
-    background: #f5fffe;
-background: -moz-linear-gradient(-45deg, #f5fffe 0%, #caf1f2 100%, #8ecbde 100%, #caf1f2 101%);
-background: -webkit-linear-gradient(-45deg, #f5fffe 0%,#caf1f2 100%,#8ecbde 100%,#caf1f2 101%);
-    width: 380px;
-    padding: 30px 0;
-    border-radius: 10px;
-    box-shadow: 0px 1px 12px 0px #cbf2f3;
+#step-four-content {
+  #result-accuracy {
+    float: left;
+    width: 50%;
+    div {
+      margin: auto;
+      text-align: center;
+      border: 1px solid #ededed;
+      width: 380px;
+      padding: 30px 0;
+      border-radius: 10px;
+      box-shadow: 0px 1px 12px 0px #ededed;
 
-    .accuracy-title {
-      font-size: 50px;
+      .accuracy-title {
+        font-size: 50px;
+      }
+
+      .accuracy-value {
+        margin-top: 15px;
+        font-size: 30px;
+      }
     }
-
-    .accuracy-value {
-      margin-top: 15px;
-      font-size: 30px;
+  }
+  #result-confusion-matrix {
+    float: left;
+    width: 50%;
+    table {
+      width: 100% !important;
+      font-size: 15px;
+      th,
+      td {
+        font-size: 20px;
+        text-align: center;
+      }
+    }
+  }
+  .download-component {
+    overflow: hidden;
+    margin-top: 50px;
+    .download-message {
+      @media @tablet {
+        float: left;
+        width: 70%;
+      }
+    }
+    .download-button {
+      @media @tablet {
+        float: right;
+      }
+      border: none;
+      background: rgba(0,170,141,1);
+      background: -moz-linear-gradient(-45deg, rgba(0,170,141,1) 18%, rgba(0,170,141,1) 49%, rgba(0,137,117,1) 100%);
+      background: -webkit-gradient(left top, right bottom, color-stop(18%, rgba(0,170,141,1)), color-stop(49%, rgba(0,170,141,1)), color-stop(100%, rgba(0,137,117,1)));
+      background: -webkit-linear-gradient(-45deg, rgba(0,170,141,1) 18%, rgba(0,170,141,1) 49%, rgba(0,137,117,1) 100%);
+      background: -o-linear-gradient(-45deg, rgba(0,170,141,1) 18%, rgba(0,170,141,1) 49%, rgba(0,137,117,1) 100%);
+      background: -ms-linear-gradient(-45deg, rgba(0,170,141,1) 18%, rgba(0,170,141,1) 49%, rgba(0,137,117,1) 100%);
+      background: linear-gradient(135deg, rgba(0,170,141,1) 18%, rgba(0,170,141,1) 49%, rgba(0,137,117,1) 100%);
+      color: #fff;
     }
   }
 }

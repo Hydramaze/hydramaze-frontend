@@ -34,9 +34,6 @@ angular.module('hydramaze')
         var directiveComponent = document.createElement(val.component + "-directive");
 
         if (val.component != 'check-box') {
-          var directiveName = document.createElement("h3");
-          directiveName.innerHTML = val.name;
-          newBlock.append(directiveName);
           newBlock.append(directiveComponent);
 
           var newScope = $scope.$new(true);
@@ -64,7 +61,7 @@ angular.module('hydramaze')
 
     $scope.$hideLoading = function() {
       $timeout(function() {
-        hideLoading(tutorialService.$getLoadingContainer()); 
+        hideLoading(tutorialService.$getLoadingContainer());
       }, 1000);
     };
 

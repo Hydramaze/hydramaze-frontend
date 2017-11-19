@@ -1,6 +1,9 @@
 .components {
   overflow: hidden;
-  .input-group {
+  .parameters-group {
+    h3 {
+      float: left;
+    }
     .help-button {
       cursor: pointer;
       border-radius: 0 4px 4px 0;
@@ -9,7 +12,7 @@
     .glyphicon {
       cursor: pointer;
       padding-left: 10px;
-
+      font-size: 16px;
       &:hover {
         color: @lighter-color;
       }
@@ -68,9 +71,13 @@
         transition: left .3s ease, background .3s ease, box-shadow .1s ease;
       }
     }
+    .glyphicon {
+      font-size: 16px;
+    }
     h4 {
       display: unset;
       font-size: 16px;
+      margin-right: 10px;
     }
   }
 }

@@ -1,8 +1,9 @@
-<div class="input-group">
-  <select title="{{title}}" class="form-control" ng-model="value" class="form-control" aria-describedby="addon-{{id}}">
+<div class="parameters-group">
+  <h3>{{name}}</h3>
+  <span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#modal-{{id}}"></span>
+  <select title="{{title}}" class="form-control" ng-model="value" class="form-control">
     <option ng-repeat="x in comboValues" ng-value="x">{{x}}</option>
   </select>
-  <span class="input-group-addon help-button" id="addon-{{id}}" data-toggle="modal" data-target="#modal-{{id}}">?</span>
   <!-- Modal -->
 	<div class="modal fade" id="modal-{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
