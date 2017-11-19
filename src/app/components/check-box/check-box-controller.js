@@ -52,6 +52,7 @@ angular.module('hydramaze')
     */
 
     $scope.id = $scope.data["id"];
+    $scope.simpleDescription = $scope.data["simpleDescription"];
     $scope.completeDescription = $scope.data["completeDescription"];
     $scope.value = $scope.data["defaultValue"];
     $scope.comboValues = $scope.data["listData"];
