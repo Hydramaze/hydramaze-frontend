@@ -1384,3 +1384,12 @@ th, td {
 #start-tpl {
   background-color: #424242;
 }
+
+#flileframe {
+  height: calc(~"100vh - 234px");
+  min-height: calc(~"100vh - 234px");
+  @media (min-width: @screen-sm-min) {
+    height: calc(~"100vh - 214px");
+    min-height: calc(~"100vh - 214px");
+  }
+}

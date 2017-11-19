@@ -1,29 +1,40 @@
 <multi-step-container id="exercises" steps="steps" class="steps-container-style simple-prev-next">
-    <h2><span class='text-color-hydra-lighter'>Beginner - Exercise {{$getActiveIndex()}}:</span> {{steps[$getActiveIndex()-1].title}}</h2>
-    <main step-container></main>
-    <section class="clearfix">
-      <div class="button-left-container">
-        <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="floating-button btn btn-default" ng-click="$previousStep()">
-          <span class="fa fa-chevron-left"></span>
-          <span class="fa fa-chevron-left"></span>
-        </button>
-      </div>
-      <div class="button-left-container-mobile">
-        <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="floating-button btn btn-default" ng-click="$previousStep()" style="font-weight: bold;">
-          <span class="">Previous</span>
-        </button>
-      </div>
 
-      <div class="button-right-container">
-        <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button btn btn-default" ng-click="$nextStep()" style="font-weight: bold;">
-          <span class="fa fa-chevron-right"></span>
-          <span class="fa fa-chevron-right"></span>
-        </button>
-      </div>
-      <div class="button-right-container-mobile">
-        <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button btn btn-default" ng-click="$nextStep()" style="font-weight: bold;">
-          <span class="">Next</span>
-        </button>
-      </div>
-    </section>
+  <div id="stepper">
+    <ul class="steps-list">
+      <li id="step-{{$index}}" ng-click="$setStepAsActive(this, $index)" ng-class="{'step-active': $index == $getActiveIndex()-1, 'allowed': $isAllowed($index)}" class="steps-item" ng-repeat="x in steps">
+        <span>{{$index + 1}}</span><p>{{x.title}}</p>
+        <hr>
+      </li>
+    </ul>
+  </div>
+
+  <div id="step-content-container">
+    <main id="main-step-content" step-container></main>
+
+    <div class="button-left-container">
+      <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="floating-button btn btn-default" ng-click="$previousStepCall(this)" style="font-weight: bold;">
+        <span class="fa fa-chevron-left"></span>
+        <span class="fa fa-chevron-left"></span>
+      </button>
+    </div>
+    <div class="button-left-container-mobile">
+      <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="floating-button btn btn-default" ng-click="$previousStepCall(this)" style="font-weight: bold;">
+        <span class="">Previous</span>
+      </button>
+    </div>
+
+    <div class="button-right-container">
+      <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button btn btn-default" ng-click="$nextStepCall(this)" style="font-weight: bold;">
+        <span class="fa fa-chevron-right"></span>
+        <span class="fa fa-chevron-right"></span>
+      </button>
+    </div>
+    <div class="button-right-container-mobile">
+      <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button btn btn-default" ng-click="$nextStepCall(this)" style="font-weight: bold;">
+        <span class="">Next</span>
+      </button>
+    </div>
+  </div>
+
 </multi-step-container>

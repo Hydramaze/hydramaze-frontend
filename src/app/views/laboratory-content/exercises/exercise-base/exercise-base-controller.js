@@ -9,9 +9,12 @@
 angular.module('hydramaze')
   .controller('ExerciseBaseCtrl', function($scope, $compile, $timeout, $http, $sce) {
 
-    console.log("ExerciseBaseCtrl Controller as been loaded!");
+    $scope.detailFrame = $sce.trustAsHtml($scope.steps[$scope.$getActiveIndex()-1].exercise);
 
-    $scope.detailFrame = $sce.trustAsResourceUrl($scope.steps[$scope.$getActiveIndex()-1].exercise);
+    // Called when finish render
+    $timeout(function () {
+      console.log("ExerciseBaseCtrl Controller as been loaded!");
+    });
 
     $scope.$on('$destroy', function() {
       window.onresize = null;
@@ -24,10 +27,13 @@ function successIframeCall() {
 }
 
 function iframeInitializer(obj) {
+  resizeIframe(obj);
+
   $(obj).contents().find("head").append('<link rel="stylesheet" href="/tmp/assets/css/main.css" type="text/css" />');
   
   $(obj).ready(function() {
     resizeIframe(obj);
+    hideLoading($("#step-content-container"));
   });
 
   window.onresize = function(event) {
@@ -36,9 +42,10 @@ function iframeInitializer(obj) {
 }
 
 function resizeIframe(obj) {
-  obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  $(obj).height($(obj).contents().find('body').prop('scrollHeight'));
   showIframe(obj);
 }
+
 
 function showIframe(obj) {
   $(obj).removeClass("ng-hide");
