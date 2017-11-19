@@ -35,6 +35,25 @@ angular.module('hydramaze')
       }
     };
 
+    $scope.$prepareReferences = function(references) {
+      var sites = [];
+      var videos = [];
+
+      $.each(references, function(key, value) {
+        if (value.type == "site") {
+          sites.push(value);
+        } else if (value.type == "video") {
+          value.url = value.url.replace('watch?v=', 'embed/');
+          videos.push(value);
+        }
+      });
+
+      return {
+        sites: sites,
+        videos: videos
+      };
+    };
+
     /*
     * Declared scope variables
     */
@@ -46,8 +65,8 @@ angular.module('hydramaze')
     $scope.comboValues = $scope.data["listData"];
     $scope.name = $scope.data["name"];
     $scope.observation = $scope.data["observation"];
-    $scope.title = $scope.data["simpleDescription"];
-
+    $scope.references = $scope.$prepareReferences($scope.data["references"]);
+    
     /*
     * Functions usage
     */
