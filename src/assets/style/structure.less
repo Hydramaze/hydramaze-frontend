@@ -1396,3 +1396,20 @@ th, td {
     min-height: calc(~"100vh - 214px");
   }
 }
+
+.confusion-matrix-td-success {
+  font-weight: bold;
+  background: rgba(0, 161, 255, 0.4); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #e0f4ff, rgba(0, 161, 255, 0.4), #e0f4ff);
+  background: -o-linear-gradient(right, #e0f4ff, rgba(0, 161, 255, 0.4), #e0f4ff);
+  background: -moz-linear-gradient(right, #e0f4ff, rgba(0, 161, 255, 0.4), #e0f4ff);
+}
+
+.confusion-matrix-td-error {
+  font-weight: bold;
+  color: white;
+  background: #ff4f4f; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #fba0a0, #ff4f4f, #fba0a0);
+  background: -o-linear-gradient(right, #fba0a0, #ff4f4f, #fba0a0);
+  background: -moz-linear-gradient(right, #fba0a0, #ff4f4f, #fba0a0);
+}

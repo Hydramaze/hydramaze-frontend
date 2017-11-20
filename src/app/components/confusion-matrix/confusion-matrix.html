@@ -6,7 +6,9 @@
     </tr>
     <tr ng-repeat="(key, value) in classNames">
       <td style="border: none;">{{ value }}</td>
-      <td ng-repeat="result in matrix[key] track by $index" ng-style="{'background-color': result? 'rgba(0, 161, 255, 0.4)' : 'none', 'font-weight': result? 'bold' : 'normal'}">{{ result }}</td>
+      <td ng-repeat="result in matrix[key] track by $index"
+          ng-class="{'confusion-matrix-td-success': result > 0 && key == $index, 'confusion-matrix-td-error': result > 0 && key != $index}"
+      >{{ result }}</td>
     </tr>
   </table>
 </div>
