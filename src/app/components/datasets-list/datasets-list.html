@@ -53,8 +53,9 @@
       <!-- End modal -->
     </div>
   </div>
+  <hr>
   <div class="slider-group">
-    <h3>How much data do you want to use for training the model?</h3>
+    <p>How much data do you want to use for training the model?</p>
     <input id="test-size" ng-model="testSize" type="range" name="range" min="10" max="90" value="{{testSize}}" ng-change="$onSliderRangeChange()" class="slider-handle">
     <output id="rangePrimary">{{testSize}} %</output>
   </div>

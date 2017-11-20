@@ -32,8 +32,10 @@ function iframeInitializer(obj) {
   $(obj).contents().find("head").append('<link rel="stylesheet" href="/tmp/assets/css/main.css" type="text/css" />');
   
   $(obj).ready(function() {
-    resizeIframe(obj);
-    hideLoading($("#exercises #step-content-container"));
+    setTimeout(function() {
+      resizeIframe(obj);
+      hideLoading($("#exercises #step-content-container"));
+    }, 1000);
   });
 
   window.onresize = function(event) {

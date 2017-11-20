@@ -9,7 +9,7 @@
 var major;
 
 angular.module('hydramaze')
-  .controller('ExercisesCtrl', function($scope, $timeout, $compile, notify) {
+  .controller('ExercisesCtrl', function($scope, $timeout, $http, $compile, notify, exercisesService) {
 
     /*
     * Declared scope functions
@@ -57,54 +57,38 @@ angular.module('hydramaze')
       $("body").removeClass("laboratory-exercises");
     };
 
-    $scope.$createSteps = function() {
+    $scope.$createSteps = function(data) {
       var steps = [];
       var template = '<div id="exercise-{{exerciseNumber}}" class="exercise"><p>{{problemIntroduction}}<br></p><div data-datacamp-exercise data-lang="python"><code data-type="pre-exercise-code">{{preExerciseCode}}</code><code data-type="sample-code">{{sampleCode}}</code><code data-type="solution">{{solution}}</code><code data-type="sct">{{validation}}</code><div data-type="hint">{{hint}}</div></div><script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script></div>';
       
-
-      var problemIntroduction = "First of all let's import some libraries which will make some tasks easily. It is important to know which library we are using and why, so be curious and look for that";
+      /*
+      var problemIntroduction = "É importante saber para que se destina o uso do algoritmo K-means, portanto veja as referências abaixo, ou acesse a seção Tutorial para mais informações.<br>Suponha que você tenha especificações sobre as pétalas de uma planta, e sabendo que ela pertence à família Iris, você precisa determinar qual a espécie desta planta. Então, vamos recorrer ao algoritmo K-Means para executar essa tarefa de classificação.<br><span>Para esse exercício é necessário que você importe os datasets e também o algoritmo kmeans.</span>";
       //var references = var $prepareReferences(var data[""]);
       var preExerciseCode = "# None declared";
-      var sampleCode = "# Import numpy as np \n# Import matplotlib.pyplot as plt";
-      var solution = "# Import numpy as np \nimport numpy as np \n# Import matplotlib.pyplot as plt \nimport matplotlib.pyplot as plt";
-      var validation = 'test_object("np") \ntest_object("plt") \nsuccess_msg("We are making progress!")';
-      var hint = "Use the function (<code>print</code>).";
+      var sampleCode = "# import datasets from sklearn\n\n# import Kmeans from sklearn\n\n";
+      var solution = "# import datasets from sklearn \nfrom sklearn import datasets \n# import Kmeans from sklearn \nfrom sklearn.cluster import KMeans \n";
+      var validation = "test_object('datasets') \ntest_object('KMeans') \nsuccess_msg('Great Job! Go ahead and try to solve the next problem.')";
+      var hint = "Use the references to solve this problem";
+      */
 
-      var newTemplateRequest = template;
-      newTemplateRequest = newTemplateRequest.replace('{{problemIntroduction}}', problemIntroduction);
-      newTemplateRequest = newTemplateRequest.replace('{{preExerciseCode}}', preExerciseCode);
-      newTemplateRequest = newTemplateRequest.replace('{{sampleCode}}', sampleCode);
-      newTemplateRequest = newTemplateRequest.replace('{{solution}}', solution);
-      newTemplateRequest = newTemplateRequest.replace('{{validation}}', validation);
-      newTemplateRequest = newTemplateRequest.replace('{{hint}}', hint);
-      
-      var newStep = {};
-      newStep['templateUrl'] = tplUrl;
-      newStep['controller'] = tplCtrl;
-      newStep['title'] = 'Learning how to use the profsfrface';
-      newStep['exercise'] = newTemplateRequest;
-      steps.push(newStep);
+      $.each(data, function(key, value) {
+        console.log(value);
+        var newTemplateRequest = template;
+        newTemplateRequest = newTemplateRequest.replace('{{problemIntroduction}}', value.problemIntroduction.replace(/\\n/g, "&#13;"));
+        newTemplateRequest = newTemplateRequest.replace('{{preExerciseCode}}', value.preExerciseCode.replace(/\\n/g, "&#13;"));
+        newTemplateRequest = newTemplateRequest.replace('{{sampleCode}}', value.sampleCode.replace(/\\n/g, "&#13;"));
+        newTemplateRequest = newTemplateRequest.replace('{{solution}}', value.solution.replace(/\\n/g, "&#13;"));
+        newTemplateRequest = newTemplateRequest.replace('{{validation}}', value.validation);
+        newTemplateRequest = newTemplateRequest.replace('{{hint}}', value.hint.replace(/\\n/g, "&#13;"));
+        
+        var newStep = {};
+        newStep['templateUrl'] = tplUrl;
+        newStep['controller'] = tplCtrl;
+        newStep['title'] = 'Exercise ' + (parseInt(value.exerciseNumber) + 1);
+        newStep['exercise'] = newTemplateRequest;
 
-      newStep = {};
-      newStep['templateUrl'] = tplUrl;
-      newStep['controller'] = tplCtrl;
-      newStep['title'] = 'Learning how to use the programming fdffdfdinterface';
-      newStep['exercise'] = newTemplateRequest;
-      steps.push(newStep);
-
-      newStep = {};
-      newStep['templateUrl'] = tplUrl;
-      newStep['controller'] = tplCtrl;
-      newStep['title'] = 'Learning how to use the pfefdfdfrogramming interface';
-      newStep['exercise'] = newTemplateRequest;
-      steps.push(newStep);
-
-      newStep = {};
-      newStep['templateUrl'] = tplUrl;
-      newStep['controller'] = tplCtrl;
-      newStep['title'] = 'Learning how to use the prografefdfmming interface';
-      newStep['exercise'] = newTemplateRequest;
-      steps.push(newStep);
+        steps.push(newStep);
+      });
 
       return steps;
     };
@@ -126,6 +110,96 @@ angular.module('hydramaze')
       return isValid;
     };
 
+    $scope.$reloadPage = function() {
+      window.location.reload();
+    };
+
+    $scope.$createScreenAlgorithmsList = function(data) {
+      var component = 'algorithms-list-with-exercise-directive';
+
+      var newBlock = document.createElement("div");
+      newBlock.setAttribute("id", "algorithms-list-directive");
+      newBlock.setAttribute("class", "block container-fluid");
+
+      var content = document.createElement(component);
+      newBlock.append(content);
+
+      $('.form-step').append(newBlock);
+
+      var newScope = $scope.$new(true);
+      newScope.data = data;
+
+      $compile($('.form-step').contents())(newScope);
+    };
+
+    $scope.$getAlgorithmsListWithExercise = function() { 
+      $http.get('http://localhost:8080/api/algorithm/exercises')
+        .then(function successCallback(response) {
+          if (response.status == 200) {
+            $scope.$createScreenAlgorithmsList(response.data);
+          }
+          else {
+            notify({
+              message: "Algorithms list not found.",
+              classes: "alert-danger"
+            });
+            hideLoading(exercisesService.$getLoadingContainer());
+          }
+        }, function errorCallback(responseError) {
+          notify({
+            message: "Sorry, an error has occurred. Try again!",
+            classes: "alert-danger"
+          });
+          hideLoading(exercisesService.$getLoadingContainer());
+        });
+    };
+
+    $scope.$getExercisesListByAlgorithmId = function(idValue) { 
+      $http.get('http://localhost:8080/api/algorithm/' + idValue + '/exercise')
+        .then(function successCallback(response) {
+          if (response.status == 200) {
+            $scope.isExercisesLoaded = true;
+            $scope.$renderExercises(response.data);
+          }
+          else {
+            notify({
+              message: "Algorithms list not found.",
+              classes: "alert-danger"
+            });
+            hideLoading(exercisesService.$getLoadingContainer());
+          }
+        }, function errorCallback(responseError) {
+          notify({
+            message: "Sorry, an error has occurred. Try again!",
+            classes: "alert-danger"
+          });
+          hideLoading(exercisesService.$getLoadingContainer());
+        });
+    };
+
+    $scope.$loadExercises = function() {
+      var exercisesData = exercisesService.$getAllData();
+      var algorithmId = exercisesData["algorithmId"];
+
+      if (algorithmId) {
+          showLoading(exercisesService.$getLoadingContainer());
+          $scope.$getExercisesListByAlgorithmId(algorithmId);
+      } else {
+        notify({
+          message: "Please select an algorithm.",
+          classes: "alert-warning"
+        });
+      }
+    };
+
+    $scope.$renderExercises = function(data) {
+      $scope.steps = $scope.$createSteps(data);
+      $timeout(function() {
+        $scope.$apply();
+        $compile($('#exercises'))($scope);
+      });
+    };
+
     /*
     * Declared scope variables
     */
@@ -133,14 +207,14 @@ angular.module('hydramaze')
     var tplUrl = '/app/views/laboratory-content/exercises/exercise-base/exercise-base.html';
     var tplCtrl = 'ExerciseBaseCtrl';
 
-    $scope.exercises = {};
+    $scope.isExercisesLoaded = false;
 
     //$scope.steps = $scope.$createSteps();
 
     $scope.steps = [
       {
         templateUrl: '/app/components/exercise/empty.html',
-        title: '',
+        title: 'Choose an algorithm and load the exercises',
         controller: ''
       }
     ];
@@ -151,16 +225,14 @@ angular.module('hydramaze')
 
     $scope.$addControllerNameAsBodyClass();
 
+    exercisesService.$setLoadingContainer($("#exercises #step-content-container"));
+
     // Called when finish render
     $timeout(function () {
-      showLoading($("#exercises #step-content-container"));
 
-      setTimeout(function() {
-        $scope.steps = $scope.$createSteps();
-        $scope.$apply();
-        $compile($('#exercises'))($scope);
+      showLoading(exercisesService.$getLoadingContainer());
 
-      }, 5000);
+      $scope.$getAlgorithmsListWithExercise();
 
       console.log("Exercises Controller as been loaded!");
     });

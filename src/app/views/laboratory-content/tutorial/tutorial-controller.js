@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('TutorialCtrl', function($scope, $timeout, $q, $controller, tutorialService, notify) {
+  .controller('TutorialCtrl', function($scope, $timeout, $q, $controller, tutorialService, stepOneService, stepTwoService, stepThreeService, stepFourService, notify) {
 
     /*
     * Declared scope functions
@@ -113,6 +113,10 @@ angular.module('hydramaze')
 
     $scope.$on("$destroy", function() {
       tutorialService.$emptyAllData();
+      stepOneService.$empty();
+      stepTwoService.$empty();
+      stepThreeService.$empty();
+      stepFourService.$empty();
       $scope.$removeControllerNameAsBodyClass();
       notify.closeAll();
       $scope.canceler.resolve();

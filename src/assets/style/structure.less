@@ -243,8 +243,8 @@ th, td {
 
   #step-content-container {
     overflow-y: scroll;
-    height: calc(~"100vh - 260px");
-    min-height: calc(~"100vh - 260px");
+    height: calc(~"100vh - 234px");
+    min-height: calc(~"100vh - 234px");
     @media (min-width: @screen-sm-min) {
       height: calc(~"100vh - 214px");
       min-height: calc(~"100vh - 214px");
@@ -303,6 +303,10 @@ th, td {
     }
     @media @phone {
       display: block;
+    }
+
+    &.load-exercises {
+      right: 150px;
     }
   }
 
@@ -410,6 +414,10 @@ th, td {
     right: 65px;
     @media @phone {
       display: none;
+    }
+
+    &.load-exercises {
+      right: 150px;
     }
   }
 
@@ -1170,9 +1178,11 @@ th, td {
   padding-left: 15px;
   padding-right: 5px;
   margin-top: 10px;
+  padding-bottom: 20px;
   @media (min-width: @screen-sm-min) {
     padding-left: 0px;
     padding-right: 0px;
+    padding-bottom: 80px;
   }
 
   #loading-container {
@@ -1307,6 +1317,7 @@ th, td {
 }
 
 #footer-container {
+  z-index:  999;
   bottom: 0px;
   position: fixed;
   width: 100%;

@@ -22,7 +22,7 @@ angular.module('hydramaze')
       angular.forEach(data, function (val, key) {
         var newBlock = document.createElement("div");
         newBlock.setAttribute("id", "result-" + key);
-        newBlock.setAttribute("class", "result block container-fluid");
+        newBlock.setAttribute("class", "result block container-fluid col-xs-12 col-sm-6 col-lg-6");
 
         var directiveComponent = document.createElement(key + "-directive");
 

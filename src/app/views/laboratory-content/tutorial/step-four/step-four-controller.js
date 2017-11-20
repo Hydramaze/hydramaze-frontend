@@ -15,7 +15,6 @@ angular.module('hydramaze')
     var downloadComponent;
     var downloadButton;
     var downloadMessage;
-    console.log("Scope: ",$scope);
 
     $scope.$stepValidation = function() {
       // Do nothing just return true

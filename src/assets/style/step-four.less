@@ -1,15 +1,19 @@
 #step-four-content {
   #result-accuracy {
-    float: left;
-    width: 50%;
-    div {
+    margin-top: 15px;
+
+    #result-accuracy-container {
       margin: auto;
       text-align: center;
       border: 1px solid #ededed;
-      width: 380px;
-      padding: 30px 0;
+      width: 100%;
+      padding: 30px 10px;
       border-radius: 10px;
       box-shadow: 0px 1px 12px 0px #ededed;
+
+      @media (min-width: @screen-sm-min) {
+        width: 380px;
+      }
 
       .accuracy-title {
         font-size: 50px;
@@ -22,10 +26,23 @@
     }
   }
   #result-confusion-matrix {
-    float: left;
-    width: 50%;
+    margin-top: 15px;
+
+    #confusion-matrix-container {
+      margin: auto;
+      text-align: center;
+      border: 1px solid #ededed;
+      padding: 30px 0;
+      border-radius: 10px;
+      box-shadow: 0px 1px 12px 0px #ededed;
+      padding-right: 20px;
+    }
+    .confusion-matrix-title {
+      font-size: 50px;
+    }
     table {
       width: 100% !important;
+      margin-top: 15px;
       font-size: 15px;
       th,
       td {

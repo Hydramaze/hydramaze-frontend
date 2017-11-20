@@ -1,6 +1,6 @@
 <div id="stepper">
   <ul id="stepper-list-container" class="steps-list">
-    <li ng-show="$isValidStep(x.title)" id="step-{{$index}}" ng-click="$setStepAsActive(this, $index)" ng-class="{'step-active': $index == $getActiveMultiStepContainerIndex(), 'allowed': $isAllowed($index)}" class="steps-item" ng-repeat="x in steps">
+    <li id="step-{{$index}}" ng-click="$setStepAsActive(this, $index)" ng-class="{'step-active': $index == $getActiveMultiStepContainerIndex(), 'allowed': $isAllowed($index)}" class="steps-item" ng-repeat="x in steps">
       <span>{{$index + 1}}</span><p>{{x.title}}</p>
       <hr>
     </li>
@@ -22,6 +22,10 @@
       <button ng-disabled="$isFirst()" ng-hide="$isFirst()" class="floating-button btn btn-default" ng-click="$previousStepCall(this)" style="font-weight: bold;">
         <span class="">Previous</span>
       </button>
+    </div>
+
+    <div class="button-right-container load-exercises" ng-hide="isExercisesLoaded">
+      <button class="floating-button btn btn-default" ng-click="$loadExercises()" style="font-weight: bold;">Load Exercises!</button>
     </div>
 
     <div class="button-right-container">

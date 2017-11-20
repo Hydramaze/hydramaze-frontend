@@ -1,0 +1,53 @@
+<div class="step-one row panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+  <div class="algorithms-group-container">
+    <div class="col-xs-12 col-sm-6 input-group" ng-repeat="(key, value) in algorithms">
+      <h2>{{ key }}</h2>
+      <div class="algorithms-options" ng-repeat="(key, result) in value">
+        <h4>{{ key }}</h4>
+        <div class="algorithm-content" ng-repeat="algorithm in result">
+          <div class="" id="heading-{{algorithm.id}}" role="tab">
+            <input type="radio" name="algorithm-option" value="{{ algorithm.name }}" id="algorithm-{{ algorithm.id }}" ng-click="$algorithmClick(algorithm.id, algorithm.name)">
+            <label class="" for="algorithm-{{ algorithm.id }}">{{ algorithm.name }}</label>
+            <span role="button" class="collapsed glyphicon glyphicon-question-sign pull-right" data-toggle="modal" data-target="#modal-{{algorithm.id}}"></span>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="modal-{{algorithm.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog references-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">{{algorithm.name}}</h4>
+                </div>
+                <div class="modal-body">
+                  <p>{{algorithm.simpleDescription}}</p>
+                  <p ng-hide="(algorithm.references.videos == null || algorithm.references.videos.length == 0) && (algorithm.references.sites == null || algorithm.references.sites.length == 0)">We have selected some references to help your understanding about this one. Enjoy your learning!</p>
+
+                  <section class="site-modal-section" ng-hide="algorithm.references.sites == null || algorithm.references.sites.length == 0">
+                    <hr>
+                    <h3 class="modal-section-title">Sites</h3>
+                    <ul>
+                      <li ng-repeat="site in algorithm.references.sites">
+                        Selected <a href="{{site.url}}" target="_blank">link {{$index}}</a>: {{site.description}} Some description.
+                      </li>
+                    </ul>
+                  </section>
+                  <section class="video-modal-section" ng-hide="algorithm.references.videos == null || algorithm.references.videos.length == 0">
+                    <hr>
+                    <h3 class="modal-section-title">Videos</h3>
+                    <div ng-repeat="video in algorithm.references.videos">
+                      <iframe class="video-container" width="420" height="345" ng-src="{{video.url | trusted}}" allowfullscreen></iframe>
+                    </div>
+                  </section>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End modal -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
