@@ -66,8 +66,15 @@ a {
   text-decoration: none;
   &:hover {
     color: #ff7f50;
-
     text-decoration: none;
+    cursor: pointer;
+  }
+  &:focus {
+    color: #ff7f50;
+    text-decoration: none;
+  }
+  &:visited {
+    outline: none;
   }
 }
 
@@ -1423,4 +1430,11 @@ th, td {
   background: -webkit-linear-gradient(left, #fba0a0, #ff4f4f, #fba0a0);
   background: -o-linear-gradient(right, #fba0a0, #ff4f4f, #fba0a0);
   background: -moz-linear-gradient(right, #fba0a0, #ff4f4f, #fba0a0);
+}
+
+.exercise-introduction {
+  span {
+    line-height: 40px;
+    font-weight: bold;
+  }
 }

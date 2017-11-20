@@ -59,27 +59,42 @@ angular.module('hydramaze')
 
     $scope.$createSteps = function(data) {
       var steps = [];
-      var template = '<div id="exercise-{{exerciseNumber}}" class="exercise"><p>{{problemIntroduction}}<br></p><div data-datacamp-exercise data-lang="python"><code data-type="pre-exercise-code">{{preExerciseCode}}</code><code data-type="sample-code">{{sampleCode}}</code><code data-type="solution">{{solution}}</code><code data-type="sct">{{validation}}</code><div data-type="hint">{{hint}}</div></div><script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script></div>';
-      
-      /*
-      var problemIntroduction = "É importante saber para que se destina o uso do algoritmo K-means, portanto veja as referências abaixo, ou acesse a seção Tutorial para mais informações.<br>Suponha que você tenha especificações sobre as pétalas de uma planta, e sabendo que ela pertence à família Iris, você precisa determinar qual a espécie desta planta. Então, vamos recorrer ao algoritmo K-Means para executar essa tarefa de classificação.<br><span>Para esse exercício é necessário que você importe os datasets e também o algoritmo kmeans.</span>";
-      //var references = var $prepareReferences(var data[""]);
-      var preExerciseCode = "# None declared";
-      var sampleCode = "# import datasets from sklearn\n\n# import Kmeans from sklearn\n\n";
-      var solution = "# import datasets from sklearn \nfrom sklearn import datasets \n# import Kmeans from sklearn \nfrom sklearn.cluster import KMeans \n";
-      var validation = "test_object('datasets') \ntest_object('KMeans') \nsuccess_msg('Great Job! Go ahead and try to solve the next problem.')";
-      var hint = "Use the references to solve this problem";
-      */
+      var template = '<div id="exercise-{{exerciseNumber}}" class="exercise"><p class="exercise-introduction">{{problemIntroduction}} {{references}} <br></p><div data-datacamp-exercise data-lang="python"><code data-type="pre-exercise-code">{{preExerciseCode}}</code><code data-type="sample-code">{{sampleCode}}</code><code data-type="solution">{{solution}}</code><code data-type="sct">{{validation}}</code><div data-type="hint">{{hint}}</div></div><script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script></div>';
 
       $.each(data, function(key, value) {
-        console.log(value);
+
+        var references = "";
+
+        if (value.references.length > 0) {
+          var referencesContainer = $('<div/>');
+          
+          var title = $('<p/>');
+          title.text( "References:" );
+          title.appendTo(referencesContainer);
+
+          var cList = $('<ul/>');
+          $.each(value.references, function(key, value) {
+            var li = $('<li/>')
+              .appendTo(cList);
+            var a = $('<a/>')
+              .text( value.description )
+              .attr("href", value.url)
+              .attr("target", "_blank")
+              .appendTo(li);
+          });
+          cList.appendTo(referencesContainer);
+
+          references = referencesContainer[0].outerHTML;
+        }
+
         var newTemplateRequest = template;
         newTemplateRequest = newTemplateRequest.replace('{{problemIntroduction}}', value.problemIntroduction.replace(/\\n/g, "&#13;"));
         newTemplateRequest = newTemplateRequest.replace('{{preExerciseCode}}', value.preExerciseCode.replace(/\\n/g, "&#13;"));
         newTemplateRequest = newTemplateRequest.replace('{{sampleCode}}', value.sampleCode.replace(/\\n/g, "&#13;"));
         newTemplateRequest = newTemplateRequest.replace('{{solution}}', value.solution.replace(/\\n/g, "&#13;"));
-        newTemplateRequest = newTemplateRequest.replace('{{validation}}', value.validation);
+        newTemplateRequest = newTemplateRequest.replace('{{validation}}', value.validation.replace(/\\n/g, "&#13;"));
         newTemplateRequest = newTemplateRequest.replace('{{hint}}', value.hint.replace(/\\n/g, "&#13;"));
+        newTemplateRequest = newTemplateRequest.replace('{{references}}', references);
         
         var newStep = {};
         newStep['templateUrl'] = tplUrl;
