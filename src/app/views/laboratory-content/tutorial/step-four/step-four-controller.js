@@ -51,8 +51,10 @@ angular.module('hydramaze')
             $scope.$previousStep();
           }
         }, function errorCallback(responseError) {
+          var errorMessage = "Sorry, an error has occurred. Try again!";
+          if (responseError.data && responseError.data.message) errorMessage = responseError.data.message;
           notify({
-            message: "Sorry, an error has occurred. Try again!",
+            message: errorMessage,
             classes: "alert-danger"
           });
           $scope.$previousStep();
@@ -88,8 +90,10 @@ angular.module('hydramaze')
             $scope.$previousStep();
           }
         }, function errorCallback(responseError) {
+          var errorMessage = "Sorry, an error has occurred. Try again!";
+          if (responseError.data && responseError.data.message) errorMessage = responseError.data.message;
           notify({
-            message: "Sorry, an error has occurred. Try again!",
+            message: errorMessage,
             classes: "alert-danger"
           });
         });
