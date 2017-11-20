@@ -58,7 +58,6 @@ angular.module('hydramaze')
     $scope.comboValues = $scope.data["listData"];
     $scope.name = $scope.data["name"];
     $scope.observation = $scope.data["observation"];
-    $scope.title = $scope.data["simpleDescription"];
     $scope.references = $scope.$prepareReferences($scope.data["references"]);
 
     /*
