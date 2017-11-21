@@ -448,6 +448,16 @@ th, td {
     @media @phone {
       display: block;
     }
+
+    &.load-exercises {
+      .floating-button {
+        width: 100%;
+        &:after {
+          content: none;
+        }
+      }
+    }
+
   }
   .floating-button {
     font-weight: bold;

@@ -13,8 +13,7 @@ angular.module('hydramaze')
     * Declared scope functions
     */
     var data;
-    var downloadComponent;
-    var downloadUrl;
+
     $scope.$stepValidation = function() {
       // Do nothing just return true
       return true;
@@ -34,9 +33,9 @@ angular.module('hydramaze')
       $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/execute?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
         .then(function successCallback(response) {
           if (response.status == 200 && !response.data.error) {
-            tutorialService.$setStepFourData(response.data);
 
-            $scope.$createScreenAlgorithmExecutionResult(response.data, downloadUrl);
+            tutorialService.$setStepFourData(response.data);
+            $scope.$createScreenAlgorithmExecutionResult(response.data, algorithmId, datasetId, testSize, parametersData);
           }
           else {
             var errorMessage = "Algorithm cannot be executed.";
@@ -58,44 +57,9 @@ angular.module('hydramaze')
           });
           $scope.$previousStep();
         });
-    }
-    $scope.$getPythonFile = function(algorithmId, datasetId, testSize, parametersData) {
-      var config = {
-          headers : {
-            'Content-Type': 'application/json;charset=utf-8;'
-          }
-        }
-
-      $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/download?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
-        .then(function successCallback(response) {
-          if (response.status == 200 && !response.data.error) {
-            var blob = new Blob([response.data], {type: 'text/x-python'});
-
-            downloadUrl = window.URL.createObjectURL(blob);
-            downloadComponent = document.createElement('download-button-directive');
-          }
-          else {
-            var errorMessage = "Algorithm cannot be downloaded.";
-            if (response.data.error) {
-              errorMessage = response.data.error;
-            }
-            notify({
-              message: errorMessage,
-              classes: "alert-danger"
-            });
-            $scope.$previousStep();
-          }
-        }, function errorCallback(responseError) {
-          var errorMessage = "Sorry, an error has occurred. Try again!";
-          if (responseError.data && responseError.data.message) errorMessage = responseError.data.message;
-          notify({
-            message: errorMessage,
-            classes: "alert-danger"
-          });
-        });
-    }
-
-    $scope.$createScreenAlgorithmExecutionResult = function(data) {
+    };
+    
+    $scope.$createScreenAlgorithmExecutionResult = function(data, algorithmId, datasetId, testSize, parametersData) {
       var component = 'results-list-directive';
 
       var newBlock = document.createElement("div");
@@ -104,16 +68,18 @@ angular.module('hydramaze')
 
       var content = document.createElement(component);
       newBlock.append(content);
-      newBlock.append(downloadComponent);
 
       $('#step-four-content').append(newBlock);
 
       var newScope = $scope.$new(true);
       newScope.data = data;
-      newScope.downloadUrl = downloadUrl;
+      newScope.algorithmId = algorithmId;
+      newScope.datasetId = datasetId;
+      newScope.testSize = testSize;
+      newScope.parametersData = parametersData;
 
       $compile($('#step-four-content').contents())(newScope)
-    }
+    };
 
     /*
     * Declared scope variables
@@ -149,9 +115,9 @@ angular.module('hydramaze')
 
         // call algorithm execution
         $scope.$getAlgorithmExecution(algorithmId, datasetId, testSize, parametersData);
-        $scope.$getPythonFile(algorithmId, datasetId, testSize, parametersData);
+        
       } else {
-        $scope.$createScreenAlgorithmExecutionResult(stepFourRetrievedData, downloadUrl);
+        $scope.$createScreenAlgorithmExecutionResult(stepFourRetrievedData, algorithmId, datasetId, testSize, parametersData);
       }
 
       console.log("StepFourCtrl Controller as been loaded!");

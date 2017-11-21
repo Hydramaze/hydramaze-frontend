@@ -7,4 +7,11 @@
     <li>Explore the Exercises area to learn more.</li>
     <li>Read more in the help area to deepen your knowledge.</li>
   </ul>
+
+  <div id="download-component" class="download-component">
+    <p class="download-message">Do you want to download the code containing the configuration you set on the previous steps? Just click on the button!</p>
+    <a ng-click="$downloadCode()" class="btn btn-lg download-button">Download</a>
+    <a id="generated-download" href="{{downloadUrl}}" ng-hide="true" target="_blank" download="{{downloadFileName}}">Download again.</a>
+  </div>
+
 </div>

@@ -28,6 +28,14 @@
       <button class="floating-button btn btn-default" ng-click="$loadExercises()" style="font-weight: bold;">Load Exercises!</button>
     </div>
 
+    <div class="button-right-container load-exercises" ng-hide="isExercisesLoaded">
+      <button class="floating-button btn btn-default" ng-click="$loadExercises()" style="font-weight: bold;">Load Exercises!</button>
+    </div>
+
+    <div class="button-right-container-mobile load-exercises">
+      <button class="floating-button btn btn-default" ng-click="$loadExercises()" style="font-weight: bold;">Load Exercises!</button>
+    </div>
+
     <div class="button-right-container">
       <button ng-disabled="$isLast()" ng-hide="$isLast()" class="floating-button btn btn-default" ng-click="$nextStepCall(this)" style="font-weight: bold;">
         <span class="fa fa-chevron-right"></span>

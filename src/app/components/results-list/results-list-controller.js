@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('ResultsListCtrl', function($scope, $compile, $timeout, stepFourService, tutorialService) {
+  .controller('ResultsListCtrl', function($scope, $compile, $timeout, $http, notify, stepFourService, tutorialService) {
 
     /*
     * Declared scope functions
@@ -35,8 +35,59 @@ angular.module('hydramaze')
 
         components.append(newBlock);
         
-        $('#results-list').append(components);
+        $('#download-component').before(components);
       });
+    };
+
+    $scope.$getPythonFile = function(algorithmId, datasetId, testSize, parametersData) {
+      var config = {
+          headers : {
+            'Content-Type': 'application/json;charset=utf-8;'
+          }
+        }
+
+      $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/download?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
+        .then(function successCallback(response) {
+          if (response.status == 200 && !response.data.error) {
+            var blob = new Blob([response.data], {type: 'text/x-python'});
+            $scope.$generateDownload(blob);
+          }
+          else {
+            var errorMessage = "Algorithm cannot be downloaded.";
+            if (response.data.error) {
+              errorMessage = response.data.error;
+            }
+            notify({
+              message: errorMessage,
+              classes: "alert-danger"
+            });
+            $scope.$previousStep();
+          }
+        }, function errorCallback(responseError) {
+          var errorMessage = "Sorry, an error has occurred. Try again!";
+          if (responseError.data && responseError.data.message) errorMessage = responseError.data.message;
+          notify({
+            message: errorMessage,
+            classes: "alert-danger"
+          });
+        });
+    }
+
+    $scope.$generateDownload = function(blob) {
+      $scope.downloadUrl = window.URL.createObjectURL(blob);
+      $scope.downloadFileName = "algorithm-script.py";
+      $scope.isGeneratedDownload = true;
+      $timeout(function() {
+        $("#generated-download")[0].click();
+      });
+    };
+
+    $scope.$downloadCode = function() {
+      if (!$scope.isGeneratedDownload) {
+        $scope.$getPythonFile($scope.algorithmId, $scope.datasetId, $scope.testSize, $scope.parametersData);
+      } else {
+        $("#generated-download")[0].click();
+      }
     };
 
     $scope.$hideLoading = function() {
@@ -48,6 +99,8 @@ angular.module('hydramaze')
     /*
     * Declared scope variables
     */
+
+    $scope.isGeneratedDownload = false;
 
     /*
     * Functions usage

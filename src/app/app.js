@@ -12,8 +12,12 @@ var app = angular.module('hydramaze', ['ngRoute', 'ui.router', 'chart.js', 'mult
 
 app.config(['$stateProvider', 
             '$urlRouterProvider', 
-            '$locationProvider', 
-            function($stateProvider, $urlRouterProvider, $locationProvider) {
+            '$locationProvider',
+            '$compileProvider',
+            function($stateProvider, $urlRouterProvider, $locationProvider, $compileProvider) {
+
+  var hrefWhiteList = /^\s*(https?|file|blob):/;
+  $compileProvider.aHrefSanitizationWhitelist(hrefWhiteList);
 
   $locationProvider.hashPrefix('');
 
