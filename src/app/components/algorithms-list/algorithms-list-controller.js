@@ -88,8 +88,6 @@ angular.module('hydramaze')
       $scope.$setupPreviousChoices();
 
       $scope.$hideLoading();
-
-      console.log('Algorithms list has been loaded');
     });
 
   })

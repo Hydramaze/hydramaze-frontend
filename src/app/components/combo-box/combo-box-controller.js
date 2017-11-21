@@ -67,7 +67,6 @@ angular.module('hydramaze')
     // Called when finish render
     $timeout(function () {
       $scope.$setupPreviousChoice();
-      console.log('combo box has been loaded');
     });
 
   });

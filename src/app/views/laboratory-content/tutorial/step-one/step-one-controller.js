@@ -99,8 +99,6 @@ angular.module('hydramaze')
       }
 
       $scope.$getAlgorithmsList();
-
-      console.log("StepOneCtrl Controller as been loaded!");
     });
 
   });

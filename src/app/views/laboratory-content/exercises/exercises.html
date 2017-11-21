@@ -10,6 +10,8 @@
 <multi-step-container id="exercises" steps="steps" class="steps-container-style simple-prev-next">
 
   <div id="step-content-container">
+    <br>
+    <a id="back-to-algorithms-list" ng-show="isExercisesLoaded" ng-click="$reloadPage()"><span class="glyphicon glyphicon-transfer"></span> click here to choose another algorithm's exercises</a>
     <main id="main-step-content" step-container></main>
 
     <div class="button-left-container">

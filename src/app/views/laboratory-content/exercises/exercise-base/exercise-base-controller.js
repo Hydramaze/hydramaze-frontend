@@ -13,7 +13,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("ExerciseBaseCtrl Controller as been loaded!");
+      
     });
 
     $scope.$on('$destroy', function() {
@@ -33,8 +33,8 @@ function iframeInitializer(obj) {
   
   $(obj).ready(function() {
     setTimeout(function() {
-      resizeIframe(obj);
       hideLoading($("#exercises #step-content-container"));
+      resizeIframe(obj);
     }, 1000);
   });
 

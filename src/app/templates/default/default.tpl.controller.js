@@ -23,7 +23,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("DefaultTplCtrl as been loaded!");
+
     });
 
   });

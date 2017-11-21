@@ -78,8 +78,6 @@ angular.module('hydramaze')
       $scope.$createScreenAlgorithmsParameters($scope.data);
 
       $scope.$hideLoading();
-
-      console.log('Parameters list has been loaded');
     });
 
   });

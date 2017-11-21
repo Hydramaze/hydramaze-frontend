@@ -113,8 +113,6 @@ angular.module('hydramaze')
       $scope.$setupPreviousChoices();
 
       $scope.$hideLoading();
-
-      console.log('Dataset list has been loaded');
     });
 
   });

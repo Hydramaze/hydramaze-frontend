@@ -118,8 +118,6 @@ angular.module('hydramaze')
         });
         $scope.$previousStep();
       }
-
-      console.log("StepTwoCtrl Controller as been loaded!");
     });
 
   });

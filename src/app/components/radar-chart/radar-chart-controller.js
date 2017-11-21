@@ -30,7 +30,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("Radar Chart Controller as been loaded!");
+
     });
 
   });

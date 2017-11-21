@@ -51,7 +51,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("AccuracyCtrl has been loaded");
+      
     });
 
   });

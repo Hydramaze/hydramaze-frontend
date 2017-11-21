@@ -67,8 +67,6 @@ angular.module('hydramaze')
     // Called when finish render
     $timeout(function () {
       $scope.$setupPreviousChoice();
-
-      console.log('check box has been loaded');
     });
 
   });

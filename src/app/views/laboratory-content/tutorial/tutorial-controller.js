@@ -108,7 +108,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("Tutorial Controller as been loaded!");
+
     });
 
     $scope.$on("$destroy", function() {

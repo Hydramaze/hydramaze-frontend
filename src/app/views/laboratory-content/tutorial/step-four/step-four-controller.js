@@ -7,7 +7,7 @@
  */
 
 angular.module('hydramaze')
-  .controller('StepFourCtrl', function($scope, $http, $timeout, $compile, tutorialService, notify) {
+  .controller('StepFourCtrl', function($scope, $http, $timeout, $compile, stepFourService, tutorialService, notify) {
 
     /*
     * Declared scope functions
@@ -20,7 +20,13 @@ angular.module('hydramaze')
     };
 
     $scope.$saveDataServiceTutorialStep = function() {
-      // Do nothing
+      // validate if had change on this step
+      if (!arraysEqual(tutorialService.$getStepFourData(), stepFourService.$getAllData())) {
+        // clear all data
+        tutorialService.$emptyFourData();
+        // save state
+        tutorialService.$setStepFourData(stepFourService.$getAllData());
+      }
     };
 
     $scope.$getAlgorithmExecution = function(algorithmId, datasetId, testSize, parametersData) {
@@ -33,9 +39,8 @@ angular.module('hydramaze')
       $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/execute?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
         .then(function successCallback(response) {
           if (response.status == 200 && !response.data.error) {
-
-            tutorialService.$setStepFourData(response.data);
-            $scope.$createScreenAlgorithmExecutionResult(response.data, algorithmId, datasetId, testSize, parametersData);
+            stepFourService.$addData("retrievedData", response.data);
+            $scope.$createScreenAlgorithmExecutionResult(response.data);
           }
           else {
             var errorMessage = "Algorithm cannot be executed.";
@@ -59,7 +64,7 @@ angular.module('hydramaze')
         });
     };
     
-    $scope.$createScreenAlgorithmExecutionResult = function(data, algorithmId, datasetId, testSize, parametersData) {
+    $scope.$createScreenAlgorithmExecutionResult = function(data) {
       var component = 'results-list-directive';
 
       var newBlock = document.createElement("div");
@@ -73,10 +78,6 @@ angular.module('hydramaze')
 
       var newScope = $scope.$new(true);
       newScope.data = data;
-      newScope.algorithmId = algorithmId;
-      newScope.datasetId = datasetId;
-      newScope.testSize = testSize;
-      newScope.parametersData = parametersData;
 
       $compile($('#step-four-content').contents())(newScope)
     };
@@ -93,8 +94,15 @@ angular.module('hydramaze')
     $timeout(function () {
       showLoading(tutorialService.$getLoadingContainer());
 
+      // retrieve previous data and init data
+      if (tutorialService.$getStepFourData() === undefined) {
+        stepFourService.$initData({});
+      } else {
+        stepFourService.$initData(angular.copy(tutorialService.$getStepFourData()));
+      }
+
       // Retrieve prvious execution result
-      var stepFourRetrievedData = tutorialService.$getStepFourData();
+      var stepFourRetrievedData = stepFourService.$getAllData()["retrievedData"];
 
       if (stepFourRetrievedData == undefined) {
         // Retrieve data from previous steps
@@ -103,9 +111,9 @@ angular.module('hydramaze')
         var stepThreeSharedData = tutorialService.$getStepThreeData();
 
         // prepare data to send
-        var algorithmId = stepOneSharedData["algorithmId"];
-        var datasetId = stepThreeSharedData["datasetId"];
-        var testSize = stepThreeSharedData["testSize"];
+        stepFourService.$addData("algorithmId", stepOneSharedData["algorithmId"]);
+        stepFourService.$addData("datasetId", stepThreeSharedData["datasetId"]);
+        stepFourService.$addData("testSize", stepThreeSharedData["testSize"]);
 
         var parametersData = [];
 
@@ -113,14 +121,20 @@ angular.module('hydramaze')
           parametersData.push({"parameterId": key, "value": value});
         });
 
+        // store the data on shared service data
+        stepFourService.$addData("parametersData", parametersData);
+
         // call algorithm execution
-        $scope.$getAlgorithmExecution(algorithmId, datasetId, testSize, parametersData);
+        $scope.$getAlgorithmExecution(
+          stepFourService.$getAllData()["algorithmId"],
+          stepFourService.$getAllData()["datasetId"],
+          stepFourService.$getAllData()["testSize"],
+          stepFourService.$getAllData()["parametersData"]
+        );
         
       } else {
-        $scope.$createScreenAlgorithmExecutionResult(stepFourRetrievedData, algorithmId, datasetId, testSize, parametersData);
+        $scope.$createScreenAlgorithmExecutionResult(stepFourRetrievedData);
       }
-
-      console.log("StepFourCtrl Controller as been loaded!");
     });
 
   });

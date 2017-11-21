@@ -34,7 +34,6 @@ angular.module('hydramaze')
 
         if (breadcrumbValue != undefined && breadcrumbValue != "") {
           pathArray[key] = breadcrumbValue;
-          console.log
         }
 
       });
@@ -65,7 +64,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("Breadcrumb Controller as been loaded!");
+      
     });
     
   });

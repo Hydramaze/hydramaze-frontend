@@ -14,7 +14,6 @@ angular.module('hydramaze')
     */
 
     $scope.$createScreenResults = function(data) {
-      var previousData = stepFourService.$getAllData();
 
       var components = document.createElement("div");
       components.setAttribute("class", "components");
@@ -53,7 +52,7 @@ angular.module('hydramaze')
             $scope.$generateDownload(blob);
           }
           else {
-            var errorMessage = "Algorithm cannot be downloaded.";
+            var errorMessage = "Algorithm file cannot be downloaded.";
             if (response.data.error) {
               errorMessage = response.data.error;
             }
@@ -84,7 +83,12 @@ angular.module('hydramaze')
 
     $scope.$downloadCode = function() {
       if (!$scope.isGeneratedDownload) {
-        $scope.$getPythonFile($scope.algorithmId, $scope.datasetId, $scope.testSize, $scope.parametersData);
+        $scope.$getPythonFile(
+          stepFourService.$getAllData()["algorithmId"],
+          stepFourService.$getAllData()["datasetId"],
+          stepFourService.$getAllData()["testSize"],
+          stepFourService.$getAllData()["parametersData"]
+        );
       } else {
         $("#generated-download")[0].click();
       }
@@ -100,8 +104,6 @@ angular.module('hydramaze')
     * Declared scope variables
     */
 
-    $scope.isGeneratedDownload = false;
-
     /*
     * Functions usage
     */
@@ -111,8 +113,6 @@ angular.module('hydramaze')
       $scope.$createScreenResults($scope.data);
 
       $scope.$hideLoading();
-
-      console.log('Results list has been loaded');
     });
 
   });

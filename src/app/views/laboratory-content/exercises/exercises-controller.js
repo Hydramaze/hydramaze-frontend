@@ -248,8 +248,6 @@ angular.module('hydramaze')
       showLoading(exercisesService.$getLoadingContainer());
 
       $scope.$getAlgorithmsListWithExercise();
-
-      console.log("Exercises Controller as been loaded!");
     });
 
     $scope.$on("$destroy", function() {

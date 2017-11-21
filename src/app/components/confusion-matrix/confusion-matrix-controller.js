@@ -27,7 +27,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("ConfusionMatrixCtrl has been loaded");
+
     });
 
   });

@@ -82,14 +82,11 @@ angular.module('hydramaze')
 
       $(window).on('resize', function() {
         $timeout(function() {
-          console.log("funcionou");
           $scope.$scaleVideoContainer();
           $scope.$scaleBannerVideoSize('.video-container .poster img');
           $scope.$scaleBannerVideoSize('.video-container video');
         });
       });
-
-      console.log("Home Controller as been loaded!");
     });
 
     $scope.$on("$destroy", function() {

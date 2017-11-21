@@ -22,7 +22,6 @@ angular.module('hydramaze')
         .then(function successCallback(response) {
           if (response.status == 200) {
             $scope.$createScreenContributorsList(response.data);
-            console.log(response.data);
           }
           else {
             notify({
@@ -72,8 +71,6 @@ angular.module('hydramaze')
     // Called when finish render
     $timeout(function () {
       $scope.$getContributorsList();
-
-      console.log("Contributors Controller as been loaded!");
     });
 
     $scope.$on("$destroy", function() {

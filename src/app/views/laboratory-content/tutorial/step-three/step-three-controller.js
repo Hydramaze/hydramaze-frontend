@@ -110,8 +110,6 @@ angular.module('hydramaze')
         });
         $scope.$previousStep();
       }
-
-      console.log("StepThreeCtrl Controller as been loaded!");
     });
 
   });

@@ -88,8 +88,6 @@ angular.module('hydramaze')
       $scope.$setupPreviousChoices();
 
       $scope.$hideLoading();
-
-      console.log('Algorithms list with exercise has been loaded');
     });
 
   })

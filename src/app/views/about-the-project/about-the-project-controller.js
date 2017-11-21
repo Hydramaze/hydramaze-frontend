@@ -33,7 +33,7 @@ angular.module('hydramaze')
 
     // Called when finish render
     $timeout(function () {
-      console.log("About The Project Controller as been loaded!");
+
     });
 
     $scope.$on("$destroy", function() {
