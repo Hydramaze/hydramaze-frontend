@@ -19,6 +19,7 @@ angular.module('hydramaze')
 
     $scope.classNames = $scope.data["class_names"];
     $scope.matrix = $scope.data["matrix"];
+    $scope.reference = $scope.data["reference"];
 
     /*
     * Functions usage
@@ -28,5 +29,5 @@ angular.module('hydramaze')
     $timeout(function () {
       console.log("ConfusionMatrixCtrl has been loaded");
     });
-    
+
   });

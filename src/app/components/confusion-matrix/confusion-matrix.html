@@ -1,5 +1,5 @@
 <div id="confusion-matrix-container">
-  <h4 class="confusion-matrix-title ng-binding">Confusion Matrix</h4>
+  <h4 class="confusion-matrix-title ng-binding"><a href="{{reference}}" target="_blank"><span class="glyphicon glyphicon-question-sign result-glyphicon"></span></a> Confusion Matrix</h4>
   <table class="table table-bordered text-capitalize text-center" style="border: none; width: 50%;">
     <tr style="border: none;" class="text-center">
       <th style="border: none;"></th>
@@ -7,9 +7,7 @@
     </tr>
     <tr ng-repeat="(key, value) in classNames">
       <td style="border: none;">{{ value }}</td>
-      <td ng-repeat="result in matrix[key] track by $index"
-          ng-class="{'confusion-matrix-td-success': result > 0 && key == $index, 'confusion-matrix-td-error': result > 0 && key != $index}"
-      >{{ result }}</td>
+      <td ng-repeat="result in matrix[key] track by $index" ng-class="{'confusion-matrix-td-success': result > 0 && key == $index, 'confusion-matrix-td-error': result > 0 && key != $index}">{{ result }}</td>
     </tr>
   </table>
 </div>

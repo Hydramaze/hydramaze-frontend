@@ -22,7 +22,7 @@
             <h3 class="modal-section-title">Sites</h3>
             <ul>
               <li ng-repeat="site in references.sites">
-                Selected <a href="{{site.url}}" target="_blank">link {{$index}}</a>: {{site.description}} Some description.
+                <a href="{{site.url}}" target="_blank">Link {{$index+1}}</a>: {{site.description}}
               </li>
             </ul>
           </section>

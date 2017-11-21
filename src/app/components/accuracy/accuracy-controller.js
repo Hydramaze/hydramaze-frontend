@@ -43,6 +43,7 @@ angular.module('hydramaze')
     $scope.name = $scope.data.name;
     $scope.value = $scope.data.value.toFixed(3);
     $scope.resultAnalysis = $scope.$getResultAnalysisText($scope.value);
+    $scope.reference = $scope.data.reference;
 
     /*
     * Functions usage

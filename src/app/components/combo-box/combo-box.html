@@ -1,5 +1,5 @@
 <div class="parameters-group">
-  <h3>{{name}}<span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#modal-{{id}}"></span></h3>
+  <h3><span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#modal-{{id}}"></span>{{name}}</h3>
   <select title="{{simpleDescription}}" class="form-control" ng-model="value" class="form-control">
     <option ng-repeat="x in comboValues" ng-value="x">{{x}}</option>
   </select>
@@ -20,7 +20,7 @@
             <h3 class="modal-section-title">Sites</h3>
             <ul>
               <li ng-repeat="site in references.sites">
-                Selected <a href="{{site.url}}" target="_blank">link {{$index}}</a>: {{site.description}} Some description.
+                <a href="{{site.url}}" target="_blank">Link {{$index+1}}</a>: {{site.description}}
               </li>
             </ul>
           </section>

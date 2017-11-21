@@ -8,9 +8,8 @@
           <div class="thumbnail card-front">
             <img src="/assets/img/dataset.jpg" alt="...">
             <div class="caption">
+              <label class="saiba-mais" data-toggle="modal" data-target="#modal-{{dataset.id}}"><span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#modal-{{id}}"></span></label>
               <h3>{{dataset.name}}</h3>
-              <label class="saiba-mais" data-toggle="modal" data-target="#modal-{{dataset.id}}"><span class="glyphicon glyphicon-question-sign" data-toggle="modal" data-target="#modal-{{id}}"></span>
-</label>
             </div>
           </div>
         </div>
@@ -32,7 +31,7 @@
                   <h3 class="modal-section-title">Sites</h3>
                   <ul>
                     <li ng-repeat="site in dataset.references.sites">
-                      Selected <a href="{{site.url}}" target="_blank">link {{$index}}</a>: {{site.description}} Some description.
+                      <a href="{{site.url}}" target="_blank">Link {{$index+1}}</a>: {{site.description}}
                     </li>
                   </ul>
                 </section>
