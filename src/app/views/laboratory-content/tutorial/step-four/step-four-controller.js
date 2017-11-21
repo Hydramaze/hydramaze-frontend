@@ -12,10 +12,9 @@ angular.module('hydramaze')
     /*
     * Declared scope functions
     */
+    var data;
     var downloadComponent;
-    var downloadButton;
-    var downloadMessage;
-
+    var downloadUrl;
     $scope.$stepValidation = function() {
       // Do nothing just return true
       return true;
@@ -36,7 +35,8 @@ angular.module('hydramaze')
         .then(function successCallback(response) {
           if (response.status == 200 && !response.data.error) {
             tutorialService.$setStepFourData(response.data);
-            $scope.$createScreenAlgorithmExecutionResult(response.data);
+
+            $scope.$createScreenAlgorithmExecutionResult(response.data, downloadUrl);
           }
           else {
             var errorMessage = "Algorithm cannot be executed.";
@@ -58,24 +58,21 @@ angular.module('hydramaze')
           });
           $scope.$previousStep();
         });
+    }
+    $scope.$getPythonFile = function(algorithmId, datasetId, testSize, parametersData) {
+      var config = {
+          headers : {
+            'Content-Type': 'application/json;charset=utf-8;'
+          }
+        }
 
       $http.post('http://localhost:8080/api/algorithm/' + algorithmId + '/download?&dataSetId=' + datasetId + "&testSize=" + testSize, parametersData, config)
         .then(function successCallback(response) {
           if (response.status == 200 && !response.data.error) {
-            console.log("Download api: ",$scope);
             var blob = new Blob([response.data], {type: 'text/x-python'});
-            downloadComponent = document.createElement("div");
-            downloadComponent.setAttribute("class", "download-component");
-            downloadMessage = document.createElement("p");
-            downloadMessage.setAttribute("class", "download-message");
-            downloadButton = document.createElement("a");
-            downloadButton.setAttribute("class", "btn btn-lg download-button");
-            downloadButton.innerHTML = "Download";
-            downloadMessage.innerHTML = "Do you want to download the code containing the configuration you set on the steps before? Just click on the button!";
 
-            let url = window.URL.createObjectURL(blob);
-            downloadButton.href = url;
-            downloadButton.download = 'teste.py';
+            downloadUrl = window.URL.createObjectURL(blob);
+            downloadComponent = document.createElement('download-button-directive');
           }
           else {
             var errorMessage = "Algorithm cannot be downloaded.";
@@ -107,14 +104,13 @@ angular.module('hydramaze')
 
       var content = document.createElement(component);
       newBlock.append(content);
+      newBlock.append(downloadComponent);
 
       $('#step-four-content').append(newBlock);
-      $('#step-four-content').append(downloadComponent);
-      $('#step-four-content .download-component').append(downloadMessage);
-      $('#step-four-content .download-component').append(downloadButton);
 
       var newScope = $scope.$new(true);
       newScope.data = data;
+      newScope.downloadUrl = downloadUrl;
 
       $compile($('#step-four-content').contents())(newScope)
     }
@@ -153,8 +149,9 @@ angular.module('hydramaze')
 
         // call algorithm execution
         $scope.$getAlgorithmExecution(algorithmId, datasetId, testSize, parametersData);
+        $scope.$getPythonFile(algorithmId, datasetId, testSize, parametersData);
       } else {
-        $scope.$createScreenAlgorithmExecutionResult(stepFourRetrievedData);
+        $scope.$createScreenAlgorithmExecutionResult(stepFourRetrievedData, downloadUrl);
       }
 
       console.log("StepFourCtrl Controller as been loaded!");
