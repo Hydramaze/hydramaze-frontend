@@ -9,10 +9,7 @@ https://nodejs.org/en/
 
 2 - Install Gulp / Bower
 
-npm install -g bower gulp-install
-
-
-Jonas: problema em gulp-install, no meu funcionou assim: npm install -g bower gulp
+npm install -g bower gulp
 
 * Validate on command line if the instalattion was successfull running: bower --version && gulp --version
 
@@ -22,18 +19,14 @@ Jonas: problema em gulp-install, no meu funcionou assim: npm install -g bower gu
 
 4 - Go to your local git project directory and start a Terminal or Command there. After run:
 
-bower install
-* It will take download of bower dependencies
-
 npm install
-* It will take download of node dependencies
+* It will download of node dependencies and after it will download the bower dependencies as well
 
 
-5 - Some important tasks:
+5 - Running the project:
 
-* (In progress) gulp build - It will generate a "dist" folder with all files on a deliverable structure.
-* gulp start - It will start a local server with watching files (a real-time changes/creation watch)
-* (In progress) gulp clear - Delete a "dist" and ".tmp" folders
+* In root folder, run: gulp start
+A local server will be started with a watching files (a real-time changes/creation watch). Access it on http://localhost:8081
 
 
 
