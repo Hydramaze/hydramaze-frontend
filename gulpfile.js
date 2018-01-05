@@ -4,7 +4,7 @@ var gulp = require('gulp'),
   connect = require('gulp-connect'),
   path = require('path'),
   $ = require('gulp-load-plugins')();
- 
+
 gulp.task('connect', function() {
   connect.server({
     root: 'src',
@@ -59,12 +59,9 @@ gulp.task('watch', function () {
   gulp.watch(['./src/assets/style/**/*.less'], ['style']);
   gulp.watch(['./src/app/**/*.js', './src/assets/js/*.js'], ['scripts']);
 });
- 
+
 gulp.task('initialization', function() {
-  gulp.start('html');
-  gulp.start('style');
-  gulp.start('scripts');
-  gulp.start('fonts');
+  gulp.start('html', 'style', 'scripts', 'fonts');
 });
 
 gulp.task('start', ['connect', 'initialization', 'watch', 'fonts']);
